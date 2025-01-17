@@ -12,6 +12,11 @@ Displayed on the first line in the list item and alarm clocks on your standby
 Display format "hh:mm (hh:mm)"
 ```
 
+### db_pause
+```
+Add pause button during audio playback through the File Manager
+```
+
 ### phone_wo_sim
 ```
 Fully operational phone without a SIM-card
@@ -22,6 +27,11 @@ v1.2
 ### phonebook_title
 ```
 Display the total of phone and sim contacts in the second row of the header
+```
+
+### remove_scrollbar
+```
+Remove Scroll bar on Main Menu
 ```
 
 ### replace_file_bt
