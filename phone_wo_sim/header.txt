@@ -1,0 +1,5 @@
+;Fully operational phone without a SIM-card
+;Everything works except the functions that require cellular communication
+;Original idea by Zormax aka mobilefree
+;v1.2
+;(c) KrasH

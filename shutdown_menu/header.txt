@@ -1,0 +1,5 @@
+;Add Power Menu when long press End Button in standby 
+;Added ability to restart phone 
+;Added ability to set Flight Mode 
+;Added free Heap on title text 
+;(c) farid 

@@ -1,0 +1,11 @@
+# Ignore Visual Studio Code settings
+.vscode/
+
+# Ignore build artifacts
+build/
+
+# Ignore elf2vkp tool directory
+elf2vkp/
+
+# Ignore firmware directory
+firmware/

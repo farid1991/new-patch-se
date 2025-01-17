@@ -1,0 +1,2 @@
+;Add window question replace file, if file already exist. when receiving file via Bluetooth 
+;(c) E1kolyan

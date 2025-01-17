@@ -1,0 +1,2 @@
+;Display the number of phone and sim contacts in the second row of the header
+;(c) E1kolyan

@@ -1,0 +1,5 @@
+;Show remaining time before the alarm
+;Displayed on the first line in the list item and alarm clocks on your standby
+;Display format "hh:mm (hh:mm)"
+;(c) E1kolyan
+;(r) IronMaster

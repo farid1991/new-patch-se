@@ -1,0 +1,2 @@
+;Add pause button during audio playback through the File Manager
+;(c) E1kolyan
