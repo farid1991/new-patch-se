@@ -1,0 +1,7 @@
+;Add "Record" functions in the FM Radio
+;Record is in the folder "/card/music/FM"
+;Output mask: "fm-channelname-frequency-date_mon_year-hour:min.amr"
+;v2.5
+;(!) If the sound recording is not, you must return the original sound driver
+;(c) KrasH, Joker XT
+;(e) farid

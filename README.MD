@@ -12,6 +12,11 @@ Displayed on the first line in the list item and alarm clocks on your standby
 Display format "hh:mm (hh:mm)"
 ```
 
+### fm_record
+```
+Add "Record" functions in the FM Radio
+```
+
 ### db_pause
 ```
 Add pause button during audio playback through the File Manager

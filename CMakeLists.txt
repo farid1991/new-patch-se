@@ -10,6 +10,7 @@ add_compile_options(-Os)
 
 add_subdirectory(alarm_remaining_time)
 add_subdirectory(db_pause)
+add_subdirectory(fm_record)
 add_subdirectory(phone_wo_sim)
 add_subdirectory(phonebook_title)
 add_subdirectory(remove_scrollbar)

@@ -1,6 +1,10 @@
 #ifndef SET_BOOK_H
 #define SET_BOOK_H
 
+#include <base.h>
+#include <bookobj.h>
+#include <gui.h>
+
 typedef struct SetBook
 {
   BOOK book;
