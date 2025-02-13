@@ -6,6 +6,8 @@
     .equ STACK_SIZE, 0x1C
 #elif defined(U100_R7AA076)
     .equ STACK_SIZE, 0x1C
+#elif defined(W20_R7DA062)
+    .equ STACK_SIZE, 0x24
 #endif
 
     // New MainInput key

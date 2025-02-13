@@ -9,6 +9,8 @@
     #include <U10_R7AA071.h>
 #elif defined(U100_R7AA076)
     #include <U100_R7AA076.h>
+#elif defined(W20_R7DA062)
+    #include <W20_R7DA062.h>
 #endif
 
 #define NEWCODE __attribute__((section(".text.patch_section")))
