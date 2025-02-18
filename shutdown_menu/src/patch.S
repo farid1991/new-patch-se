@@ -1,9 +1,13 @@
-#if defined(J20_R7CA064)
+#if defined(J10_R7CA065)
+    .equ STACK_SIZE, 0x24
+#elif defined(J20_R7CA064)
     .equ STACK_SIZE, 0x24
 #elif defined(J108_R7EA011)
     .equ STACK_SIZE, 0x24
 #elif defined(U10_R7AA071)
     .equ STACK_SIZE, 0x1C
+#elif defined(U10_R7BA084)
+    .equ STACK_SIZE, 0x24
 #elif defined(U100_R7AA076)
     .equ STACK_SIZE, 0x1C
 #elif defined(W20_R7DA062)
