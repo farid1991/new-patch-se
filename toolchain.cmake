@@ -1,4 +1,4 @@
-# elf2vkp: https://github.com/siemens-mobile-hacks/elf2vkp
+# elf2vkp-go: https://github.com/farid1991/elf2vkp-go
 
 set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
 set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
@@ -25,12 +25,8 @@ set(CMAKE_CXX_FLAGS "-nostdlib -nostdinc -fno-exceptions")
 set(CMAKE_ASM_FLAGS "-nostdlib -nostdinc")
 set(FULLFLASHES_PATH ${CMAKE_CURRENT_SOURCE_DIR}/firmware)
 
-set(VKP_COMMAND elf2vkp)
-if(WIN32)
-	set(ELF2VKP "${CMAKE_CURRENT_SOURCE_DIR}/elf2vkp")
-	set(ENV{PATH} "$ENV{PATH};${ELF2VKP}")
-	set(VKP_COMMAND ${ELF2VKP}/elf2vkp)
-endif()
+set(VKP_COMMAND elf2vkp-go CACHE STRING "elf2vkp tool command")
+find_program(VKP_COMMAND ${VKP_COMMAND} REQUIRED)
 
 function(define_patch phone svn platform chipset base_address)
 	set(target ${phone}_${svn}_${PROJECT_NAME})
@@ -49,15 +45,14 @@ function(define_patch phone svn platform chipset base_address)
 	add_custom_command(
 		TARGET ${target} POST_BUILD
 		COMMENT "Generating VKP file"
-		COMMAND ${VKP_COMMAND}
-				--header "\;${firmware}"
-				--header-from-file ${CMAKE_CURRENT_SOURCE_DIR}/header.txt
-				-b ${base_address}
-				-f ${FULLFLASHES_PATH}/${firmware}.bin
-				-i ${target}.elf
-				-o ${target}.vkp
-				--format sony-ericsson
-	)
+		COMMAND "${VKP_COMMAND}"
+				--header ";${firmware}"
+				--header-from-file "${CMAKE_CURRENT_SOURCE_DIR}/header.txt"
+				-b "${base_address}"
+				-f "${FULLFLASHES_PATH}/${firmware}.bin"
+				-i "${target}.elf"
+				-o "${target}.vkp"
+		)
 
 	if (chipset STREQUAL "DB2000" OR 
 		chipset STREQUAL "DB2010" OR 
