@@ -29,3 +29,7 @@ define_patch(W810 R4EA031 A1 DB2010 0x44140000)
 # Z780_R3DA028
 add_executable("Z780_R3DA028_${PROJECT_NAME}" src/patch.c src/patch.S)
 define_patch(Z780 R3DA028 A2 DB3150v2 0x10000000)
+
+# Z310_R8BA024
+add_executable("Z310_R8BA024_${PROJECT_NAME}" src/patch.c src/patch.S)
+define_patch(Z310 R8BA024 A1 PNX5230 0x20100000)
