@@ -46,13 +46,14 @@ function(define_patch phone svn platform chipset base_address)
 		TARGET ${target} POST_BUILD
 		COMMENT "Generating VKP file"
 		COMMAND "${VKP_COMMAND}"
-				--header ";${firmware}"
-				--header-from-file "${CMAKE_CURRENT_SOURCE_DIR}/header.txt"
-				-b "${base_address}"
-				-f "${FULLFLASHES_PATH}/${firmware}.bin"
-				-i "${target}.elf"
-				-o "${target}.vkp"
+			--header "\;${firmware}"
+			--header-from-file ${CMAKE_CURRENT_SOURCE_DIR}/header.txt
+			-b "${base_address}"
+			-f "${FULLFLASHES_PATH}/${firmware}.bin"
+			-i "${target}.elf"
+			-o "${target}.vkp"
 		)
+
 
 	if (chipset STREQUAL "DB2000" OR 
 		chipset STREQUAL "DB2010" OR 
