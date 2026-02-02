@@ -46,7 +46,7 @@ function(define_patch phone svn platform chipset base_address)
 		TARGET ${target} POST_BUILD
 		COMMENT "Generating VKP file"
 		COMMAND "${VKP_COMMAND}"
-			--header "\;${firmware}"
+			--header "${firmware}"
 			--header-from-file ${CMAKE_CURRENT_SOURCE_DIR}/header.txt
 			-b "${base_address}"
 			-f "${FULLFLASHES_PATH}/${firmware}.bin"
