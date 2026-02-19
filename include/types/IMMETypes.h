@@ -1,21 +1,18 @@
 #ifndef _IMME_TYPES_H_
 #define _IMME_TYPES_H_
 
-#include <base.h>
+#include <types/Basic_types.h>
 
 /**
  * The maximum length of a file path or a streaming URL
  */
-// const int MME_URL_TYPE_MAX_LENGTH = 512;
 #define MME_URL_TYPE_MAX_LENGTH 512
-
-// const int MME_STREAMING_SESSION_NAME_MAX_LENGTH = 512;
 #define MME_STREAMING_SESSION_NAME_MAX_LENGTH 512
 
 /**
  * The firewall traversal interval used when streaming is connected via WLAN
  */
-const int MME_STREAMING_WLAN_FIREWALL_TRAVERSAL_INTERVAL = 60000;
+#define MME_STREAMING_WLAN_FIREWALL_TRAVERSAL_INTERVAL 60000
 
 /**
  * The set of error codes that can be sent
@@ -571,7 +568,7 @@ typedef enum
     TMMEAddressFamily_Packet       // The packet address family.
 } TMMEAddressFamily;
 
-const int MME_AUDIOCONTROL_HANDLE_NOT_USED = 0;
+#define MME_AUDIOCONTROL_HANDLE_NOT_USED 0
 
 /**
  * This type is used to indicate the fade direction when

@@ -14,19 +14,19 @@
     .equ STACK_SIZE, 0x24
 #endif
 
-    // New MainInput key
-    .section .text.new_button
-    .thumb
+@ New MainInput key
+.section .text.new_button
+.thumb
     ldr     r3, =new_key+1
     bx      r3
 
-    .section .text.patch_section
-    .thumb
+.section .text.patch_section
+.thumb
 new_key:
     cmp     r6, #1
     bne     exit
     bl      CreateShutdownMenu
 
 exit:
-	add     sp, #STACK_SIZE
-    pop     {r4-r7,pc}
+    add     sp, #STACK_SIZE
+    pop     {r4-r7, pc}

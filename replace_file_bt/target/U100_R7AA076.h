@@ -21,7 +21,7 @@
 #define ADDR_FILEITEM_GetPath (0x146A12F4 | 1)
 #define ADDR_FileDelete (0x1462FF80 | 1)
 #define ADDR_FSX_IsFileExists (0x147002C0 | 1)
-#define ADDR_DATABROWSER_CHECKFILE (0x147002FC | 1)
+#define ADDR_DataBrowser_ItemDesc_CheckFileToCopyMove (0x147002FC | 1)
 
 #define ADDR_DataDownloadBook_onClose (0x157143F8 | 1)
 

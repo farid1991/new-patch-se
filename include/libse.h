@@ -3,6 +3,7 @@
 
 #include <base.h>
 #include <bookobj.h>
+#include <apps.h>
 #include <com.h>
 #include <datetime.h>
 #include <dispobj.h>
@@ -29,5 +30,6 @@
 #include <addressbook.h>
 #include <shortcut.h>
 #include <misc.h>
+#include <functions.h>
 
 #endif // LIBSE_H

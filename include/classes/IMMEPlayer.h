@@ -2,8 +2,8 @@
 #define _IMMEPLAYER_H_
 
 #include <base.h>
-#include <classes/IMME_types.h>
 #include <classes/IUnknown.h>
+#include <types/IMMETypes.h>
 
 class IMMEPlayer : public IUnknown
 {

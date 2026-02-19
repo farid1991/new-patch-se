@@ -78,5 +78,6 @@ void INHERITANCECHECK()
 
 #define ARM32 __attribute__((target("arm")))
 #define THUMB16 __attribute__((target("thumb")))
+#define NEWCODE __attribute__((section(".text.patch_section")))
 
 #endif // BASIC_TYPES_H

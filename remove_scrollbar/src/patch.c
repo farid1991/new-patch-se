@@ -1,13 +1,8 @@
-#include <libse.h>
-
 #ifdef K800_R8BF003
-    #include "K800_R8BF003.h"
+#include "K800_R8BF003.h"
 #endif
 
-#define NEWCODE __attribute__((section(".text.patch_section")))
-
-#define GUIObject_GetDispObject ((DISP_OBJ *(*)(GUI *))ADDR_GUIObject_GetDispObject)
-#define DispObject_SetScrollbarMode ((void (*)(DISP_OBJ *, int))ADDR_DispObject_SetScrollbarMode)
+#include <libse.h>
 
 THUMB16 NEWCODE void GUIObject_SetScrollbarMode(GUI *gui, int mode)
 {

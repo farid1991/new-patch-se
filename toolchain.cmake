@@ -14,9 +14,14 @@ find_program(ARM_CXX_COMPILER arm-none-eabi-g++${CMAKE_EXECUTABLE_SUFFIX} NO_CAC
 
 set(CMAKE_C_COMPILER ${ARM_C_COMPILER} CACHE INTERNAL "CMAKE_C_COMPILER")
 set(CMAKE_CXX_COMPILER ${ARM_CXX_COMPILER} CACHE INTERNAL "CMAKE_CXX_COMPILER")
-add_compile_options(-mcpu=arm926ej-s -mthumb-interwork -msoft-float -mlittle-endian -fshort-wchar)
-
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/)
+add_compile_options(-mcpu=arm926ej-s 
+					-mthumb-interwork 
+					-msoft-float
+					-mlittle-endian 
+					-ffreestanding
+					-fno-jump-tables
+					-fshort-wchar
+)
 
 add_link_options(-Wl,-z,max-page-size=1)
 
@@ -38,8 +43,8 @@ function(define_patch phone svn platform chipset base_address)
 	target_link_options(${target} PUBLIC -Wl,-T,${CMAKE_CURRENT_SOURCE_DIR}/linker/${firmware}.ld)
 
 	add_custom_command(TARGET ${target} PRE_BUILD
-		COMMENT "Removing old VKP file"
-		COMMAND ${CMAKE_COMMAND} -E remove ${CMAKE_BINARY_DIR}/${target}_${PROJECT_NAME}.vkp
+		COMMENT "Removing old ${target}.vkp file"
+		COMMAND ${CMAKE_COMMAND} -E remove ${CMAKE_BINARY_DIR}/${PROJECT_NAME}/${target}.vkp
 	)
 
 	add_custom_command(

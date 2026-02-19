@@ -48,3 +48,8 @@ Add question about replacing file if exist when receiving file via Bluetooth
 ```
 Add Power Menu when long press End Button in standby
 ```
+
+### volume_slider
+```
+Add New Volume Control GUI on settings
+```

@@ -1,19 +1,8 @@
-#include <libse.h>
-
 #ifdef C510_R1HA035
-    #include "C510_R1HA035.h"
+#include "C510_R1HA035.h"
 #endif
 
-#define NEWCODE __attribute__((section(".text.patch_section")))
-
-#define AB_GETNBROFITEMS ((int (*)(int, int))ADDR_AB_GETNBROFITEMS)
-#define snwprintf ((int (*)(wchar_t *, int, const wchar_t *, ...))ADDR_snwprintf)
-#define TextID_Create ((int (*)(const void *, int, int))ADDR_TextID_Create)
-
-#define GUIObject_SetTitleIcon ((void (*)(GUI *, IMAGEID))ADDR_GUIObject_SetTitleIcon)
-#define GUIObject_SetTitleType ((void (*)(GUI *, UI_TitleMode_t))ADDR_GUIObject_SetTitleType)
-#define GUIObject_SetTitleText ((void (*)(GUI *, TEXTID))ADDR_GUIObject_SetTitleText)
-#define GUIObject_SetSecondRowTitleText ((void (*)(GUI *, TEXTID))ADDR_GUIObject_SetSecondRowTitleText)
+#include <libse.h>
 
 #define MEMORY 2
 

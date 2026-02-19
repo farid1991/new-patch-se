@@ -1,5 +1,3 @@
-#include <libse.h>
-
 #if defined(C510_R1HA035)
 #include "C510_R1HA035.h"
 #elif defined(U10_R7AA071)
@@ -8,25 +6,7 @@
 #include "U100_R7AA076.h"
 #endif
 
-#define NEWCODE __attribute__((section(".text.patch_section")))
-
-#if defined(DB2020)
-#define memalloc ((void *(*)(int, int, int, int, const char *, int))ADDR_memalloc)
-#define memfree ((void (*)(int, void *, const char *, int))ADDR_memfree)
-#elif defined(A2)
-#define memalloc ((void *(*)(int, int, int, int, const char *, int))ADDR_memalloc)
-#define memfree ((void (*)(int, void *, const char *, int))ADDR_memfree)
-#else
-#define memalloc ((void *(*)(int, int, int, const char *, int))ADDR_memalloc)
-#define memfree ((void (*)(void *, const char *, int))ADDR_memfree)
-#endif
-#define debug_printf ((void (*)(const char *fmt, ...))ADDR_debug_printf)
-
-#define snwprintf ((int (*)(wchar_t *, int, const wchar_t *, ...))ADDR_snwprintf)
-#define REQUEST_DATEANDTIME_GET ((void (*)(int *, DATETIME *))ADDR_REQUEST_DATEANDTIME_GET)
-#define datetime2unixtime ((int (*)(DATETIME *))ADDR_datetime2unixtime)
-#define unixtime2datetime ((void (*)(int, DATETIME *))ADDR_unixtime2datetime)
-#define TextID_Create ((int (*)(const void *, int, int))ADDR_TextID_Create)
+#include <libse.h>
 
 THUMB16 NEWCODE void *malloc(int size)
 {

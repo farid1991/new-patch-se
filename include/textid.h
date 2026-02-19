@@ -29,6 +29,7 @@ typedef enum TEXT_ENCODING
 
 #define TEXT(__STR__) L##__STR__
 #define _T(__STR__) L##__STR__
-#define STR(__STR__) TextID_Create(_T(__STR__), ENC_UCS2, TEXTID_ANY_LEN)
+#define STR(__STR__) TextID_Create(__STR__, ENC_LAT1, TEXTID_ANY_LEN)
+#define STRW(__STRW__) TextID_Create(_T(__STRW__), ENC_UCS2, TEXTID_ANY_LEN)
 
 #endif // TEXTID_H
