@@ -12,6 +12,12 @@ Displayed on the first line in the list item and alarm clocks on your standby
 Display format "hh:mm (hh:mm)"
 ```
 
+### flashmenu_picker
+```
+Ability to select SWF as Custom Flash Menu
+Select swf from Main Menu Layout->Custom->FlashMenuPicker.
+```
+
 ### fm_record
 ```
 Add "Record" functions in the FM Radio

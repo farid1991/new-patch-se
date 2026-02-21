@@ -120,7 +120,7 @@
     ((int (*)(int))ADDR_fflush)
 
 #define FSX_IsFileExists \
-    ((BOOL (*)(wchar_t *, wchar_t *))ADDR_FSX_IsFileExists)
+    ((BOOL (*)(const wchar_t *, const wchar_t *))ADDR_FSX_IsFileExists)
 
 // file operations -------------------------------------------------------------
 
@@ -146,6 +146,9 @@
 
 #define rename \
     ((int (*)(const wchar_t *, const wchar_t *, const wchar_t *, const wchar_t *, int))ADDR_rename)
+
+#define getFileExtention \
+    ((wchar_t * (*)(const wchar_t *)) ADDR_getFileExtention)
 
 // wide filesystem (w_*) -------------------------------------------------------
 
@@ -274,6 +277,9 @@
 
 #define BookObj_ReturnPage \
     ((void (*)(BOOK *, int))ADDR_BookObj_ReturnPage)
+
+#define BookObj_CallPage \
+    ((void (*)(BOOK *, const PAGE_DESC *))ADDR_BookObj_CallPage)
 
 #define FreeBook \
     ((void (*)(BOOK *))ADDR_FreeBook)
@@ -451,6 +457,24 @@
 #define wstr2strn \
     ((char *(*)(char *, const wchar_t *, int))ADDR_wstr2strn)
 
+#define strstr \
+    ((char *(*)(const char *, const char *))ADDR_strstr)
+
+#define wstrcmpni \
+    ((int (*)(const wchar_t *, const wchar_t *, int))ADDR_wstrcmpni)
+
+#define wtoi \
+    ((int (*)(const wchar_t *, int, int *))ADDR_wtoi)
+
+#define wstrwstr \
+    ((wchar_t * (*)(const wchar_t *, const wchar_t *)) ADDR_wstrwstr)
+
+#define wstrcmpi \
+    ((int (*)(const wchar_t *, const wchar_t *))ADDR_wstrcmpi)
+
+#define wstrchr \
+    ((wchar_t * (*)(const wchar_t *, wchar_t)) ADDR_wstrchr)
+
 // TextID API ------------------------------------------------------------------
 
 #define TextID_CreateIntegerID \
@@ -477,13 +501,13 @@
 // Timer
 
 #define Timer_ReSet \
-    ((void (*)(uint16_t * timer, int time, TIMERPROC onTimer, LPARAM lparam)) ADDR_Timer_ReSet)
+    ((void (*)(uint16_t *timer, int time, TIMERPROC onTimer, LPARAM lparam))ADDR_Timer_ReSet)
 
 #define Timer_Set \
     ((uint16_t (*)(int time, TIMERPROC onTimer, LPARAM lparam))ADDR_Timer_Set)
 
 #define Timer_Kill \
-    ((void (*)(uint16_t * timerID)) ADDR_Timer_Kill)
+    ((void (*)(uint16_t *timerID))ADDR_Timer_Kill)
 
 // OSE / UI / COM-style interfaces ---------------------------------------------
 
@@ -820,7 +844,7 @@
     ((void (*)(GUI * strinp, BOOL state)) ADDR_StringInput_SetEnableEmptyText)
 
 #define StringInput_GetCursorPosition \
-    ((int (*)(GUI *, uint16_t * pos, char *_zero)) ADDR_StringInput_GetCursorPosition)
+    ((int (*)(GUI *, uint16_t *pos, char *_zero))ADDR_StringInput_GetCursorPosition)
 
 #define StringInput_SetCursorPosition \
     ((void (*)(GUI *, uint16_t curs_pos, char unk))ADDR_StringInput_SetCursorPosition)
@@ -971,6 +995,20 @@
 #define SoundRecorderDesc_SetStyle ((int (*)(void *desc, int style))ADDR_SoundRecorderDesc_SetStyle)
 #define SoundRecorder_Create ((int (*)(void *desc))ADDR_SoundRecorder_Create)
 
+// --- Browser / URI --------------------------------------------------------
+
+#define Browser_OpenURI \
+    ((int (*)(BOOK *, char *, int))ADDR_Browser_OpenURI)
+
+#define GetURIScheme \
+    ((char *(*)(int schemeID))ADDR_GetURIScheme)
+
+#define CreateURI \
+    ((char *(*)(const wchar_t *, const wchar_t *, char *))ADDR_CreateURI)
+
+#define FreeURI \
+    ((void (*)(char *))ADDR_FreeURI)
+
 // CANVAS / GVI GC -------------------------------------------------------------
 
 #define CANVAS_Get_GviGC \
@@ -1072,5 +1110,16 @@
 #define GetFreeBytesOnHeap ((int (*)(void))ADDR_GetFreeBytesOnHeap)
 #define FlightMode_GetState ((int (*)(void))ADDR_FlightMode_GetState)
 #define FlightMode_SetState ((void (*)(int state))ADDR_FlightMode_SetState)
+
+// --- Theme / Flash menu ---------------------------------------------------
+
+#define MainMenu_SetFromUserTheme \
+    ((void (*)(int))ADDR_MainMenu_SetFromUserTheme)
+
+#define ThemeImage_Apply \
+    ((void (*)(const wchar_t *, const wchar_t *, const wchar_t *, const wchar_t *, int, int))ADDR_ThemeImage_Apply)
+
+#define Set_SWF_AsFlashMenu \
+    ((void (*)(const wchar_t *, const wchar_t *, int *))ADDR_Set_SWF_AsFlashMenu)
 
 #endif

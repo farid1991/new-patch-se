@@ -5,6 +5,13 @@
 #include <imageid.h>
 #include <textid.h>
 
+#define FREE_GUI(g)           \
+	if (g)                    \
+	{                         \
+		GUIObject_Destroy(g); \
+		g = NULL;             \
+	}
+
 typedef enum UI_OverlayStyle_t
 {
 	UI_OverlayStyle_NotDefined = 0,
@@ -109,8 +116,7 @@ typedef enum
 
 typedef struct GUI
 {
-    char dummy[0x90];
+	char dummy[0x90];
 } GUI;
-
 
 #endif // GUI_H

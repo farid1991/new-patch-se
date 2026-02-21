@@ -1,0 +1,9 @@
+;Ability to select SWF as Custom Flash Menu
+;Select swf from Main Menu Layout->Custom->FlashMenuPicker.
+;Added ability to preview SWF before set.
+;Put SWF on correct directory
+;1. Default `/tpa/preset/system/desktop/flash`
+;2. Phone Memory `%PATH_IMAGE_INT%/flash`
+;3. Memory Card `%PATH_IMAGE_EXT%/flash`
+;(c) farid
+;Original idea from Myrzeug
