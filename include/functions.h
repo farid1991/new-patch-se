@@ -69,10 +69,10 @@
     ((PROCESS (*)(void))ADDR_GetCurrentPID)
 
 #define get_envp \
-    ((OSADDRESS (*)(PROCESS, char *))ADDR_get_envp)
+    ((OSADDRESS (*)(PROCESS, const char *))ADDR_get_envp)
 
 #define set_envp \
-    ((OSBOOLEAN (*)(PROCESS, char *, OSADDRESS))ADDR_set_envp)
+    ((OSBOOLEAN (*)(PROCESS, const char *, OSADDRESS))ADDR_set_envp)
 
 #define debug_printf \
     ((void (*)(const char *fmt, ...))ADDR_debug_printf)

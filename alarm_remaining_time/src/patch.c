@@ -8,14 +8,17 @@
 
 #include <libse.h>
 
+static const char mem[] = "al";
+static const wchar_t output_fmt[] = L"%02d:%02d (%02d:%02d)";
+
 THUMB16 NEWCODE void *malloc(int size)
 {
 #if defined(DB2020)
-    return (memalloc(0, size, 1, 5, "al", 0));
+    return (memalloc(0, size, 1, 5, mem, 0));
 #elif defined(A2)
-    return (memalloc(0xFFFFFFFF, size, 1, 5, "al", 0));
+    return (memalloc(0xFFFFFFFF, size, 1, 5, mem, 0));
 #else
-    return memalloc(size, 1, 5, "al", 0);
+    return memalloc(size, 1, 5, mem, 0);
 #endif
 }
 
@@ -23,11 +26,11 @@ THUMB16 NEWCODE void mfree(void *mem)
 {
     if (mem)
 #if defined(DB2020)
-        memfree(0, mem, "al", 0);
+        memfree(0, mem, mem, 0);
 #elif defined(A2)
-        memfree(0, mem, "al", 0);
+        memfree(0, mem, mem, 0);
 #else
-        memfree(mem, "al", 0);
+        memfree(mem, mem, 0);
 #endif
 }
 
@@ -56,6 +59,6 @@ THUMB16 NEWCODE TEXTID GetRemainingTimeID(TIME *alarm)
     mfree(datetime_alarm);
 
     wchar_t buf[64];
-    snwprintf(buf, MAXELEMS(buf), L"%02d:%02d (%02d:%02d)", alarm->hour, alarm->min, datetime_back.time.hour, datetime_back.time.min);
+    snwprintf(buf, MAXELEMS(buf), output_fmt, alarm->hour, alarm->min, datetime_back.time.hour, datetime_back.time.min);
     return TextID_Create(buf, ENC_UCS2, TEXTID_ANY_LEN);
 }

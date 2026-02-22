@@ -9,8 +9,9 @@
 #include <libse.h>
 #include <book/DataDownloadBook.h>
 
-#define EMP_NAME "r_emp"
-#define MEM_NAME "r_mem"
+static const char EMP_NAME[] = "r_emp";
+static const char MEM_NAME[] = "r_mem";
+static const char DataDownload_ReplaceFile_Page_Name[] = "DataDownload_ReplaceFile_Page";
 
 typedef struct FILE_DATA
 {
@@ -28,7 +29,7 @@ const PAGE_MSG evtlst_DataDownload_ReplaceFile[] =
         PAGE_EXIT_EVENT, pg_ReplaceFile_ExitEvent,
         NIL_EVENT, NULL};
 
-const PAGE_DESC DataDownload_ReplaceFile_Page = {"DataDownload_ReplaceFile_Page", 0, evtlst_DataDownload_ReplaceFile};
+const PAGE_DESC DataDownload_ReplaceFile_Page = {DataDownload_ReplaceFile_Page_Name, 0, evtlst_DataDownload_ReplaceFile};
 
 THUMB16 NEWCODE void *malloc(int size)
 {
@@ -112,13 +113,9 @@ THUMB16 NEWCODE void Patch_ReplaceFile_Page(BOOK *book)
     DataDownloadBook *dl_book = (DataDownloadBook *)book;
 
     if (FSX_IsFileExists(FILEITEM_GetPath(dl_book->fi), FILEITEM_GetFname(dl_book->fi)))
-    {
         BookObj_GotoPage(book, &DataDownload_ReplaceFile_Page);
-    }
     else
-    {
         BookObj_GotoPage(book, DataDownload_Main_Page);
-    }
 }
 
 THUMB16 NEWCODE void New_ReplaceFile(FILEITEM *fileitem)
@@ -126,13 +123,9 @@ THUMB16 NEWCODE void New_ReplaceFile(FILEITEM *fileitem)
     FILE_DATA *fd = get_env_data();
 
     if (fd->state)
-    {
         FileDelete(FILEITEM_GetPath(fileitem), FILEITEM_GetFname(fileitem), NULL);
-    }
     else
-    {
         DataBrowser_ItemDesc_CheckFileToCopyMove(fileitem);
-    }
 }
 
 THUMB16 NEWCODE void Close_DataDownloadBook(BOOK *book)

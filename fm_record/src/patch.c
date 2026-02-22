@@ -7,7 +7,8 @@
 #include <soundrecorder.h>
 
 #define FNAME_SIZE 256
-const wchar_t output_dir[16] = L"/card/music/FM";
+const wchar_t output_dir[] = L"/card/music/FM";
+const wchar_t output_fmt[] = L"fm-%ls-%d-%02d_%02d_%d-%02d:%02d.amr";
 
 THUMB16 NEWCODE void FMRadio_Record(BOOK *book, GUI *gui)
 {
@@ -31,7 +32,7 @@ THUMB16 NEWCODE void FMRadio_Record(BOOK *book, GUI *gui)
         wchar_t filename[FNAME_SIZE];
         snwprintf(filename,
                   MAXELEMS(filename),
-                  L"fm-%ls-%d-%02d_%02d_%d-%02d:%02d.amr",
+                  output_fmt,
                   fm_book->Channel[fm_book->CurrentChannel - 1].Name,
                   fm_book->CurrentFrequency,
                   dt.date.day, dt.date.mon, dt.date.year,

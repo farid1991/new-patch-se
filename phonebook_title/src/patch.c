@@ -6,6 +6,9 @@
 
 #define MEMORY 2
 
+const wchar_t sim_fmt[] = L"Contacts: %d";
+const wchar_t phone_fmt[] = L"Contacts: %d";
+
 THUMB16 NEWCODE void SetTitleText(int mem, GUI *gui)
 {
     IMAGEID image;
@@ -16,13 +19,13 @@ THUMB16 NEWCODE void SetTitleText(int mem, GUI *gui)
     {
         image = IMAGEID_SIM;
         title = TEXTID_SIM;
-        snwprintf(buf, sizeof(buf), L"Contacts: %d", AB_GETNBROFITEMS(4, 0));
+        snwprintf(buf, sizeof(buf), sim_fmt, AB_GETNBROFITEMS(4, 0));
     }
     else
     {
         image = IMAGEID_PHONE;
         title = TEXTID_PHONE;
-        snwprintf(buf, sizeof(buf), L"Contacts: %d(%d)", AB_GETNBROFITEMS(0, 0), AB_GETNBROFITEMS(3, 0));
+        snwprintf(buf, sizeof(buf), phone_fmt, AB_GETNBROFITEMS(0, 0), AB_GETNBROFITEMS(3, 0));
     }
 
     GUIObject_SetTitleIcon(gui, image);
