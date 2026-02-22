@@ -22,7 +22,7 @@ enum
 {
     ITEM_SYS,
     ITEM_INT,
-#ifdef EXT_FLASH_PATH
+#ifdef HAS_EXTERNAL
     ITEM_EXT,
 #endif
     ITEM_LAST

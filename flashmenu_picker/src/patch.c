@@ -1,4 +1,6 @@
-#if defined(W760_R3EM001)
+#if defined(C510_R1HA035)
+#include <C510_R1HA035.h>
+#elif defined(W760_R3EM001)
 #include <W760_R3EM001.h>
 #endif
 
@@ -72,7 +74,7 @@ THUMB16 NEWCODE BOOL FSX_IsFileExists(const wchar_t *fpath, const wchar_t *fname
 #endif
 
 #if defined(DB3200) || defined(DB3210) || defined(DB3350)
-THUMB16 NEWCODE void Set_SWF_AsFlashMenu(const wchar_t *fpath, const wchar_t *fname, int *error)
+THUMB16 NEWCODE void _Set_SWF_AsFlashMenu(const wchar_t *fpath, const wchar_t *fname, int *error)
 {
     FileDelete(SETTINGS_PATH, FD_IMAGE, NULL);
     ThemeImage_Apply(fpath, fname, SETTINGS_PATH, FD_IMAGE, NULL, NULL);
@@ -116,7 +118,12 @@ THUMB16 NEWCODE void FlashMenuPicker_Pick_Select(BOOK *book, GUI *gui)
             FileCopy(EXTERNAL_PATH, flist->filename, DEFAULT_FLASH_PATH, CUSTOM_NAME, NULL);
 #endif
 
+#if defined(DB3200) || defined(DB3210) || defined(DB3350)
+        _Set_SWF_AsFlashMenu(DEFAULT_FLASH_PATH, CUSTOM_NAME, NULL);
+#else
         Set_SWF_AsFlashMenu(DEFAULT_FLASH_PATH, CUSTOM_NAME, NULL);
+#endif
+
 #if defined(DB3150v2) || defined(DB3200) || defined(DB3210) || defined(DB3350)
         MainMenu_SetFromUserTheme(TRUE);
 #endif

@@ -20,22 +20,6 @@
 #define ITEM_EXT_ICN 0xF845
 #define DB_FLASH_ICN 0xEA51
 
-#define KBD_LONG_PRESS 0x1
-#define KBD_LONG_RELEASE 0x4
-#define KBD_REPEAT 0x2
-#define KBD_SHORT_PRESS 0x0
-#define KBD_SHORT_RELEASE 0x3
-
-#define KEY_STAR 0x22
-#define KEY_DIEZ 0x23
-#define KEY_ESC 0x4
-#define KEY_UP 0x9
-#define KEY_DOWN 0xD
-#define KEY_LEFT 0xF
-#define KEY_RIGHT 0xB
-#define KEY_ENTER 0x8
-#define KEY_DIGITAL_0 0x18
-
 #define ACTION_BACK 0xFC0
 #define ACTION_LONG_BACK 0xFAF
 #define ACTION_SELECT1 0xFC2
@@ -78,6 +62,7 @@
 #define ADDR_fstat (0x109F61A4 | 1)
 #define ADDR_FileCopy (0x109F673C | 1)
 #define ADDR_FileDelete (0x109F6434 | 1)
+#define ADDR_mkdir (0x109F2DBC | 1)
 #define ADDR_w_fopen (0x11330F6C | 1)
 #define ADDR_w_lseek (0x11AE3334 | 1)
 #define ADDR_w_fread (0x11330F9C | 1)

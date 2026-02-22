@@ -1,4 +1,6 @@
-#if defined(W760_R3EM001)
+#if defined(C510_R1HA035)
+#include <C510_R1HA035.h>
+#elif defined(W760_R3EM001)
 #include <W760_R3EM001.h>
 #endif
 
@@ -70,6 +72,7 @@ THUMB16 NEWCODE LIST *file_list_create(const wchar_t *path)
 {
     LIST *list = List_Create();
 
+    mkdir(path);
     void *dir = w_diropen(path);
     if (!dir)
         return list;
