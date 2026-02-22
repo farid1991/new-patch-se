@@ -29,11 +29,13 @@ enum MENU_ITEMS
 #define ACTION_BACK       0xFC0
 #define ACTION_LONG_BACK  0xFAF
 
+const char title_fmt[] = "Free HEAP: %02d KB";
+
 THUMB16 NEWCODE TEXTID GetTitleText()
 {
-    wchar_t buff[32];
-    snwprintf(buff, MAXELEMS(buff), L"Free HEAP: %dKB", GetFreeBytesOnHeap() >> 10);
-    return TextID_Create(buff, ENC_UCS2, TEXTID_ANY_LEN);
+    char buff[32];
+    snprintf(buff, MAXELEMS(buff), title_fmt, GetFreeBytesOnHeap() >> 10);
+    return TextID_Create(buff, ENC_LAT1, TEXTID_ANY_LEN);
 }
 
 THUMB16 NEWCODE void ShutdownMenu_onClose(BOOK *book, GUI *gui)

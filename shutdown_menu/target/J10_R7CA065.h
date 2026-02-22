@@ -6,6 +6,7 @@
 
 #define ADDR_GUIObject_Show (0x14181520 | 1)
 #define ADDR_GUIObject_SoftKeys_SetAction (0x1456E038 | 1)
+#define ADDR_snprintf (0x145D8D04 | 1)
 #define ADDR_snwprintf (0x145D8D40 | 1)
 #define ADDR_TextID_Create (0x145CC790 | 1)
 
