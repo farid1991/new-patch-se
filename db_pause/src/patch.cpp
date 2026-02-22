@@ -7,21 +7,21 @@
 
 extern "C" THUMB16 NEWCODE void db_action_pause(BOOK *book, GUI *gui)
 {
-  SUB_EXECUTE *sub_execute = BrowserItem_Get_SUB_EXECUTE(book);
-  TMMEState state;
+    SUB_EXECUTE *sub_execute = BrowserItem_Get_SUB_EXECUTE(book);
+    TMMEState state;
 
-  IMMEPlayer *pIMMEPlayer = (IMMEPlayer *)sub_execute->pIMMEPlayer;
-  pIMMEPlayer->GetState(&state);
-  if (state == TMMEState_Playing)
-  {
-    pIMMEPlayer->Pause();
-    GUIObject_SoftKeys_SetVisible(sub_execute->gui, ACTION_PLAY, TRUE);
-    GUIObject_SoftKeys_SetVisible(sub_execute->gui, ACTION_PAUSE, FALSE);
-  }
-  else
-  {
-    pIMMEPlayer->Play(NULL, FALSE);
-    GUIObject_SoftKeys_SetVisible(sub_execute->gui, ACTION_PLAY, FALSE);
-    GUIObject_SoftKeys_SetVisible(sub_execute->gui, ACTION_PAUSE, TRUE);
-  }
+    IMMEPlayer *pIMMEPlayer = (IMMEPlayer *)sub_execute->pIMMEPlayer;
+    pIMMEPlayer->GetState(&state);
+    if (state == TMMEState_Playing)
+    {
+        pIMMEPlayer->Pause();
+        GUIObject_SoftKeys_SetVisible(sub_execute->gui, ACTION_PLAY, TRUE);
+        GUIObject_SoftKeys_SetVisible(sub_execute->gui, ACTION_PAUSE, FALSE);
+    }
+    else
+    {
+        pIMMEPlayer->Play(NULL, FALSE);
+        GUIObject_SoftKeys_SetVisible(sub_execute->gui, ACTION_PLAY, FALSE);
+        GUIObject_SoftKeys_SetVisible(sub_execute->gui, ACTION_PAUSE, TRUE);
+    }
 }
