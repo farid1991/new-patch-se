@@ -14,6 +14,8 @@
 #endif
 
 #define memset ((void *(*)(void *, int, int))ADDR_memset)
+#define memcpy ((int (*)(void *, const void *, int))ADDR_memcpy)
+#define memcmp ((int (*)(const void *, const void *, int))ADDR_memcmp)
 
 // OSE functioms
 #define GetCurrentPID \
@@ -118,6 +120,9 @@
 
 #define fflush \
     ((int (*)(int))ADDR_fflush)
+
+#define lseek \
+    ((int (*)(int file, int offset, int mode))ADDR_lseek)
 
 #define FSX_IsFileExists \
     ((BOOL (*)(const wchar_t *, const wchar_t *))ADDR_FSX_IsFileExists)
@@ -299,6 +304,9 @@
 #define BookObj_SetFocus \
     ((void (*)(BOOK *, int))ADDR_BookObj_SetFocus)
 
+#define Display_GetTopBook \
+    ((BOOK * (*)(int)) ADDR_Display_GetTopBook)
+
 // DISP / GC / GUI -------------------------------------------------------------
 
 #define get_DisplayGC \
@@ -339,6 +347,25 @@
 
 #define DispObject_SetScrollbarMode \
     ((void (*)(DISP_OBJ *, int))ADDR_DispObject_SetScrollbarMode)
+
+// --- Text / Image drawing --------------------------------------------------
+#define SetFont \
+    ((int (*)(int))ADDR_SetFont)
+
+#define DrawString \
+    ((void (*)(TEXTID, int, int, int, int, int, int, int, int, int))ADDR_DrawString)
+
+#define GC_PutChar \
+    ((void (*)(GC *, int, int, int, int, IMAGEID))ADDR_GC_PutChar)
+
+#define GetImageHeight \
+    ((int (*)(IMAGEID))ADDR_GetImageHeight)
+
+#define GetImageWidth \
+    ((int (*)(IMAGEID))ADDR_GetImageWidth)
+
+#define GetThemeColor \
+    ((int (*)(int, int))ADDR_GetThemeColor)
 
 // GUI object creation / lifecycle --------------------------------------------
 
