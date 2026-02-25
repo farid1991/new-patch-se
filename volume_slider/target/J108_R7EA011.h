@@ -94,32 +94,11 @@
 #define ADDR_memfree (0x4BC003BC)
 #define ADDR_memset (0x145C5AE8)
 
-#define ADDR__fopen (0x142048D8 | 1)
-#define ADDR_fclose (0x14587FC0 | 1)
-#define ADDR_fread (0x1428EA7C | 1)
-#define ADDR_fwrite (0x1428F010 | 1)
-#define ADDR_FileDelete (0x140DC6C4 | 1)
-
-#define ADDR_strcmp (0x145C619C)
-#define ADDR_sprintf (0x145C4AC4 | 1)
-#define ADDR_snprintf (0x145C4AF0 | 1)
 #define ADDR_snwprintf (0x145C4A3C | 1)
-#define ADDR_MessageBox (0x152EBA98 | 1)
-
 #define ADDR_TextID_Create (0x145B8610 | 1)
 #define ADDR_TextID_Destroy (0x145B7C6C | 1)
 #define ADDR_Volume_Get (0x144DA0C0 | 1)
 #define ADDR_Volume_Set (0x144DC690 | 1)
-
-#define ADDR_FindBook (0x1445FFC0 | 1)
-#define ADDR_FindBookEx (0x14235A1C | 1)
-
-#define ADDR_Create_KnobOption (0x14B76B50 | 1)
-#define ADDR_KnobOption_SetTitleText (0x14E09BDC | 1)
-#define ADDR_KnobOption_SetItemCount (0x14751058 | 1)
-#define ADDR_KnobOption_SetCursor (0x14E09C24 | 1)
-#define ADDR_KnobOption_SetItems (0x14B76B30 | 1)
-#define ADDR_KnobOption_GetSelectedItem (0x14ADD370 | 1)
 
 #define ADDR_DISP_DESC_SetSize (0x1448D778 | 1)
 #define ADDR_DISP_DESC_SetName (0x1448D77C | 1)
@@ -140,24 +119,13 @@
 
 #define ADDR_DrawRect (0x141A41F0 | 1)
 
-#define ADDR_REQUEST_SYSTEM_SHUTDOWN (0x147BB85C | 1)
-#define ADDR_REQUEST_SYSTEM_RESTART (0x152ED4E4 | 1)
 #define ADDR_REQUEST_SETTING_RINGVOLUME_SET (0x15303A14 | 1)
 
-#define ADDR_GetFreeBytesOnHeap (0x4BC00500)
 #define ADDR_CreateBook (0x14179108 | 1)
 #define ADDR_FreeBook (0x1417924C | 1)
 #define ADDR_BookObj_AddGUIObject (0x141798E8 | 1)
 #define ADDR_BookObj_SetFocus (0x141775BC | 1)
 #define ADDR_BookObj_GotoPage (0x1404FF00 | 1)
-
-#define ADDR_FlightMode_GetState (0x140954B0 | 1)
-#define ADDR_FlightMode_SetState (0x14AB9920 | 1)
-
-#define ADDR_DynamicMenu_CreateSetBook (0x14AA82C8 | 1)
-#define ADDR_DynamicMenu_GetElementMsg (0x14184194 | 1)
-#define ADDR_DynamicMenu_SetElement_FirstLineText (0x14184AF0 | 1)
-#define ADDR_DynamicMenu_SetElement_SecondLineText (0x14AA75E8 | 1)
 
 #define ADDR_CoCreateInstance (0x144E924C | 1)
 #define ADDR_get_DisplayGC (0x142CCD80 | 1)
@@ -165,8 +133,5 @@
 #define ADDR_TextObject_SetText (0x1427864C | 1)
 #define ADDR_TextObject_SetFont (0x144AEC28 | 1)
 
-#define ADDR_onStandyEvent (0x14F51E78 | 1)
-#define ADDR_onCloseBook (0x14849648 | 1)
 #define ADDR_onBackPressed (0x14F51494 | 1)
 #define ADDR_onLongBackPressed (0x14F7F9C0 | 1)
-#define ADDR_StandartRingMenu (0x14AA76E0 | 1)
