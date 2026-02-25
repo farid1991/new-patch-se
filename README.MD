@@ -12,10 +12,21 @@ Displayed on the first line in the list item and alarm clocks on your standby
 Display format "hh:mm (hh:mm)"
 ```
 
+### bt_transmission
+```
+Displays a process of transmission through BT in the status bar.
+Only works if the window "Sending"/"Receiving" is minimazed.
+```
+
 ### flashmenu_picker
 ```
 Ability to select SWF as Custom Flash Menu
 Select swf from Main Menu Layout->Custom->FlashMenuPicker.
+```
+
+### db_pause
+```
+Add pause button during audio playback through the File Manager
 ```
 
 ### fm_record
@@ -23,9 +34,10 @@ Select swf from Main Menu Layout->Custom->FlashMenuPicker.
 Add "Record" functions in the FM Radio
 ```
 
-### db_pause
+### mp3_info
 ```
-Add pause button during audio playback through the File Manager
+Add extra informations about files mp3
+Added items Bitrate, Samplerate and Channel mode
 ```
 
 ### phone_wo_sim

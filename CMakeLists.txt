@@ -12,6 +12,7 @@ add_compile_options(-Os)
 
 add_subdirectory(common/aeabi)
 add_subdirectory(alarm_remaining_time)
+add_subdirectory(bt_transmission)
 add_subdirectory(db_pause)
 add_subdirectory(flashmenu_picker)
 add_subdirectory(fm_record)

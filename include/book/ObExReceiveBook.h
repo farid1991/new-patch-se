@@ -1,0 +1,56 @@
+#ifndef ObExReceiveBook_H
+#define ObExReceiveBook_H
+
+typedef struct OBEX_REFRESH_RECEIVE_PROGRESS_DATA
+{
+    char dummy[0x28];
+    int received_bytes;
+} OBEX_REFRESH_RECEIVE_PROGRESS_DATA;
+
+#if defined(DB2010)
+typedef struct ObExReceiveBook
+{
+    BOOK book;                 // 0x00
+    void *unk_18;              // 0x18
+    GUI *ProgressBar;          // 0x1C
+    int unk_24;                // 0x20
+    BT_FILE_2010 bt_file;      // 0x24
+    wchar_t sender_name[0xFC]; // 0x414
+    int file_size;             // 0x60C
+    int free_space;            // 0x610
+    int unk_614;               // 0x614
+    int unk_618;               // 0x618
+    int percentage;            // 0x61C
+    u16 unk_620;               // 0x620
+    wchar_t short_name[0xE];   // 0x622
+    char unk_63E;              // 0x63E
+    char unk_63F;              // 0x63F
+} ObExReceiveBook;
+
+#elif defined(DB3150v1) || defined(DB3150v2) || defined(DB3350)
+typedef struct ObExReceiveBook
+{
+    BOOK book;               // 0x00
+    GUI *ProgressBar;        // 0x18
+    void *unk_1C;            // 0x1C
+    wchar_t short_name[0xE]; // 0x20
+    int file_size;           // 0x3C
+    int free_space;          // 0x40
+    int file_received;       // 0x44
+} ObExReceiveBook;
+
+#elif defined(DB3200) || defined(DB3210)
+typedef struct ObExReceiveBook
+{
+    BOOK book;               // 0x00
+    GUI *ProgressBar;        // 0x18
+    void *unk_1C;            // 0x1C
+    void *unk_20;            // 0x20
+    wchar_t short_name[0xE]; // 0x24
+    int file_size;           // 0x40
+    int free_space;          // 0x44
+    int file_received;       // 0x48
+} ObExReceiveBook;
+#endif
+
+#endif

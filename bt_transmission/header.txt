@@ -1,0 +1,4 @@
+;Displays a process of transmission through BT in the status bar.
+;Only works if the window "Sending"/"Receiving" is minimazed.
+;v 1.1
+;(c) MaPkiZzz aka Vital
