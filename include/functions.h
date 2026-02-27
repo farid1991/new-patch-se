@@ -469,24 +469,6 @@
 #define wstrlen \
     ((int (*)(const wchar_t *))ADDR_wstrlen)
 
-#define str2wstr \
-    ((wchar_t * (*)(wchar_t *, const char *)) ADDR_str2wstr)
-
-#define strcmp \
-    ((int (*)(const char *, const char *))ADDR_strcmp)
-
-#define strlen \
-    ((int (*)(const char *))ADDR_strlen)
-
-#define str2wstrn \
-    ((wchar_t * (*)(wchar_t *, const char *, int)) ADDR_str2wstrn)
-
-#define wstr2strn \
-    ((char *(*)(char *, const wchar_t *, int))ADDR_wstr2strn)
-
-#define strstr \
-    ((char *(*)(const char *, const char *))ADDR_strstr)
-
 #define wstrcmpni \
     ((int (*)(const wchar_t *, const wchar_t *, int))ADDR_wstrcmpni)
 
@@ -501,6 +483,36 @@
 
 #define wstrchr \
     ((wchar_t * (*)(const wchar_t *, wchar_t)) ADDR_wstrchr)
+
+#define strcpy \
+    ((char *(*)(char *, const char *))ADDR_strcpy)
+
+#define strncpy \
+    ((char * (*)(char *, const char *, int)) ADDR_strncpy)
+
+#define str2wstr \
+    ((wchar_t * (*)(wchar_t *, const char *)) ADDR_str2wstr)
+
+#define strcmp \
+    ((int (*)(const char *, const char *))ADDR_strcmp)
+
+#define strlen \
+    ((int (*)(const char *))ADDR_strlen)
+
+#define strcat \
+    ((char *(*)(char *, const char *))ADDR_strcat)
+
+#define strncat \
+    ((char *(*)(char *, const char *, int))ADDR_strncat)
+
+#define str2wstrn \
+    ((wchar_t * (*)(wchar_t *, const char *, int)) ADDR_str2wstrn)
+
+#define wstr2strn \
+    ((char *(*)(char *, const wchar_t *, int))ADDR_wstr2strn)
+
+#define strstr \
+    ((char *(*)(const char *, const char *))ADDR_strstr)
 
 // TextID API ------------------------------------------------------------------
 
@@ -554,6 +566,7 @@
     ((int (*)(TEXTID, void *, void *))ADDR_RichTextLayout_GetTextWidth)
 
 // DynamicMenu function --------------------------------------------------------
+
 #define DynamicMenu_GetElementMsg \
     ((int (*)(DYNAMIC_MENU_ELEMENT *))ADDR_DynamicMenu_GetElementMsg)
 

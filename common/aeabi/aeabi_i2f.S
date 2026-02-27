@@ -32,3 +32,5 @@ positive:
 zero:
     mov r0, #0
     bx lr
+
+.size __aeabi_i2f, .- __aeabi_i2f

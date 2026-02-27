@@ -20,6 +20,7 @@ add_compile_options(-mcpu=arm926ej-s
 					-mlittle-endian 
 					-ffreestanding
 					-fno-jump-tables
+					-fno-tree-switch-conversion
 					-fshort-wchar
 )
 

@@ -18,6 +18,12 @@ Displays a process of transmission through BT in the status bar.
 Only works if the window "Sending"/"Receiving" is minimazed.
 ```
 
+### exif_info
+```
+Display Exif Info of JPEG file.  
+Added 40 Exif tags on JPEG file information.  
+```
+
 ### flashmenu_picker
 ```
 Ability to select SWF as Custom Flash Menu
