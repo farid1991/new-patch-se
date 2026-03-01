@@ -7,6 +7,7 @@ extern unsigned int __udivmodsi4(unsigned int num, unsigned int den, unsigned in
 /*
  * 32-bit signed integer divide.
  */
+__attribute__((section(".text.patch_section")))
 signed int __aeabi_idiv(signed int num, signed int den)
 {
     signed int minus = 0;

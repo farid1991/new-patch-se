@@ -3,6 +3,7 @@
  */
 
 .syntax unified
+.section .text.patch_section
 .arm
 .globl __aeabi_uidivmod
 .type __aeabi_uidivmod, %function

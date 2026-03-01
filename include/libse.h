@@ -30,6 +30,15 @@
 #include <addressbook.h>
 #include <shortcut.h>
 #include <misc.h>
+
+#ifdef USE_LIBPNG
+#include <png.h>
+#endif // USE_LIBPNG
+
+#ifdef USE_ZLIB
+#include <zlib.h>
+#endif // USE_ZLIB
+
 #include <functions.h>
 
 #endif // LIBSE_H

@@ -1,7 +1,7 @@
 /*
  * __udivmodsi4.c 32-bit. (internal funtion)
  */
-
+__attribute__((section(".text.patch_section")))
 unsigned int __udivmodsi4(unsigned int num, unsigned int den, unsigned int * rem_p)
 {
 	unsigned int quot = 0, qbit = 1;

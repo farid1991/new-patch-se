@@ -1,0 +1,9 @@
+;Add more info about PNG in file information window
+;Bit depth
+;Channels
+;Pixel Depth
+;Color
+;Interlace
+;Filter
+;User Text info
+;(c) farid

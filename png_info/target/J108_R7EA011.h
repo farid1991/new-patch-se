@@ -1,0 +1,35 @@
+#pragma once
+
+#define PNG_EXTRA_SUPPORTED
+#define DEF_PNG_LIBPNG_VER_STRING (char *)0x11D65C2C // "1.2.20"
+
+#define ADDR_memalloc (0x4BC00394)
+#define ADDR_memfree (0x4BC003BC)
+#define ADDR_memcmp (0x145C5A74 | 1)
+#define ADDR_memcpy (0x145C5D98)
+#define ADDR_memset (0x145C5AE8)
+#define ADDR_strlen (0x142F7364 | 1)
+#define ADDR_strncat (0x101A2DB8 | 1)
+#define ADDR_strncpy (0x101A2E14 | 1)
+#define ADDR_snprintf (0x145C4AF0 | 1)
+#define ADDR__fopen (0x142048D8 | 1)
+#define ADDR_fread (0x1428EA7C | 1)
+#define ADDR_fclose (0x14587FC0 | 1)
+#define ADDR_lseek (0x1428EC20 | 1)
+#define ADDR_FILEITEM_GetFname (0x140214AC | 1)
+#define ADDR_FILEITEM_GetPath (0x140213B0 | 1)
+#define ADDR_TextID_Create (0x145B8610 | 1)
+#define ADDR_List_DestroyElements (0x1455B378 | 1)
+#define ADDR_List_Destroy (0x1404E52C | 1)
+#define ADDR_List_Create (0x142CE2E0 | 1)
+#define ADDR_List_Get (0x1445FFA8 | 1)
+#define ADDR_List_InsertLast (0x1446012C | 1)
+#define ADDR_List_GetCount (0x14460020 | 1)
+
+#define ADDR_png_create_read_struct_2 (0x10113C0C | 1)
+#define ADDR_png_create_info_struct (0x10113E3C | 1)
+#define ADDR_png_destroy_read_struct (0x101142F0 | 1)
+#define ADDR_png_get_IHDR (0x10113EA8 | 1)
+#define ADDR_png_set_read_fn (0x10113DFC | 1)
+#define ADDR_png_get_io_ptr (0x10157530 | 1)
+#define ADDR_png_read_info (0x101576BC | 1)

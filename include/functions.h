@@ -488,7 +488,7 @@
     ((char *(*)(char *, const char *))ADDR_strcpy)
 
 #define strncpy \
-    ((char * (*)(char *, const char *, int)) ADDR_strncpy)
+    ((char *(*)(char *, const char *, int))ADDR_strncpy)
 
 #define str2wstr \
     ((wchar_t * (*)(wchar_t *, const char *)) ADDR_str2wstr)
@@ -1161,5 +1161,75 @@
 
 #define Set_SWF_AsFlashMenu \
     ((void (*)(const wchar_t *, const wchar_t *, int *))ADDR_Set_SWF_AsFlashMenu)
+
+// -------------------------------- libpng -------------------------------------
+#ifdef USE_LIBPNG
+#define png_create_read_struct_2 \
+    ((png_structp (*)(png_const_charp, png_voidp, png_error_ptr, png_error_ptr, png_voidp, png_malloc_ptr, png_free_ptr))ADDR_png_create_read_struct_2)
+
+#define png_destroy_read_struct \
+    ((void (*)(png_structpp, png_infopp, png_infopp))ADDR_png_destroy_read_struct)
+
+#define png_create_info_struct \
+    ((png_infop (*)(png_structp))ADDR_png_create_info_struct)
+
+#define png_destroy_info_struct \
+    ((void (*)(png_structp, png_infopp))ADDR_png_destroy_info_struct)
+
+#define png_set_progressive_read_fn \
+    ((void (*)(png_structp, png_voidp, png_progressive_info_ptr, png_progressive_row_ptr, png_progressive_end_ptr))ADDR_png_set_progressive_read_fn)
+
+#define png_process_data \
+    ((void (*)(png_structp, png_infop, png_bytep, png_size_t))ADDR_png_process_data)
+
+#define png_read_update_info \
+    ((void (*)(png_structp, png_infop))ADDR_png_read_update_info)
+
+#define png_get_progressive_ptr \
+    ((png_voidp (*)(png_structp))ADDR_png_get_progressive_ptr)
+
+#define png_get_IHDR \
+    ((png_uint_32 (*)(png_structp, png_infop, png_uint_32 *, png_uint_32 *, int *, int *, int *, int *, int *))ADDR_png_get_IHDR)
+
+#define png_set_strip_16 \
+    ((void (*)(png_structp))ADDR_png_set_strip_16)
+
+#define png_set_gray_1_2_4_to_8 \
+    ((void (*)(png_structp))ADDR_png_set_gray_1_2_4_to_8)
+
+#define png_set_gray_to_rgb \
+    ((void (*)(png_structp))ADDR_png_set_gray_to_rgb)
+
+#define png_get_valid \
+    ((png_uint_32 (*)(png_structp, png_infop, png_uint_32))ADDR_png_get_valid)
+
+#define png_set_tRNS_to_alpha \
+    ((void (*)(png_structp))ADDR_png_set_tRNS_to_alpha)
+
+#define png_set_filler \
+    ((void (*)(png_structp, png_uint_32, int))ADDR_png_set_filler)
+
+#define png_set_palette_to_rgb \
+    ((void (*)(png_structp))ADDR_png_set_palette_to_rgb)
+
+#define png_get_rowbytes \
+    ((png_uint_32 (*)(png_structp, png_infop))ADDR_png_get_rowbytes)
+
+#define png_progressive_combine_row \
+    ((void (*)(png_structp, png_bytep, png_bytep))ADDR_png_progressive_combine_row)
+
+#define png_sig_cmp \
+    ((int (*)(png_bytep, png_size_t, png_size_t))ADDR_png_sig_cmp)
+
+#define png_get_io_ptr \
+    ((png_voidp (*)(png_structp))ADDR_png_get_io_ptr)
+
+#define png_set_read_fn \
+    ((void (*)(png_structp, png_voidp, png_rw_ptr))ADDR_png_set_read_fn)
+
+#define png_read_info \
+    ((void (*)(png_structp, png_infop))ADDR_png_read_info)
+
+#endif // USE_LIBPNG
 
 #endif

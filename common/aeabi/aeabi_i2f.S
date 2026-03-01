@@ -3,9 +3,11 @@
  */
 
 .syntax unified
+.section .text.patch_section
 .arm
 .global __aeabi_i2f
 .type __aeabi_i2f, %function
+.align 4
 
 __aeabi_i2f:
     cmp r0, #0
