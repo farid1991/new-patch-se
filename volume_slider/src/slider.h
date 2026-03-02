@@ -3,8 +3,8 @@
 
 static const char Gui_Slider[] = "GUI_Slider";
 
-static const uint8_t vol_table_ring[MAX_RINGVOLUME + 1] = {0, 12, 25, 37, 50, 62, 75, 87, 100};
-static const uint8_t vol_table_media[MAX_MEDIAVOLUME + 1] = {0, 6, 13, 20, 26, 33, 40, 46, 53, 60, 66, 73, 80, 86, 93, 100};
+static const uint8_t VOLUME_RINGTONE[MAX_RINGVOLUME + 1] = {0, 12, 25, 37, 50, 62, 75, 87, 100};
+static const uint8_t VOLUME_MEDIA[MAX_MEDIAVOLUME + 1] = {0, 6, 13, 20, 26, 33, 40, 46, 53, 60, 66, 73, 80, 86, 93, 100};
 
 enum
 {

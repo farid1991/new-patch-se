@@ -22,6 +22,13 @@
 #define YPOS_CALL 140
 #endif
 
+static const char STR_CALL[] = "Call";
+static const char STR_MEDIA[] = "Media";
+static const char STR_RINGTONE[] = "Ringtone";
+static const char STR_VOLUME[] = "Volume";
+
+static const wchar_t PERC_FMT[] = L"%d%%";
+
 //==============================================================================
 
 THUMB16 NEWCODE void DrawText(int font, TEXTID text, int align, int XPos, int YPos, int Width, int TextColor)
@@ -79,17 +86,17 @@ THUMB16 NEWCODE void DrawSlider(int value, int max_value,
 THUMB16 NEWCODE TEXTID percent_to_textid(int percentage)
 {
     wchar_t buf[16];
-    snwprintf(buf, MAXELEMS(buf), L"%d%%", percentage);
-    return TextID_Create(buf, ENC_UCS2, TEXTID_ANY_LEN);
+    snwprintf(buf, MAXELEMS(buf), PERC_FMT, percentage);
+    return TextID_Create(buf, ENC_UCS2, MAXELEMS(buf));
 }
 
 THUMB16 NEWCODE int Slider_OnCreate(DISP_OBJ *disp)
 {
     DISP_OBJ_SLIDER *disp_obj = (DISP_OBJ_SLIDER *)disp;
 
-    disp_obj->slider_a_textid = STR("Media");
-    disp_obj->slider_b_textid = STR("Ringtone");
-    disp_obj->slider_c_textid = STR("Call");
+    disp_obj->slider_a_textid = STR(STR_MEDIA);
+    disp_obj->slider_b_textid = STR(STR_RINGTONE);
+    disp_obj->slider_c_textid = STR(STR_CALL);
 
     char media, ring, call;
     Volume_Get(AUDIOCONTROL_VOLUMETYPE_CALLVOLUME, &call);
@@ -100,9 +107,9 @@ THUMB16 NEWCODE int Slider_OnCreate(DISP_OBJ *disp)
     disp_obj->slider_b = ring;
     disp_obj->slider_c = call - 9;
 
-    disp_obj->slider_a_val = percent_to_textid(vol_table_media[disp_obj->slider_a]);
-    disp_obj->slider_b_val = percent_to_textid(vol_table_ring[disp_obj->slider_b]);
-    disp_obj->slider_c_val = percent_to_textid(vol_table_ring[disp_obj->slider_c]);
+    disp_obj->slider_a_val = percent_to_textid(VOLUME_MEDIA[disp_obj->slider_a]);
+    disp_obj->slider_b_val = percent_to_textid(VOLUME_RINGTONE[disp_obj->slider_b]);
+    disp_obj->slider_c_val = percent_to_textid(VOLUME_RINGTONE[disp_obj->slider_c]);
 
     disp_obj->current_row = ROW_1;
 
@@ -157,7 +164,7 @@ THUMB16 NEWCODE void Slider_OnKey(DISP_OBJ *disp, int key, int r2, int repeat, i
 {
     DISP_OBJ_SLIDER *disp_obj = (DISP_OBJ_SLIDER *)disp;
 
-    int _SYNC = NULL;
+    int _SYNC = 0;
     int *SYNC = &_SYNC;
 
     char media_volume;
@@ -254,9 +261,9 @@ THUMB16 NEWCODE void Slider_OnKey(DISP_OBJ *disp, int key, int r2, int repeat, i
             break;
         }
 
-        disp_obj->slider_a_val = percent_to_textid(vol_table_media[disp_obj->slider_a]);
-        disp_obj->slider_b_val = percent_to_textid(vol_table_ring[disp_obj->slider_b]);
-        disp_obj->slider_c_val = percent_to_textid(vol_table_ring[disp_obj->slider_c]);
+        disp_obj->slider_a_val = percent_to_textid(VOLUME_MEDIA[disp_obj->slider_a]);
+        disp_obj->slider_b_val = percent_to_textid(VOLUME_RINGTONE[disp_obj->slider_b]);
+        disp_obj->slider_c_val = percent_to_textid(VOLUME_RINGTONE[disp_obj->slider_c]);
         DispObject_InvalidateRect(disp, NULL);
     }
 }
@@ -298,6 +305,6 @@ THUMB16 NEWCODE GUI_SLIDER *Create_Slider(VSBook *vs)
         BookObj_AddGUIObject(&vs->book, gs);
 
     GUIObject_SetTitleType(gs, UI_TitleMode_Normal);
-    GUIObject_SetTitleText(gs, STR("Volume"));
+    GUIObject_SetTitleText(gs, STR(STR_VOLUME));
     return (gs);
 }
