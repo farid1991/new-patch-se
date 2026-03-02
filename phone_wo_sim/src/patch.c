@@ -4,6 +4,8 @@
 #include <U10_R7AA071.h>
 #elif defined(U10_R7BA084)
 #include <U10_R7BA084.h>
+#elif defined(W760_R3EM001)
+#include <W760_R3EM001.h>
 #elif defined(W810_R4EA031)
 #include <W810_R4EA031.h>
 #elif defined(W995_R1HA035)
