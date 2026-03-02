@@ -43,7 +43,34 @@ function(define_patch phone svn platform chipset base_address)
 	set_property(TARGET ${target} PROPERTY POSITION_INDEPENDENT_CODE OFF)
 	set_property(TARGET ${target} PROPERTY SUFFIX ".elf")
 
-	target_compile_definitions(${target} PUBLIC ${target} ${firmware})
+	# -------------------------------------------------------
+	# Chipset validation
+	# -------------------------------------------------------
+
+	set(VALID_CHIPSETS
+		DB2000
+		DB2010
+		DB2020
+		DB3150v1
+		DB3150v2
+		DB3200
+		DB3210
+		DB3350
+		PNX5230
+	)
+
+	list(FIND VALID_CHIPSETS ${chipset} CHIPSET_INDEX)
+
+	if (CHIPSET_INDEX EQUAL -1)
+		message(FATAL_ERROR "Invalid chipset: ${chipset}")
+	endif()
+
+	if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/linker/${firmware}.ld")
+		message(FATAL_ERROR "Missing linker script: ${firmware}.ld")
+	endif()
+
+	message("Compiling for target ${target} (SE ${chipset})")
+	target_compile_definitions(${target} PUBLIC ${target} ${platform} ${chipset} ${firmware})
 	target_link_options(${target} PUBLIC -Wl,-T,${CMAKE_CURRENT_SOURCE_DIR}/linker/${firmware}.ld)
 
 	# -------------------------------------------------------
@@ -51,6 +78,7 @@ function(define_patch phone svn platform chipset base_address)
 	# -------------------------------------------------------
 
 	set(FW_ARGS "")
+	set(HAS_FW FALSE)
 
 	if(EXISTS "${FW_DIR}")
 
@@ -62,29 +90,31 @@ function(define_patch phone svn platform chipset base_address)
 		if(CXC_FILES)
 			message("Detected CXC firmware for ${firmware}")
 			list(SORT CXC_FILES)
-
 			foreach(fw ${CXC_FILES})
 				list(APPEND FW_ARGS -f "${fw}")
 			endforeach()
+			set(HAS_FW TRUE)
 
 		elseif(MBN_FILES)
 			message("Detected MBN firmware for ${firmware}")
 			list(APPEND FW_ARGS -f "${MBN_FILES}")
+			set(HAS_FW TRUE)
 
 		elseif(RAW_FILES)
 			message("Detected RAW firmware for ${firmware}")
 			list(APPEND FW_ARGS -f "${RAW_FILES}")
+			set(HAS_FW TRUE)
 
 		elseif(BIN_FILES)
 			message("Detected BIN firmware for ${firmware}")
 			list(APPEND FW_ARGS -f "${BIN_FILES}")
-
-		else()
-			message(WARNING "No firmware files found in ${FW_DIR}")
+			set(HAS_FW TRUE)
 		endif()
 
-	else()
-		message(WARNING "Firmware directory not found: ${FW_DIR}")
+	endif()
+
+	if(NOT HAS_FW)
+		message("No firmware found for ${firmware}. Generating patch without old bytes.")
 	endif()
 
 	# -------------------------------------------------------
@@ -111,26 +141,5 @@ function(define_patch phone svn platform chipset base_address)
 			-i "${target}.elf"
 			-o "${target}.vkp"
 	)
-
-	# -------------------------------------------------------
-	# Chipset validation
-	# -------------------------------------------------------
-
-	if (chipset STREQUAL "DB2000" OR 
-		chipset STREQUAL "DB2010" OR 
-		chipset STREQUAL "DB2020" OR 
-		chipset STREQUAL "DB3150v1" OR
-		chipset STREQUAL "DB3150v2" OR
-		chipset STREQUAL "DB3200" OR 
-		chipset STREQUAL "DB3210" OR 
-		chipset STREQUAL "DB3350" OR
-		chipset STREQUAL "PNX5230")
-
-		message("Compiling for target ${target} (SE ${chipset})")
-		target_compile_definitions(${target} PUBLIC ${platform} ${chipset} ${firmware})
-
-	else()
-		message(FATAL_ERROR "Invalid chipset: ${chipset}")
-	endif()
 
 endfunction()
