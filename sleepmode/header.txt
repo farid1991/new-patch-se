@@ -1,0 +1,5 @@
+;Change the items in a sleep mode.
+;Standard hours removed.
+;Added: stroke, day, date, time and icons of events
+;(c) ploik
+;(e) farid

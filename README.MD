@@ -58,6 +58,11 @@ v1.2
 Display the total of phone and sim contacts in the second row of the header
 ```
 
+### png_info
+```
+Add more info about PNG in file information window
+```
+
 ### remove_scrollbar
 ```
 Remove Scroll bar on Main Menu
@@ -71,6 +76,13 @@ Add question about replacing file if exist when receiving file via Bluetooth
 ### shutdown_menu
 ```
 Add Power Menu when long press End Button in standby
+```
+
+### sleepmode
+```
+Change the items in a sleep mode.
+Standard hours removed.
+Added: stroke, day, date, time and icons of events
 ```
 
 ### volume_slider

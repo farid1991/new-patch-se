@@ -72,7 +72,7 @@ public:
 class IFontManager : public IUnknown
 {
 public:
-    virtual void GetFontFactory(IFontFactory **pFontFactory);
+    virtual int GetFontFactory(IFontFactory **pFontFactory);
 };
 
 #endif

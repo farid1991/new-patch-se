@@ -551,7 +551,7 @@
 // OSE / UI / COM-style interfaces ---------------------------------------------
 
 #define CoCreateInstance \
-    ((void (*)(UUID *, UUID *, void **))ADDR_CoCreateInstance)
+    ((int (*)(UUID *, UUID *, void **))ADDR_CoCreateInstance)
 
 #define OSE_GetShell \
     ((void (*)(void **))ADDR_OSE_GetShell)
@@ -970,6 +970,15 @@
 #define unixtime2datetime \
     ((void (*)(int, DATETIME *))ADDR_unixtime2datetime)
 
+#define DATE_GetWeekDay \
+    ((void (*)(DATE *, char *))ADDR_DATE_GetWeekDay)
+
+#define Date2ID \
+    ((TEXTID (*)(DATE *, int, int))ADDR_Date2ID)
+
+#define Time2ID \
+    ((TEXTID (*)(TIME *, char, int))ADDR_Time2ID)
+
 // DataBrowser / FILEITEM ------------------------------------------------------
 
 #define DataBrowser_CreateSubExecute \
@@ -1048,6 +1057,14 @@
 
 #define FreeURI \
     ((void (*)(char *))ADDR_FreeURI)
+
+// Display -------------------------------------------------------------
+
+#define Display_GetHeight \
+    ((int (*)(int))ADDR_Display_GetHeight)
+
+#define Display_GetWidth \
+    ((int (*)(int))ADDR_Display_GetWidth)
 
 // CANVAS / GVI GC -------------------------------------------------------------
 
