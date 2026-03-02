@@ -28,9 +28,8 @@ alarm_list:
     ldr     r3, =alarmlist_ret
     bx      r3
 
-@ Patch function
-.section .text.patch_section
-.thumb
+.align  2
+
 alarm_standby:
     mov     r0, sp
     add     r0, sp, #0x10
