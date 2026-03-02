@@ -19,27 +19,27 @@
 // Softkeys Hook
 .section .text.softkeys_hook
 .thumb
-    ldr r3, =fd_softkeys+1
-    bx r3
+    ldr     r3, =fd_softkeys+1
+    bx      r3
 
 // Patch function
 .section .text.patch_section
 .thumb
 fd_softkeys:
-    ldr r2, =original_softkeys+1
-    ldr r1, =ACTION_ID
-    ldr r0, [r4, #0x18]
-    ldr r3, =GUIObject_SoftKeys_SetAction+1
-    blx r3
-    ldr r2, =LAYOUT_TEXTID
-    mov r1, #1
-    ldr r0, [r4, #0x18]
-    ldr r3, =GUIObject_SoftKeys_SetText+1
-    blx r3
-    ldr r2, =FlashmenuPicker
-    mov r1, #1
-    ldr r0, [r4, #0x18]
-    ldr r3, =GUIObject_SoftKeys_SetAction+1
-    blx r3
-    ldr r3, =softkeys_hook_ret+1
-    bx r3
+    ldr     r2, =original_softkeys+1
+    ldr     r1, =ACTION_ID
+    ldr     r0, [r4, #0x18]
+    ldr     r3, =GUIObject_SoftKeys_SetAction+1
+    blx     r3
+    ldr     r2, =LAYOUT_TEXTID
+    mov     r1, #1
+    ldr     r0, [r4, #0x18]
+    ldr     r3, =GUIObject_SoftKeys_SetText+1
+    blx     r3
+    ldr     r2, =FlashmenuPicker
+    mov     r1, #1
+    ldr     r0, [r4, #0x18]
+    ldr     r3, =GUIObject_SoftKeys_SetAction+1
+    blx     r3
+    ldr     r3, =softkeys_hook_ret+1
+    bx      r3

@@ -42,41 +42,41 @@
 
 .section .text.pg_ObEx_FileSent
 .thumb
-    mov r1, #0
-    add r0, r5, #0
-    bl action_back
-    b end_pg_ObEx_FileSent
+    mov     r1, #0
+    add     r0, r5, #0
+    bl      action_back
+    b       end_pg_ObEx_FileSent
 
 .section .text.pg_ObEx_FileSentFailed
 .thumb
-    add r0, r4, #0
-    bl action_back
-    b end_pg_ObEx_FileSentFailed
+    add     r0, r4, #0
+    bl      action_back
+    b       end_pg_ObEx_FileSentFailed
 
 .section .text.patch_section
 .thumb
 .global refresh_statusrow
 .type refresh_statusrow, %function
 refresh_statusrow:
-    push {lr}
-    ldr r0, =StatusRow_p
-    ldr r0, [r0]
-    mov r1, #0
-    ldr r3, =DispObject_InvalidateRect+1
-    blx r3
-    pop {pc}
+    push    {lr}
+    ldr     r0, =StatusRow_p
+    ldr     r0, [r0]
+    mov     r1, #0
+    ldr     r3, =DispObject_InvalidateRect+1
+    blx     r3
+    pop     {pc}
 
 .section .text.patch_section
 .thumb
 .global is_obexreceivebook
 .type is_obexreceivebook, %function
 is_obexreceivebook:
-    ldr r1, =obexreceivebook_onclose+1
-    ldr r0, [r0, #4]
-    cmp r0, r1
-    bne notequal
-    mov r0, #1
-    bx lr
+    ldr     r1, =obexreceivebook_onclose+1
+    ldr     r0, [r0, #4]
+    cmp     r0, r1
+    bne     notequal
+    mov     r0, #1
+    bx      lr
 notequal:
-    mov r0, #0
-    bx lr
+    mov     r0, #0
+    bx      lr

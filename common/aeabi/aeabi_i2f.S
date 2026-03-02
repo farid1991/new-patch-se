@@ -29,10 +29,10 @@ positive:
     mov r2, r2, lsl#31
     orr r0, r1, r3
     orr r0, r0, r2
-    bx lr
+    bx  lr
 
 zero:
     mov r0, #0
-    bx lr
+    bx  lr
 
 .size __aeabi_i2f, .- __aeabi_i2f
