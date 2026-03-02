@@ -7,6 +7,7 @@
 #endif
 
 #include <libse.h>
+#include <types/Colors.h>
 #include <types/UIRichText_types.h>
 
 #if defined(DB3200) || defined(DB3210) || defined(DB3350)
@@ -14,8 +15,6 @@
 #endif
 
 #include "patch.h"
-
-#define clBlack 0xFF000000
 
 THUMB16 NEWCODE void *malloc(int size)
 {

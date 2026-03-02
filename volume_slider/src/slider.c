@@ -5,6 +5,7 @@
 
 #include <libse.h>
 #include <types/AudioControl_types.h>
+#include <types/Colors.h>
 #include <types/UIRichText_types.h>
 
 #include "dll.h"
