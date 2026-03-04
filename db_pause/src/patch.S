@@ -9,6 +9,18 @@
     .equ text_play, 0x631
     .equ text_pause, 0x1390
     .equ text_stop, 0xCC0
+#elif defined(J108_R7EA011)
+#define DB3350_R2
+    .equ db_new_softkeys_ret, 0x14816C9E
+    .equ GUIObject_SoftKeys_SetVisible, 0x142CE958
+    .equ GUIObject_SoftKeys_SetText, 0x14559DC4
+    .equ GUIObject_SoftKeys_SetAction, 0x1455ADF0
+
+    .equ action_back, 0x14C506DC
+
+    .equ text_play, 0xF14
+    .equ text_pause, 0xF0F
+    .equ text_stop, 0xF4D
 #elif defined(W760_R3EM001)
     .equ db_new_softkeys_ret, 0x1187AB6E
     .equ GUIObject_SoftKeys_SetVisible, 0x108AE848
@@ -32,7 +44,11 @@
 @ softkey_text
 .section .text.softkey_text
 .thumb
+#ifdef J108_R7EA011
+    sub     r2, #0xA0
+#else
     .word text_pause
+#endif
 
 @ add_new_softkeys
 .section .text.add_new_softkeys
@@ -46,27 +62,47 @@
 db_new_softkeys:
     ldr     r2, =text_play
     mov     r1, #0xFF
+#ifdef DB3350_R2
+    ldr     r0, [r4, #0x14]
+#else
     ldr     r0, [r6, #0x14]
+#endif
     ldr     r3, =GUIObject_SoftKeys_SetText+1
     blx     r3
     ldr     r2, =db_action_pause
     mov     r1, #0xFF
+#ifdef DB3350_R2
+    ldr     r0, [r4, #0x14]
+#else
     ldr     r0, [r6, #0x14]
+#endif
     ldr     r3, =GUIObject_SoftKeys_SetAction+1
     blx     r3
     mov     r2, #0
     mov     r1, #0xFF
+#ifdef DB3350_R2
+    ldr     r0, [r4, #0x14]
+#else
     ldr     r0, [r6, #0x14]
+#endif
     ldr     r3, =GUIObject_SoftKeys_SetVisible+1
     blx     r3
     ldr     r2, =text_stop
     ldr     r1, =0xFC0
+#ifdef DB3350_R2
+    ldr     r0, [r4, #0x14]
+#else
     ldr     r0, [r6, #0x14]
+#endif
     ldr     r3, =GUIObject_SoftKeys_SetText+1
     blx     r3
     ldr     r2, =action_back+1
     ldr     r1, =0xFC0
+#ifdef DB3350_R2
+    ldr     r0, [r4, #0x14]
+#else
     ldr     r0, [r6, #0x14]
+#endif
     ldr     r3, =GUIObject_SoftKeys_SetAction+1
     blx     r3
     ldr     r3, =db_new_softkeys_ret+1
