@@ -101,6 +101,9 @@
 #define MessageBox \
     ((int (*)(TEXTID, TEXTID, IMAGEID, int, int, BOOK *))ADDR_MessageBox)
 
+#define MessageBox_NoImage \
+    ((void (*)(TEXTID, TEXTID, int, int, BOOK *))ADDR_MessageBox_NoImage)
+
 // file I/O --------------------------------------------------------------------
 
 #define _fopen \
@@ -126,6 +129,12 @@
 
 #define FSX_IsFileExists \
     ((BOOL (*)(const wchar_t *, const wchar_t *))ADDR_FSX_IsFileExists)
+
+#define FSX_MakeFullPath \
+    ((wchar_t * (*)(const wchar_t *, const wchar_t *)) ADDR_FSX_MakeFullPath)
+
+#define FSX_FreeFullPath \
+    ((void (*)(const wchar_t *))ADDR_FSX_FreeFullPath)
 
 // file operations -------------------------------------------------------------
 
@@ -304,6 +313,12 @@
 #define BookObj_SetFocus \
     ((void (*)(BOOK *, int))ADDR_BookObj_SetFocus)
 
+#define BookObj_Hide \
+    ((void (*)(BOOK *, int))ADDR_BookObj_Hide)
+
+#define BookObj_Show \
+    ((void (*)(BOOK *, int))ADDR_BookObj_Show)
+
 #define Display_GetTopBook \
     ((BOOK * (*)(int)) ADDR_Display_GetTopBook)
 
@@ -327,6 +342,24 @@
 #define GC_SetXX \
     ((void (*)(GC *, int))ADDR_GC_SetXX)
 
+#define GC_GetPenColor \
+    ((int (*)(GC *))ADDR_GC_GetPenColor)
+
+#define GC_SetPenColor \
+    ((void (*)(GC *, int))ADDR_GC_SetPenColor)
+
+#define GC_SetPixel \
+    ((void (*)(GC *, int, int, int))ADDR_GC_SetPixel)
+
+#define GC_DrawLine \
+    ((void (*)(GC *, int, int, int, int))ADDR_GC_DrawLine)
+
+#define GC_DrawFRect \
+    ((void (*)(GC *, int, int, int, int, int))ADDR_GC_DrawFRect)
+
+#define GC_WritePixels \
+    ((int (*)(GC *, int, int, int, int, int *))ADDR_GC_WritePixels)
+
 #define GC_ValidateRect \
     ((void (*)(GC *, RECT *))ADDR_GC_ValidateRect)
 
@@ -348,6 +381,21 @@
 #define DispObject_SetScrollbarMode \
     ((void (*)(DISP_OBJ *, int))ADDR_DispObject_SetScrollbarMode)
 
+#define DispObject_SetRefreshTimer \
+    ((void (*)(DISP_OBJ *, int))ADDR_DispObject_SetRefreshTimer)
+
+#define DispObject_KillRefreshTimer \
+    ((void (*)(DISP_OBJ *))ADDR_DispObject_KillRefreshTimer)
+
+#define DispObject_SetAnimation \
+    ((void (*)(DISP_OBJ *, int))ADDR_DispObject_SetAnimation)
+
+#define DispObject_SetBacklightMode \
+    ((void (*)(DISP_OBJ *, int))ADDR_DispObject_SetBacklightMode)
+
+#define DispObject_SetThemeImage \
+    ((void (*)(DISP_OBJ *, int))ADDR_DispObject_SetThemeImage)
+
 // --- Text / Image drawing --------------------------------------------------
 #define SetFont \
     ((int (*)(int))ADDR_SetFont)
@@ -367,6 +415,18 @@
 #define GetThemeColor \
     ((int (*)(int, int))ADDR_GetThemeColor)
 
+#define ImageID_Get \
+    ((int (*)(const wchar_t *, const wchar_t *, IMAGEID *))ADDR_ImageID_Get)
+
+#define ImageID_Free \
+    ((void (*)(IMAGEID))ADDR_ImageID_Free)
+
+#define ImageID_Copy \
+    ((IMAGEID (*)(IMAGEID))ADDR_ImageID_Copy)
+
+#define ImageID_GetIndirect \
+    ((int (*)(void *, int, int, const wchar_t *, IMAGEID *))ADDR_ImageID_GetIndirect)
+
 // GUI object creation / lifecycle --------------------------------------------
 
 #define GUIObject_Create                                             \
@@ -385,6 +445,9 @@
 #define GUIObject_SetSecondRowTitleText \
     ((void (*)(GUI *, TEXTID))ADDR_GUIObject_SetSecondRowTitleText)
 
+#define GUIObject_SetStyle \
+    ((void (*)(GUI *, int))ADDR_GUIObject_SetStyle)
+
 #define GUIObject_Show \
     ((void (*)(GUI *))ADDR_GUIObject_Show)
 
@@ -401,6 +464,21 @@
 
 #define GUIObject_SoftKeys_SetText \
     ((void (*)(GUI *, uint16_t, TEXTID))ADDR_GUIObject_SoftKeys_SetText)
+
+#define GUIObject_SoftKeys_SetActionAndText \
+    ((void (*)(GUI *, uint16_t, SKACTIONPROC, TEXTID))ADDR_GUIObject_SoftKeys_SetActionAndText)
+
+#define GUIObject_SoftKeys_Hide \
+    ((void (*)(GUI *))ADDR_GUIObject_SoftKeys_Hide)
+
+#define GUIObject_SoftKeys_Show \
+    ((void (*)(GUI *))ADDR_GUIObject_SoftKeys_Show)
+
+#define GUIObject_SoftKeys_RemoveBackground \
+    ((void (*)(GUI *))ADDR_GUIObject_SoftKeys_RemoveBackground)
+
+#define GUIObject_SoftKeys_RestoreBackground \
+    ((void (*)(GUI *))ADDR_GUIObject_SoftKeys_RestoreBackground)
 
 #define GUIObject_SoftKeys_SetEnable \
     ((void (*)(GUI *, uint16_t, BOOL))ADDR_GUIObject_SoftKeys_SetEnable)
@@ -483,6 +561,9 @@
 
 #define wstrchr \
     ((wchar_t * (*)(const wchar_t *, wchar_t)) ADDR_wstrchr)
+
+#define wstrrchr \
+    ((wchar_t * (*)(const wchar_t *, wchar_t)) ADDR_wstrrchr)
 
 #define strcpy \
     ((char *(*)(char *, const char *))ADDR_strcpy)
@@ -645,7 +726,7 @@
     ((int (*)(const int *, uint16_t *, char *))ADDR_REQUEST_IMAGEHANDLER_INTERNAL_GETHANDLE)
 
 #define REQUEST_IMAGEHANDLER_INTERNAL_REGISTER \
-    ((int (*)(const int *, uint16_t, wchar_t *, wchar_t *, int, IMAGEID *, char *))ADDR_REQUEST_IMAGEHANDLER_INTERNAL_REGISTER)
+    ((int (*)(const int *, uint16_t, const wchar_t *, const wchar_t *, int, IMAGEID *, char *))ADDR_REQUEST_IMAGEHANDLER_INTERNAL_REGISTER)
 
 #define REQUEST_IMAGEHANDLER_INTERNAL_UNREGISTER \
     ((int (*)(const int *, uint16_t, uint16_t *, uint16_t *, IMAGEID, int, char *))ADDR_REQUEST_IMAGEHANDLER_INTERNAL_UNREGISTER)
@@ -917,6 +998,9 @@
 #define YesNoQuestion_SetDescriptionText \
     ((void (*)(GUI *, TEXTID))ADDR_YesNoQuestion_SetDescriptionText)
 
+#define YesNoQuestion_SetIcon \
+    ((void (*)(GUI *, IMAGEID))ADDR_YesNoQuestion_SetIcon)
+
 // Knob GUI DB3350 only
 #ifdef DB3350
 #define Create_KnobOption \
@@ -1167,6 +1251,7 @@
 #define GetFreeBytesOnHeap ((int (*)(void))ADDR_GetFreeBytesOnHeap)
 #define FlightMode_GetState ((int (*)(void))ADDR_FlightMode_GetState)
 #define FlightMode_SetState ((void (*)(int state))ADDR_FlightMode_SetState)
+#define MetaData_GetTags ((wchar_t * (*)(wchar_t *, wchar_t *, int)) ADDR_MetaData_GetTags)
 
 // --- Theme / Flash menu ---------------------------------------------------
 

@@ -84,9 +84,14 @@ typedef struct SUB_EXECUTE
 	GUI *gui;
 	GUI_FEEDBACK *gui_fb;
 	void *strinp_struct;
+#if defined(DB3350_R2)
+	char dummy1[0x2A4];
+#endif
+#if defined(DB3200) || defined(DB3200)
 	char dummy1[0x2D0];
 #if defined(DB3150v1) || defined(DB3150v2)
 	char dummy2[0x4];
+#endif
 #endif
 	void *pIMMEPlayer;
 } SUB_EXECUTE;

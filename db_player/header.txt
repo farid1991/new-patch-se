@@ -1,0 +1,31 @@
+;Add advanced display information when playing music on File Manager
+; - Display album cover
+; - Display progress bar, slider and stroke
+; - Select progress bar type: normal and rounded ends
+; - Display time: full, current, remaining
+; - Display tags: artist, album, title, year, genre
+; - Display information: bit rate, sampling frequency, audio output, format type
+; - Display icons: background, frame
+; - Display current time progressbar
+; - Display volume state progressbar
+; - Setting activity, color, etc.
+; - Setting coordinates and font in real time
+; - Ability to use color for background
+; - Enable/disable window appearance animation
+; - Ability to minimize window
+; - Edit tags in Music Tagger
+; - Ability to show/hide status bar
+; - Ability to show/hide softkeys
+; - Auto close window
+; - Auto update settings
+; - Go to specified time
+; - Display Lyric of playing audio
+; - Pause
+; - Controls:
+; Joystick up/down - volume
+; Joystick left/right - rewind
+; # - Mute/restore sound
+; * - button lock
+;v. 7
+;(c) E1kolyan
+;(e) farid
