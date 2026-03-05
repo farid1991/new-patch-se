@@ -12,6 +12,7 @@ add_compile_options(-Os)
 
 add_subdirectory(common/aeabi)
 add_subdirectory(alarm_remaining_time)
+add_subdirectory(book_manager)
 add_subdirectory(bt_transmission)
 add_subdirectory(db_itemtext)
 add_subdirectory(db_pause)

@@ -319,8 +319,59 @@
 #define BookObj_Show \
     ((void (*)(BOOK *, int))ADDR_BookObj_Show)
 
-#define Display_GetTopBook \
-    ((BOOK * (*)(int)) ADDR_Display_GetTopBook)
+#define BookObj_GetSession \
+    ((UI_APP_SESSION * (*)(BOOK *)) ADDR_BookObj_GetSession)
+
+#define BookObj_GetSessionID \
+    ((int (*)(BOOK *))ADDR_BookObj_GetSessionID)
+
+#define BookObj_GetBookID \
+    ((int (*)(BOOK *))ADDR_BookObj_GetBookID)
+
+#define root_list_get_session_count \
+    ((int (*)(void))ADDR_root_list_get_session_count)
+
+#define root_list_get_session \
+    ((UI_APP_SESSION * (*)(int)) ADDR_root_list_get_session)
+
+#define IsRightNowBook \
+    ((int (*)(BOOK *))ADDR_IsRightNowBook)
+
+#define IsVolumeControllerBook \
+    ((int (*)(BOOK *))ADDR_IsVolumeControllerBook)
+
+#define IsScreenSaverBook \
+    ((int (*)(BOOK *))ADDR_IsScreenSaverBook)
+
+#define IsFmRadioBook \
+    ((int (*)(BOOK *))ADDR_IsFmRadioBook)
+
+#define IsAudioPlayerBook \
+    ((int (*)(BOOK *))ADDR_IsAudioPlayerBook)
+
+#define IsDataBrowserBook \
+    ((int (*)(BOOK *))ADDR_IsDataBrowserBook)
+
+#define IsCameraBook \
+    ((int (*)(BOOK *))ADDR_IsCameraBook)
+
+#define IsSoundRecorderBook \
+    ((int (*)(BOOK *))ADDR_IsSoundRecorderBook)
+
+#define UIEventName \
+    ((char *(*)(int))ADDR_UIEventName)
+
+#define UI_Event \
+    ((void (*)(int))ADDR_UI_Event)
+
+#define UI_Event_wData \
+    ((void (*)(int, void *, void (*)(void *)))ADDR_UI_Event_wData)
+
+#define UI_Event_toBookID \
+    ((void (*)(int, int))ADDR_UI_Event_toBookID)
+
+#define UI_Event_toBookIDwData \
+    ((void (*)(int, int, void *, void (*)(void *)))ADDR_UI_Event_toBookIDwData)
 
 // DISP / GC / GUI -------------------------------------------------------------
 
@@ -427,6 +478,12 @@
 #define ImageID_GetIndirect \
     ((int (*)(void *, int, int, const wchar_t *, IMAGEID *))ADDR_ImageID_GetIndirect)
 
+#define iconidname2id \
+    ((int (*)(const wchar_t *, int, int *))ADDR_iconidname2id)
+
+#define textidname2id \
+    ((int (*)(const wchar_t *, int, TEXTID *))ADDR_textidname2id)
+
 // GUI object creation / lifecycle --------------------------------------------
 
 #define GUIObject_Create                                             \
@@ -456,6 +513,9 @@
 
 #define GUIObject_GetDispObject \
     ((DISP_OBJ * (*)(GUI *)) ADDR_GUIObject_GetDispObject)
+
+#define GUIObject_TabTitleRemove \
+    ((void (*)(GUI *, int))ADDR_GUIObject_TabTitleRemove)
 
 // Softkey handling ------------------------------------------------------------
 
@@ -527,6 +587,36 @@
 #define DISP_DESC_SetOnConfig \
     ((void (*)(DISP_DESC *, DISP_OBJ_ONCONFIG_METHOD))ADDR_DISP_DESC_SetOnConfig)
 
+#define DispObject_GetDESC \
+    ((DISP_DESC * (*)(DISP_OBJ *)) ADDR_DispObject_GetDESC)
+
+#define DispObject_GetName \
+    ((char *(*)(DISP_OBJ *))ADDR_DispObject_GetName)
+
+#define DispObject_GetOnCreate \
+    ((DISP_OBJ_ONCREATE_METHOD (*)(DISP_OBJ *))ADDR_DispObject_GetOnCreate)
+
+#define DispObject_GetOnClose \
+    ((DISP_OBJ_ONCLOSE_METHOD (*)(DISP_OBJ *))ADDR_DispObject_GetOnClose)
+
+#define DispObject_GetOnRedraw \
+    ((DISP_OBJ_ONREDRAW_METHOD (*)(DISP_OBJ *))ADDR_DispObject_GetOnRedraw)
+
+#define DispObject_GetOnKey \
+    ((DISP_OBJ_ONKEY_METHOD (*)(DISP_OBJ *))ADDR_DispObject_GetOnKey)
+
+#define DispObject_GetonRefresh \
+    ((DISP_OBJ_METHOD (*)(DISP_OBJ *))ADDR_DispObject_GetonRefresh)
+
+#define DispObject_GetMethod06 \
+    ((DISP_OBJ_METHOD (*)(DISP_OBJ *))ADDR_DispObject_GetMethod06)
+
+#define DispObject_GetOnLayout \
+    ((DISP_OBJ_METHOD (*)(DISP_OBJ *))ADDR_DispObject_GetOnLayout)
+
+#define DispObject_GetOnConfig \
+    ((DISP_OBJ_METHOD (*)(DISP_OBJ *))ADDR_DispObject_GetOnConfig)
+
 // wchar / string helpers ------------------------------------------------------
 
 #define wstrcpy \
@@ -555,6 +645,9 @@
 
 #define wstrwstr \
     ((wchar_t * (*)(const wchar_t *, const wchar_t *)) ADDR_wstrwstr)
+
+#define wstrncmp \
+    ((int (*)(const wchar_t *, const wchar_t *, int))ADDR_wstrncmp)
 
 #define wstrcmpi \
     ((int (*)(const wchar_t *, const wchar_t *))ADDR_wstrcmpi)
@@ -736,6 +829,9 @@
 
 #define REQUEST_SYSTEM_RESTART \
     ((void (*)(void))ADDR_REQUEST_SYSTEM_RESTART)
+
+#define Request_ICA_ShutdownAllConnections \
+    ((int (*)(const int *))ADDR_Request_ICA_ShutdownAllConnections)
 
 // List Menu GUI ------------------------------------------------------------
 
@@ -1115,6 +1211,18 @@
 #define JavaAppDesc_GetJavaAppInfo \
     ((int (*)(void *, int, wchar_t **))ADDR_JavaAppDesc_GetJavaAppInfo)
 
+#define JavaApp_LogoImageID_Get \
+    ((int (*)(wchar_t *, IMAGEID *))ADDR_JavaApp_LogoImageID_Get)
+
+#define manifest_GetParam \
+    ((char *(*)(const char *, const char *, int))ADDR_manifest_GetParam)
+
+#define JavaSession_Manager \
+    ((void (*)(int))ADDR_JavaSession_Manager)
+
+#define JavaSession_GetName \
+    ((TEXTID (*)(void))ADDR_JavaSession_GetName)
+
 // Sound Recorder
 #define SoundRecorderDesc_Create ((void *(*)())ADDR_SoundRecorderDesc_Create)
 #define SoundRecorderDesc_Destroy ((void (*)(void *desc))ADDR_SoundRecorderDesc_Destroy)
@@ -1149,6 +1257,12 @@
 
 #define Display_GetWidth \
     ((int (*)(int))ADDR_Display_GetWidth)
+
+#define Display_GetTopBook \
+    ((BOOK * (*)(int)) ADDR_Display_GetTopBook)
+
+#define Display_GetBrightness \
+    ((int (*)(int))ADDR_Display_GetBrightness)
 
 // CANVAS / GVI GC -------------------------------------------------------------
 
@@ -1251,7 +1365,15 @@
 #define GetFreeBytesOnHeap ((int (*)(void))ADDR_GetFreeBytesOnHeap)
 #define FlightMode_GetState ((int (*)(void))ADDR_FlightMode_GetState)
 #define FlightMode_SetState ((void (*)(int state))ADDR_FlightMode_SetState)
-#define MetaData_GetTags ((wchar_t * (*)(wchar_t *, wchar_t *, int)) ADDR_MetaData_GetTags)
+#define ConnectionManager_Connection_GetState \
+    ((int (*)(void))ADDR_ConnectionManager_Connection_GetState)
+
+#define ConnectionManager_Connection_GetState_A2 \
+    ((int (*)(char *))ADDR_ConnectionManager_Connection_GetState_A2)
+
+#define MetaData_GetTags ((wchar_t * (*)(const wchar_t *, const wchar_t *, int)) ADDR_MetaData_GetTags)
+#define Shortcut_Run ((void (*)(const wchar_t *))ADDR_Shortcut_Run)
+#define NewEvents_GetCount ((int (*)(void))ADDR_NewEvents_GetCount)
 
 // --- Theme / Flash menu ---------------------------------------------------
 

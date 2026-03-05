@@ -12,6 +12,15 @@ Displayed on the first line in the list item and alarm clocks on your standby.
 Display format "hh:mm (hh:mm)".
 ```
 
+### book_manager
+```
+Improved Activity Menu.
+1st tab corrected for the title "New Events: %d".
+2nd tab displays running books GUI + header "Heap: %dKB".
+3rd tab displays running elf + in the title count of the elves in the memory.
+4th tab: shut down, restart, brightness, flight mode, close the connection.
+```
+
 ### bt_transmission
 ```
 Displays a process of transmission through BT in the status bar.

@@ -3,6 +3,18 @@
 
 #include <base.h>
 
+enum JAVA_APP_ID
+{
+	JAVAAPP_NAME,
+	JAVAAPP_UNK,
+	JAVAAPP_VENDOR,
+	JAVAAPP_CERT,
+	JAVAAPP_HASH,
+	JAVAAPP_FULLPATH,
+	JAVAAPP_SEMCLET,
+	LAST_ID
+};
+
 typedef struct MIDP_DESC_ITEM
 {
 	uint16_t item_name_len;
@@ -19,7 +31,7 @@ typedef struct MIDP_DESC
 
 typedef struct JavaAppDesc
 {
-    char unk[255];
+	char unk[255];
 } JavaAppDesc;
 
 typedef struct JavaAppFullpath
