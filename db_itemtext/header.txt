@@ -1,0 +1,4 @@
+;Display more info of file and/or folder on FileManager when view mode set to Thumbnail List
+;File: Show file size on second line of list item.
+;Folder: Show count of files and/or sub-folder inside it on second line of list item.
+;(c) farid
