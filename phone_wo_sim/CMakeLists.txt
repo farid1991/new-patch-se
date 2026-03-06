@@ -35,3 +35,7 @@ define_patch(Z310 R8BA024 A1 PNX5230 0x20100000)
 # W760_R3EM001
 add_executable("W760_R3EM001_${PROJECT_NAME}" src/patch.c src/patch.S)
 define_patch(W760 R3EM001 A2 DB3150v2 0x10000000)
+
+# W550_R4CB020
+add_executable("W550_R4CB020_${PROJECT_NAME}" src/patch.c src/patch.S)
+define_patch(W550 R4CB020 A1 DB2010 0x440A0000)
