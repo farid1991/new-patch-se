@@ -4,6 +4,8 @@
 #include <J108_R7EA011.h>
 #elif defined(W760_R3EM001)
 #include <W760_R3EM001.h>
+#elif defined(W810_R4EA031)
+#include <W810_R4EA031.h>
 #endif
 
 #define USE_LIBPNG
@@ -11,14 +13,46 @@
 
 #include "patch.h"
 
+/* ---- PNG Info Format ---- */
+static const char STR_PNG_INFO_FMT[] =
+    "\n=Extra PNG Info=\n"
+    "Bit Depth: %d\n"
+    "Channels: %d\n"
+    "Pixel Depth: %d\n"
+    "Color: %s\n"
+    "Interlace: %s\n"
+    "Filter: %s\n"
+    "libpng: %s";
+
+/* ---- Color type strings ---- */
+static const char STR_GRAY[] = "Grayscale";
+static const char STR_PALETTE[] = "Paletted color";
+static const char STR_RGB[] = "RGB";
+static const char STR_RGBA[] = "RGB with alpha";
+static const char STR_GA[] = "Grayscale with alpha";
+static const char STR_UNKNOWN_COLOR[] = "Unknown color type";
+
+/* ---- Interlace strings ---- */
+static const char STR_NON_INTERLACED[] = "Non-interlaced image";
+static const char STR_ADAM7[] = "Adam7 interlacing";
+static const char STR_INVALID[] = "Not a valid";
+
+/* ---- Filter strings ---- */
+static const char STR_MNG[] = "MNG datastreams";
+static const char STR_SINGLE_ROW[] = "Single row per-byte";
+
+/* Small reusable literals */
+static const char STR_NEWLINE[] = "\n";
+static const char STR_COLON_SPACE[] = ": ";
+
 THUMB16 NEWCODE void *malloc(int size)
 {
 #if defined(DB2020)
-    return memalloc(NULL, size, 1, 5, DEF_PNG_LIBPNG_VER_STRING, NULL);
+    return memalloc(0, size, 1, 5, DEF_PNG_LIBPNG_VER_STRING, 0);
 #elif defined(A2)
-    return memalloc(-1, size, 1, 5, DEF_PNG_LIBPNG_VER_STRING, NULL);
+    return memalloc(-1, size, 1, 5, DEF_PNG_LIBPNG_VER_STRING, 0);
 #else
-    return memalloc(size, 1, 5, DEF_PNG_LIBPNG_VER_STRING, NULL);
+    return memalloc(size, 1, 5, DEF_PNG_LIBPNG_VER_STRING, 0);
 #endif
 }
 
@@ -26,9 +60,9 @@ THUMB16 NEWCODE void mfree(void *mem)
 {
     if (mem)
 #if defined(DB2020) || defined(A2)
-        memfree(NULL, mem, DEF_PNG_LIBPNG_VER_STRING, NULL);
+        memfree(0, mem, DEF_PNG_LIBPNG_VER_STRING, 0);
 #else
-        memfree(mem, DEF_PNG_LIBPNG_VER_STRING, NULL);
+        memfree(mem, DEF_PNG_LIBPNG_VER_STRING, 0);
 #endif
 }
 
@@ -75,6 +109,23 @@ THUMB16 NEWCODE TEXT_LIST *text_list_create(char *key, char *value)
 
     return text;
 }
+
+THUMB16 NEWCODE int my_png_get_text(png_infop info_ptr, png_textp *text_ptr, int *num_text)
+{
+    if (info_ptr->num_text > 0)
+    {
+        if (text_ptr != NULL)
+            *text_ptr = info_ptr->text;
+
+        if (num_text != NULL)
+            *num_text = info_ptr->num_text;
+
+        return info_ptr->num_text;
+    }
+    if (num_text != NULL)
+        *num_text = 0;
+    return 0;
+}
 #endif
 
 THUMB16 NEWCODE void *my_png_malloc(png_structp png_ptr, png_size_t size)
@@ -93,23 +144,6 @@ THUMB16 NEWCODE void my_png_read(png_structp png_ptr, png_bytep data, png_size_t
     fread(*io_ptr, data, length);
 }
 
-THUMB16 NEWCODE int my_png_get_text(png_infop info_ptr, png_textp *text_ptr, int *num_text)
-{
-    if (info_ptr->num_text > 0)
-    {
-        if (text_ptr != NULL)
-            *text_ptr = info_ptr->text;
-
-        if (num_text != NULL)
-            *num_text = info_ptr->num_text;
-
-        return info_ptr->num_text;
-    }
-    if (num_text != NULL)
-        *num_text = 0;
-    return 0;
-}
-
 THUMB16 NEWCODE CHUNK_DATA *png_read_chunk_data(const wchar_t *path, const wchar_t *name)
 {
     CHUNK_DATA *png_data = (CHUNK_DATA *)malloc(sizeof(CHUNK_DATA));
@@ -126,8 +160,8 @@ THUMB16 NEWCODE CHUNK_DATA *png_read_chunk_data(const wchar_t *path, const wchar
     }
 
     png_structp png_ptr = png_create_read_struct_2(DEF_PNG_LIBPNG_VER_STRING,
-                                       NULL, NULL, NULL, NULL,
-                                       my_png_malloc, my_png_free);
+                                                   NULL, NULL, NULL, NULL,
+                                                   my_png_malloc, my_png_free);
     if (!png_ptr)
     {
         mfree(png_data);
@@ -163,6 +197,7 @@ THUMB16 NEWCODE CHUNK_DATA *png_read_chunk_data(const wchar_t *path, const wchar
         png_data->channels = 3;
     else
         png_data->channels = 1;
+
     if (png_data->color & PNG_COLOR_MASK_ALPHA)
         png_data->channels++;
 #else
@@ -199,23 +234,6 @@ THUMB16 NEWCODE void png_destroy_chunk_data(CHUNK_DATA *png_data)
 #endif
     mfree(png_data);
 }
-
-/* ---- Color type strings ---- */
-static const char STR_GRAY[] = "Grayscale";
-static const char STR_PALETTE[] = "Paletted color";
-static const char STR_RGB[] = "RGB";
-static const char STR_RGBA[] = "RGB with alpha";
-static const char STR_GA[] = "Grayscale with alpha";
-static const char STR_UNKNOWN_COLOR[] = "Unknown color type";
-
-/* ---- Interlace strings ---- */
-static const char STR_NON_INTERLACED[] = "Non-interlaced image";
-static const char STR_ADAM7[] = "Adam7 interlacing";
-static const char STR_INVALID[] = "Not a valid";
-
-/* ---- Filter strings ---- */
-static const char STR_MNG[] = "MNG datastreams";
-static const char STR_SINGLE_ROW[] = "Single row per-byte";
 
 THUMB16 NEWCODE const char *get_color_type(int color_type)
 {
@@ -256,21 +274,6 @@ THUMB16 NEWCODE const char *get_filter_type(int filter)
 
     return STR_SINGLE_ROW;
 }
-
-/* ---- PNG Info Format ---- */
-static const char STR_PNG_INFO_FMT[] =
-    "\n=Extra PNG Info=\n"
-    "Bit Depth: %d\n"
-    "Channels: %d\n"
-    "Pixel Depth: %d\n"
-    "Color: %s\n"
-    "Interlace: %s\n"
-    "Filter: %s\n"
-    "libpng: %s";
-
-/* Small reusable literals */
-static const char STR_NEWLINE[] = "\n";
-static const char STR_COLON_SPACE[] = ": ";
 
 THUMB16 NEWCODE TEXTID patch_brw_png_info(TEXTID text_id, SUB_EXECUTE *sub_exec)
 {
