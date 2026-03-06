@@ -4,6 +4,8 @@
 #include <J108_R7EA011.h>
 #elif defined(W760_R3EM001)
 #include <W760_R3EM001.h>
+#elif defined(W810_R4EA031)
+#include <W810_R4EA031.h>
 #endif
 
 #include <libse.h>
@@ -29,12 +31,16 @@ THUMB16 NEWCODE TEXTID patch_brw_mp3info(TEXTID text_id, SUB_EXECUTE *sub_exec)
         return text_id;
 
     char mp3_info[MAX_INFO_SIZE];
+#if defined(DB2000) || defined(DB2010)
+    sprintf(mp3_info,
+#else
     snprintf(mp3_info, MAX_INFO_SIZE,
-             output_fmt,
-             id3_vers,
-             get_bitrate(header),
-             get_frequency(header),
-             get_mode(header));
+#endif
+            output_fmt,
+            id3_vers,
+            get_bitrate(header),
+            get_frequency(header),
+            get_mode(header));
 
     TEXTID new_textid[2];
     new_textid[0] = text_id;

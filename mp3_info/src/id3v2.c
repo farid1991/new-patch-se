@@ -4,6 +4,8 @@
 #include <J108_R7EA011.h>
 #elif defined(W760_R3EM001)
 #include <W760_R3EM001.h>
+#elif defined(W810_R4EA031)
+#include <W810_R4EA031.h>
 #endif
 
 #include <libse.h>
@@ -91,7 +93,7 @@ static inline BOOL is_valid_id3_header(uint32_t header)
            get_frequency_index(header) != 3;  // Frequency index cannot be 3 (invalid frequency)
 }
 
-THUMB16 NEWCODE uint32_t get_header(uint8_t *data)
+static inline uint32_t get_header(uint8_t *data)
 {
     return ((data[0] << 24) | (data[1] << 16) | (data[2] << 8) | data[3]);
 }
@@ -123,7 +125,7 @@ THUMB16 NEWCODE const char *get_mode(uint32_t header)
 
 THUMB16 NEWCODE uint32_t id3v2_read_header(const wchar_t *path, const wchar_t *name, uint32_t *tagsize, uint32_t *version, uint32_t *fpos)
 {
-    int file = _fopen(path, name, FSX_O_RDONLY, FSX_S_IREAD | FSX_S_IWRITE, NULL);
+    int file = _fopen(path, name, FSX_O_RDONLY, FSX_S_IREAD, NULL);
     if (file == -1)
         return 0;
 
