@@ -4,6 +4,8 @@
 #include <J108_R7EA011.h>
 #elif defined(W760_R3EM001)
 #include <W760_R3EM001.h>
+#elif defined(W810_R4EA031)
+#include <W810_R4EA031.h>
 #endif
 
 #include <libse.h>
@@ -16,6 +18,12 @@
 #define MAX_NAME 32
 #define MAX_VALUE 32
 #define MAX_TAGS 256
+
+#if defined(DB2000) || defined(DB2010)
+#define exif_printf(buf, size, fmt, ...) sprintf((buf), (fmt), ##__VA_ARGS__)
+#else
+#define exif_printf(buf, size, fmt, ...) snprintf((buf), (size), (fmt), ##__VA_ARGS__)
+#endif
 
 static const char exif_mem[] = "ExIf";
 static const char STR_TITLE[] = "\n=EXIF Info=";
@@ -135,7 +143,7 @@ THUMB16 NEWCODE BOOL tagid_and_shortdata_to_name(uint16_t tag_id,
 
     case NANOEXIF_TAG_ISO_SPEED:
         strncpy(name, STR_ISO_SPEED, MAX_NAME);
-        snprintf(value, MAX_VALUE, STR_FMT_ISO, data);
+        exif_printf(value, MAX_VALUE, STR_FMT_ISO, data);
         break;
 
     case NANOEXIF_TAG_METERING_MODE:
@@ -217,19 +225,19 @@ THUMB16 NEWCODE BOOL tagid_and_rationaldata_to_name(uint16_t tag_id,
     {
     case NANOEXIF_TAG_XRES:
         strncpy(name, STR_XRES, MAX_NAME);
-        snprintf(value, MAX_VALUE, STR_DPI_FMT,
-                 data[1] ? (data[0] / data[1]) : 0);
+        exif_printf(value, MAX_VALUE, STR_DPI_FMT,
+                    data[1] ? (data[0] / data[1]) : 0);
         break;
 
     case NANOEXIF_TAG_YRES:
         strncpy(name, STR_YRES, MAX_NAME);
-        snprintf(value, MAX_VALUE, STR_DPI_FMT,
-                 data[1] ? (data[0] / data[1]) : 0);
+        exif_printf(value, MAX_VALUE, STR_DPI_FMT,
+                    data[1] ? (data[0] / data[1]) : 0);
         break;
 
     case NANOEXIF_TAG_EXPOSURETIME:
         strncpy(name, STR_EXPTIME, MAX_NAME);
-        snprintf(value, MAX_VALUE, STR_PERSEC, data[0] ? (data[1] / data[0]) : 0);
+        exif_printf(value, MAX_VALUE, STR_PERSEC, data[0] ? (data[1] / data[0]) : 0);
         break;
 
     case NANOEXIF_TAG_F_NUMBER:
@@ -240,16 +248,16 @@ THUMB16 NEWCODE BOOL tagid_and_rationaldata_to_name(uint16_t tag_id,
                               ? (data[0] * 10U) / data[1]
                               : 0;
 
-        snprintf(value, MAX_VALUE, STR_FNUMBER_FMT,
-                 scaled / 10,
-                 scaled % 10);
+        exif_printf(value, MAX_VALUE, STR_FNUMBER_FMT,
+                    scaled / 10,
+                    scaled % 10);
     }
     break;
 
     case NANOEXIF_TAG_EXPOSURE_COMP:
         strncpy(name, STR_EXPCOMP, MAX_NAME);
-        snprintf(value, MAX_VALUE, STR_RATIO_FMT,
-                 data[0], data[1]);
+        exif_printf(value, MAX_VALUE, STR_RATIO_FMT,
+                    data[0], data[1]);
         break;
 
     case NANOEXIF_TAG_SUBJECT_DISTANCE:
@@ -260,9 +268,9 @@ THUMB16 NEWCODE BOOL tagid_and_rationaldata_to_name(uint16_t tag_id,
                               ? (data[0] * 100U) / data[1]
                               : 0;
 
-        snprintf(value, MAX_VALUE, STR_MM_FMT,
-                 scaled / 100,
-                 scaled % 100);
+        exif_printf(value, MAX_VALUE, STR_MM_FMT,
+                    scaled / 100,
+                    scaled % 100);
     }
     break;
 
@@ -274,9 +282,9 @@ THUMB16 NEWCODE BOOL tagid_and_rationaldata_to_name(uint16_t tag_id,
                               ? (data[0] * 100U) / data[1]
                               : 0;
 
-        snprintf(value, MAX_VALUE, STR_DEC2_FMT,
-                 scaled / 100,
-                 scaled % 100);
+        exif_printf(value, MAX_VALUE, STR_DEC2_FMT,
+                    scaled / 100,
+                    scaled % 100);
     }
     break;
 
@@ -288,34 +296,34 @@ THUMB16 NEWCODE BOOL tagid_and_rationaldata_to_name(uint16_t tag_id,
                               ? (data[0] * 10U) / data[1]
                               : 0;
 
-        snprintf(value, MAX_VALUE, STR_DEC2_FMT,
-                 scaled / 10,
-                 scaled % 10);
+        exif_printf(value, MAX_VALUE, STR_DEC2_FMT,
+                    scaled / 10,
+                    scaled % 10);
     }
     break;
 
     case NANOEXIF_TAG_GPS_LATITUDE:
         strncpy(name, STR_GPS_LAT, MAX_NAME);
-        snprintf(value, MAX_VALUE, STR_GPS_FMT,
-                 data[0], data[1], data[2], data[3]);
+        exif_printf(value, MAX_VALUE, STR_GPS_FMT,
+                    data[0], data[1], data[2], data[3]);
         break;
 
     case NANOEXIF_TAG_GPS_LONGITUDE:
         strncpy(name, STR_GPS_LON, MAX_NAME);
-        snprintf(value, MAX_VALUE, STR_GPS_FMT,
-                 data[0], data[1], data[2], data[3]);
+        exif_printf(value, MAX_VALUE, STR_GPS_FMT,
+                    data[0], data[1], data[2], data[3]);
         break;
 
     case NANOEXIF_TAG_GPS_ALTITUDE:
         strncpy(name, STR_GPS_ALT, MAX_NAME);
-        snprintf(value, MAX_VALUE, STR_PAIR_FMT,
-                 data[0], data[1]);
+        exif_printf(value, MAX_VALUE, STR_PAIR_FMT,
+                    data[0], data[1]);
         break;
 
     case NANOEXIF_TAG_GPS_TIMESTAMP:
         strncpy(name, STR_GPS_TIME, MAX_NAME);
-        snprintf(value, MAX_VALUE, STR_TIME_FMT,
-                 data[0], data[1], data[2]);
+        exif_printf(value, MAX_VALUE, STR_TIME_FMT,
+                    data[0], data[1], data[2]);
         break;
 
     default:
@@ -519,7 +527,7 @@ THUMB16 NEWCODE TEXTID patch_brw_jpg_info(TEXTID text_id, SUB_EXECUTE *sub_exec)
 
     char *exif_info = (char *)malloc(exif_info_size);
     memset(exif_info, 0, exif_info_size);
-    snprintf(exif_info, exif_info_size, STR_TITLE);
+    exif_printf(exif_info, exif_info_size, STR_TITLE);
 
     for (int i = 0; i < list_count; i++)
     {
