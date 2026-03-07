@@ -4,9 +4,12 @@
 #include <J108_R7EA011.h>
 #elif defined(W760_R3EM001)
 #include <W760_R3EM001.h>
+#elif defined(W810_R4EA031)
+#include <W810_R4EA031.h>
 #endif
 
 #include <libse.h>
+
 #include <types/Colors.h>
 #include <types/UIRichText_types.h>
 
@@ -16,14 +19,17 @@
 
 #include "patch.h"
 
+static const int _SYNC = 0;
+static const int *SYNC = &_SYNC;
+
 THUMB16 NEWCODE void *malloc(int size)
 {
 #if defined(DB2020)
-    return memalloc(NULL, size, 1, 5, MEM_NAME, NULL);
+    return memalloc(0, size, 1, 5, MEM_NAME, 0);
 #elif defined(A2)
-    return memalloc(-1, size, 1, 5, MEM_NAME, NULL);
+    return memalloc(-1, size, 1, 5, MEM_NAME, 0);
 #else
-    return memalloc(size, 1, 5, MEM_NAME, NULL);
+    return memalloc(size, 1, 5, MEM_NAME, 0);
 #endif
 }
 
@@ -31,9 +37,9 @@ THUMB16 NEWCODE void mfree(void *mem)
 {
     if (mem)
 #if defined(DB2020) || defined(A2)
-        memfree(NULL, mem, MEM_NAME, NULL);
+        memfree(0, mem, MEM_NAME, 0);
 #else
-        memfree(mem, MEM_NAME, NULL);
+        memfree(mem, MEM_NAME, 0);
 #endif
 }
 
@@ -71,7 +77,8 @@ THUMB16 NEWCODE void KillRefreshTimer()
     if (timer_id)
     {
         Timer_Kill(timer_id);
-        *timer_id = NULL;
+        *timer_id = 0;
+        set_envp(NULL, EMP_NAME, 0);
     }
 }
 
@@ -81,7 +88,7 @@ THUMB16 NEWCODE void DrawText(int font, TEXTID text, int align, int x1, int y1, 
     dll_DrawString(font, text, align, x1, y1, x2, y2 + (font & 0xFF), pen_color);
 #else
     SetFont(font);
-    DrawString(text, align, x1, y1, x2, y2 + GetImageHeight(30), 20, 5, pen_color, pen_color);
+    DrawString(text, align, x1, y1, x2, y2 + GetImageHeight(' '), 20, 5, pen_color, pen_color);
 #endif
 }
 
@@ -91,8 +98,6 @@ THUMB16 NEWCODE void New_SleepMode_OnRedraw(DISP_OBJ *disp_obj, int a, int b, in
     TEXTID text_id;
 
     DATETIME dt;
-    int _SYNC = 0;
-    int *SYNC = &_SYNC;
     REQUEST_DATEANDTIME_GET(SYNC, &dt);
 
     text_id = Time2ID(&dt.time, 2, FALSE);
@@ -105,20 +110,18 @@ THUMB16 NEWCODE void New_SleepMode_OnRedraw(DISP_OBJ *disp_obj, int a, int b, in
 
     char weekday;
     DATE_GetWeekDay(&dt.date, &weekday);
-    text_id = days[weekday];
+    text_id = WEEKDAYS[weekday];
     DrawText(FONT_DAY, text_id, AlignCenter, 0, DAY_Y, disp_width, DAY_Y, clBlack);
     TextID_Destroy(text_id);
 
     int missed[ICONS_COUNT];
     int *p = missed;
-    int m = *(MissedEvents);
+    int m = *(MISSED_EVENTS_PTR);
     int i;
     for (i = 0; i < ICONS_COUNT; i++)
     {
         if (m & (1 << i))
-        {
             *p++ = missed_icons[i];
-        }
     }
 
     int x = 0;

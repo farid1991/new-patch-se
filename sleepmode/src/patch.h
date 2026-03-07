@@ -1,12 +1,12 @@
-#ifndef _Main_H_
-#define _Main_H_
+#ifndef _pAtCh_H_
+#define _pAtCh_H_
 
 static const char MEM_NAME[] = "SM_MEM";
 static const char EMP_NAME[] = "SM_EMP";
 
-static const int days[7] = {TEXTID_1, TEXTID_2, TEXTID_3, TEXTID_4, TEXTID_5, TEXTID_6, TEXTID_7};
+static const TEXTID WEEKDAYS[7] = {TEXTID_1, TEXTID_2, TEXTID_3, TEXTID_4, TEXTID_5, TEXTID_6, TEXTID_7};
 
-#ifdef DB2010
+#if defined(DB2000) || defined(DB2010)
 #define ICONS_COUNT 4
 static const int missed_icons[ICONS_COUNT] = {
     CALLS_MISSED_SLEEPMODE_ICN,

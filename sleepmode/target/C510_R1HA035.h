@@ -1,6 +1,6 @@
 #pragma once
 
-#define MissedEvents (char *)0x4BA1B07C
+#define MISSED_EVENTS_PTR (char *)0x4BA1B07C
 
 #define KEYLOCK_SLEEPMODE_ICN 0x47B
 #define SILENT_SLEEPMODE_ICN 0x869

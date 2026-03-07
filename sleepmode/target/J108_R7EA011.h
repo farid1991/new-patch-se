@@ -1,7 +1,7 @@
 #pragma once
 
 #define DB3350_R2
-#define MissedEvents (char *)0x4BC03328
+#define MISSED_EVENTS_PTR (char *)0x4BC03328
 
 #define KEYLOCK_SLEEPMODE_ICN 0x1046
 #define SILENT_SLEEPMODE_ICN 0x1E35
