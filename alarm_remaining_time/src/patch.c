@@ -7,6 +7,10 @@
 #endif
 
 #include <libse.h>
+#include <sync.h>
+
+// static const int _SYNC = 0;
+// static const int *SYNC = &_SYNC;
 
 static const char mem[] = "al";
 static const wchar_t output_fmt[] = L"%02d:%02d (%02d:%02d)";
@@ -36,11 +40,8 @@ THUMB16 NEWCODE void mfree(void *mem)
 
 THUMB16 NEWCODE TEXTID GetRemainingTimeID(TIME *alarm)
 {
-    int _SYNC = 0;
-    int *SYNC = &_SYNC;
-
     DATETIME datetime_real;
-    REQUEST_DATEANDTIME_GET(SYNC, &datetime_real);
+    REQUEST_DATEANDTIME_GET(&SYNC, &datetime_real);
     int unix_real = datetime2unixtime(&datetime_real);
 
     DATETIME *datetime_alarm = (DATETIME *)malloc(sizeof(DATETIME));

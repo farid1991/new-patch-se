@@ -19,6 +19,9 @@
 
 extern int isrsstickerbook(BOOK *book);
 
+static const int _SYNC = 0;
+static const int *SYNC = &_SYNC;
+
 static const char MEM_NAME[] = "bm_mem";
 static const char EMP_NAME[] = "bm_emp";
 
@@ -727,11 +730,8 @@ THUMB16 NEWCODE void ShortcutMenu_onEnterPressed(BOOK *book, GUI *gui)
             FlightMode_SetState(OFF);
     }
     else if (item == SHC_ITEM_5)
-    {
-        int _SYNC = 0;
-        int *SYNC = &_SYNC;
         Request_ICA_ShutdownAllConnections(SYNC);
-    }
+
     FreeBook(book);
 }
 

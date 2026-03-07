@@ -1,16 +1,34 @@
 cmake_minimum_required(VERSION 3.15)
 
+# -----------------------------------------------------------------------------
+# Cross-compile toolchain for Sony Ericsson A1/A2 platform
+# -----------------------------------------------------------------------------
 set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/toolchain.cmake)
 
 project(patch-se LANGUAGES C CXX ASM)
 
+# -----------------------------------------------------------------------------
+# Global include directory for all patches
+# -----------------------------------------------------------------------------
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/)
 
+# -----------------------------------------------------------------------------
+# Compiler configuration
+# -----------------------------------------------------------------------------
 set(CMAKE_C_STANDARD 99)
 set(CMAKE_CXX_STANDARD 98)
 add_compile_options(-Os)
 
+# -----------------------------------------------------------------------------
+# Common modules used by multiple patches
+# -----------------------------------------------------------------------------
 add_subdirectory(common/aeabi)
+add_subdirectory(common/sync)
+
+# -----------------------------------------------------------------------------
+# Individual patch modules
+# Each directory builds its own firmware patch
+# -----------------------------------------------------------------------------
 add_subdirectory(alarm_remaining_time)
 add_subdirectory(book_manager)
 add_subdirectory(bt_transmission)

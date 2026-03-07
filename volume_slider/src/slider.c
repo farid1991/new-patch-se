@@ -4,6 +4,7 @@
 #endif
 
 #include <libse.h>
+#include <sync.h>
 #include <types/AudioControl_types.h>
 #include <types/Colors.h>
 #include <types/UIRichText_types.h>
@@ -164,9 +165,6 @@ THUMB16 NEWCODE void Slider_OnKey(DISP_OBJ *disp, int key, int r2, int repeat, i
 {
     DISP_OBJ_SLIDER *disp_obj = (DISP_OBJ_SLIDER *)disp;
 
-    int _SYNC = 0;
-    int *SYNC = &_SYNC;
-
     char media_volume;
 
     if (mode == KBD_SHORT_RELEASE || mode == KBD_REPEAT)
@@ -201,7 +199,7 @@ THUMB16 NEWCODE void Slider_OnKey(DISP_OBJ *disp, int key, int r2, int repeat, i
                 if (disp_obj->slider_b)
                 {
                     Volume_Set(AUDIOCONTROL_VOLUMETYPE_RINGVOLUME, --disp_obj->slider_b);
-                    REQUEST_SETTING_RINGVOLUME_SET(SYNC, -2, 0, disp_obj->slider_b);
+                    REQUEST_SETTING_RINGVOLUME_SET(&SYNC, -2, 0, disp_obj->slider_b);
                 }
                 break;
 
@@ -228,7 +226,7 @@ THUMB16 NEWCODE void Slider_OnKey(DISP_OBJ *disp, int key, int r2, int repeat, i
                 if (disp_obj->slider_b < MAX_RINGVOLUME)
                 {
                     Volume_Set(AUDIOCONTROL_VOLUMETYPE_RINGVOLUME, ++disp_obj->slider_b);
-                    REQUEST_SETTING_RINGVOLUME_SET(SYNC, -2, 0, disp_obj->slider_b);
+                    REQUEST_SETTING_RINGVOLUME_SET(&SYNC, -2, 0, disp_obj->slider_b);
                 }
                 break;
 
@@ -250,7 +248,7 @@ THUMB16 NEWCODE void Slider_OnKey(DISP_OBJ *disp, int key, int r2, int repeat, i
             case ROW_2:
                 disp_obj->slider_b = 0;
                 Volume_Set(AUDIOCONTROL_VOLUMETYPE_RINGVOLUME, 0);
-                REQUEST_SETTING_RINGVOLUME_SET(SYNC, -2, 0, 0);
+                REQUEST_SETTING_RINGVOLUME_SET(&SYNC, -2, 0, 0);
                 break;
 
             case ROW_3:

@@ -7,6 +7,8 @@
 #endif
 
 #include <libse.h>
+#include <sync.h>
+
 #include <classes/IMMEPlayer.h>
 
 #include <types/Colors.h>
@@ -26,6 +28,9 @@
 #include "settings.h"
 #include "str_helper.h"
 #include "time.h"
+
+// static const int _SYNC = 0;
+// static const int *&SYNC = &_SYNC;
 
 static const char DB_MEM[] = "dbp";
 
@@ -71,14 +76,12 @@ THUMB16 NEWCODE void mfree(void *mem)
 
 THUMB16 NEWCODE void FreeImage(DBP_DATA *data)
 {
-    int _SYNC = NULL;
-    int *SYNC = &_SYNC;
     char error_code;
 
     for (int i = IMG_BACKGROUND; i < IMG_LAST; i++)
     {
         if (data->Image[i].ID != NOIMAGE)
-            REQUEST_IMAGEHANDLER_INTERNAL_UNREGISTER(SYNC, data->Image[i].Handle, 0, 0, data->Image[i].ID, 1, &error_code);
+            REQUEST_IMAGEHANDLER_INTERNAL_UNREGISTER(&SYNC, data->Image[i].Handle, 0, 0, data->Image[i].ID, 1, &error_code);
     }
 
     if (data->has_cover_art)
@@ -92,12 +95,10 @@ THUMB16 NEWCODE void RegisterImage(IMG *img, const wchar_t *fpath, const wchar_t
 
     if (FSX_IsFileExists(fpath, fname))
     {
-        int _SYNC = NULL;
-        int *SYNC = &_SYNC;
         char error_code;
 
-        if (!REQUEST_IMAGEHANDLER_INTERNAL_GETHANDLE(SYNC, &img->Handle, &error_code))
-            if (!REQUEST_IMAGEHANDLER_INTERNAL_REGISTER(SYNC, img->Handle, fpath, fname, 0, &img->ID, &error_code))
+        if (!REQUEST_IMAGEHANDLER_INTERNAL_GETHANDLE(&SYNC, &img->Handle, &error_code))
+            if (!REQUEST_IMAGEHANDLER_INTERNAL_REGISTER(&SYNC, img->Handle, fpath, fname, 0, &img->ID, &error_code))
                 if (error_code)
                     img->Handle = NOIMAGE;
     }

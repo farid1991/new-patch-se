@@ -9,6 +9,7 @@
 #endif
 
 #include <libse.h>
+#include <sync.h>
 
 #include <types/Colors.h>
 #include <types/UIRichText_types.h>
@@ -18,9 +19,6 @@
 #endif
 
 #include "patch.h"
-
-static const int _SYNC = 0;
-static const int *SYNC = &_SYNC;
 
 THUMB16 NEWCODE void *malloc(int size)
 {
@@ -98,7 +96,7 @@ THUMB16 NEWCODE void New_SleepMode_OnRedraw(DISP_OBJ *disp_obj, int a, int b, in
     TEXTID text_id;
 
     DATETIME dt;
-    REQUEST_DATEANDTIME_GET(SYNC, &dt);
+    REQUEST_DATEANDTIME_GET(&SYNC, &dt);
 
     text_id = Time2ID(&dt.time, 2, FALSE);
     DrawText(FONT_TIME, text_id, AlignCenter, 0, TIME_Y, disp_width, TIME_Y, clBlack);

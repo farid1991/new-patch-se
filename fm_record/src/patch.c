@@ -5,6 +5,7 @@
 #include <libse.h>
 #include <book/FmRadio_Book.h>
 #include <soundrecorder.h>
+#include <sync.h>
 
 #define FNAME_SIZE 256
 const wchar_t output_dir[] = L"/card/music/FM";
@@ -24,10 +25,8 @@ THUMB16 NEWCODE void FMRadio_Record(BOOK *book, GUI *gui)
         mkdir(output_dir);
         SoundRecorderDesc_SetFolder(desc, output_dir);
 
-        int _SYNC = 0;
-        int *SYNC = &_SYNC;
         DATETIME dt;
-        REQUEST_DATEANDTIME_GET(SYNC, &dt);
+        REQUEST_DATEANDTIME_GET(&SYNC, &dt);
 
         wchar_t filename[FNAME_SIZE];
         snwprintf(filename,
