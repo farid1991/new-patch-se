@@ -2,6 +2,8 @@
 #include <C510_R1HA035.h>
 #elif defined(J108_R7EA011)
 #include <J108_R7EA011.h>
+#elif defined(K600_R2BB001)
+#include <K600_R2BB001.h>
 #elif defined(W760_R3EM001)
 #include <W760_R3EM001.h>
 #elif defined(W810_R4EA031)
@@ -43,29 +45,27 @@ THUMB16 NEWCODE void mfree(void *mem)
 
 THUMB16 NEWCODE uint16_t *get_timer_id()
 {
-    return (uint16_t *)get_envp(NULL, EMP_NAME);
-}
-
-THUMB16 NEWCODE uint16_t *create_timer_id()
-{
-    uint16_t *timer_id = (uint16_t *)malloc(sizeof(uint16_t));
-    memset(timer_id, 0, sizeof(uint16_t));
-    set_envp(NULL, EMP_NAME, (OSADDRESS)timer_id);
+    uint16_t *timer_id = (uint16_t *)get_envp(NULL, EMP_NAME);
+    if (!timer_id)
+    {
+        timer_id = (uint16_t *)malloc(sizeof(uint16_t));
+        memset(timer_id, 0, sizeof(uint16_t));
+        set_envp(NULL, EMP_NAME, (OSADDRESS)timer_id);
+    }
     return timer_id;
 }
 
 THUMB16 NEWCODE void onTimer(uint16_t timerID, LPARAM disp_obj)
 {
-    uint16_t *timer_id = get_timer_id();
     DispObject_InvalidateRect((DISP_OBJ *)disp_obj, NULL);
+
+    uint16_t *timer_id = get_timer_id();
     Timer_ReSet(timer_id, 1000, onTimer, disp_obj);
 }
 
 THUMB16 NEWCODE void SetRefreshTimer(DISP_OBJ *disp_obj)
 {
     uint16_t *timer_id = get_timer_id();
-    if (!timer_id)
-        timer_id = create_timer_id();
     *timer_id = Timer_Set(0, onTimer, (LPARAM)disp_obj);
 }
 
@@ -75,7 +75,7 @@ THUMB16 NEWCODE void KillRefreshTimer()
     if (timer_id)
     {
         Timer_Kill(timer_id);
-        *timer_id = 0;
+        mfree(timer_id);
         set_envp(NULL, EMP_NAME, 0);
     }
 }

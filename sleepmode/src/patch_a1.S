@@ -1,4 +1,7 @@
-#if defined(W810_R4EA031)
+#if defined(K600_R2BB001)
+    .equ func, 0x202651A8
+    .equ DispObject_SetBacklightMode, 0x20267D8C
+#elif defined(W810_R4EA031)
     .equ func, 0x453035A8
     .equ TextID_Destroy, 0x452FE86C
     .equ DispObject_SetBacklightMode, 0x453066AC
@@ -22,7 +25,9 @@
 .section .text.patch_section
 .thumb
 settimer:
+#if defined(DB2010)
     add     r0, r4, #0
+#endif
     ldr     r3, =DispObject_SetBacklightMode+1
     blx     r3
     add     r0, r4, #0
@@ -33,8 +38,10 @@ settimer:
 .align 2
 
 killtimer:
+#if defined(DB2010)
     ldr     r3, =TextID_Destroy+1
     blx     r3
+#endif
     ldr     r3, =func+1
     blx     r3
     bl      KillRefreshTimer
