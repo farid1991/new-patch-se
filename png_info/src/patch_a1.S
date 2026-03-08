@@ -1,4 +1,6 @@
-#if defined(W810_R4EA031)
+#if defined(K600_R2BB001)
+    .equ TextID_Create, 0x202CFF38
+#elif defined(W810_R4EA031)
     .equ TextID_Create, 0x452FE69C
 #endif
 
