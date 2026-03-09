@@ -21,9 +21,6 @@
 #endif
 #include "patch.h"
 
-#define is_mocallbook \
-    ((int (*)(BOOK *))ADDR_is_mocallbook)
-
 extern int is_ongoingcallbook(BOOK *book);
 
 THUMB16 NEWCODE static inline void *malloc(int size)
@@ -59,6 +56,12 @@ THUMB16 NEWCODE vdata_t *Get_VDATA()
     return data;
 }
 
+THUMB16 NEWCODE void Free_VDATA(vdata_t *data)
+{
+    set_envp(NULL, V_EMP, 0);
+    mfree(data);
+}
+
 #if defined(DB2000) || defined(DB2010)
 #define MainDisplay_GetTopBook() Display_GetTopBook(UIDisplay_Main)
 
@@ -85,7 +88,7 @@ THUMB16 NEWCODE BOOL is_java_running(BOOK *book)
     return FALSE;
 }
 
-THUMB16 NEWCODE static inline int GetVolumeLevel(int type, int level)
+THUMB16 NEWCODE int GetVolumeLevel(int type, int level)
 {
     return type ? TABLE_VOL_MEDIA[level] : TABLE_VOL_CALL[level];
 }
@@ -142,20 +145,18 @@ THUMB16 NEWCODE void RegisterImage(image_t *img, const wchar_t *path, const wcha
 
 THUMB16 NEWCODE void UnRegisterImage(vdata_t *data)
 {
-    if (!data->images_initialized)
-        return;
-
     char err;
     for (int i = 0; i < LAST_IMG; i++)
-        REQUEST_IMAGEHANDLER_INTERNAL_UNREGISTER(&SYNC,
-                                                 data->volume_img[i].handle,
-                                                 NULL,
-                                                 NULL,
-                                                 data->volume_img[i].id,
-                                                 1,
-                                                 &err);
-
-    data->images_initialized = FALSE;
+    {
+        if (data->volume_img[i].handle != NOIMAGE)
+            REQUEST_IMAGEHANDLER_INTERNAL_UNREGISTER(&SYNC,
+                                                     data->volume_img[i].handle,
+                                                     NULL,
+                                                     NULL,
+                                                     data->volume_img[i].id,
+                                                     1,
+                                                     &err);
+    }
 }
 
 THUMB16 NEWCODE void InitImage(vdata_t *data)
@@ -167,8 +168,6 @@ THUMB16 NEWCODE void InitImage(vdata_t *data)
         else
             data->volume_img[i].id = NOIMAGE;
     }
-
-    data->images_initialized = TRUE;
 }
 
 THUMB16 NEWCODE void DrawImage(GC *gc_ctx, int x, int y, IMAGEID img)
@@ -233,24 +232,23 @@ THUMB16 NEWCODE int New_Volume_OnCreate(DISP_OBJ *disp_obj)
 {
     vdata_t *data = Get_VDATA();
 
-    wchar_t new_path[MAX_PATH_LEN];
-    GetCurrentSkinPath(new_path);
-
-    bool skin_changed = !data->images_initialized ||
-                        (wstrcmp(new_path, data->cfg_path) != 0);
-
-    if (skin_changed)
-    {
-        UnRegisterImage(data);
-
-        wstrcpy(data->cfg_path, new_path);
-
-        InitImage(data);
-    }
-
+    GetCurrentSkinPath(data->cfg_path);
     GetConfig(data->cfg_path, &data->sk_config);
 
+    InitImage(data);
+
     return VolumeControl_OnCreate(disp_obj);
+}
+
+THUMB16 NEWCODE void New_Volume_OnClose(DISP_OBJ *disp_obj)
+{
+    vdata_t *data = Get_VDATA();
+
+    UnRegisterImage(data);
+
+    Free_VDATA(data);
+
+    VolumeControl_OnClose(disp_obj);
 }
 
 THUMB16 NEWCODE void New_Volume_OnRedraw(DISP_OBJ *disp_obj, int a, int b, int c)

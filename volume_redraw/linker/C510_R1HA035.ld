@@ -1,13 +1,9 @@
 /* Sections placement */
 SECTIONS
 {
-    .oncreate_hook 0x14ED7504 :
+    .dispdesc_hook 0x14ED7504 :
     {
-        KEEP(*(.text.oncreate_hook))
-    }
-    .onredraw_hook 0x14ED750C :
-    {
-        KEEP(*(.text.onredraw_hook))
+        KEEP(*(.text.dispdesc_hook))
     }
 
     .on_enter_hook 0x15C3A608 :

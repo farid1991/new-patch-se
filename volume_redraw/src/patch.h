@@ -1,6 +1,9 @@
 #ifndef _pAtCh_H_
 #define _pAtCh_H_
 
+#define is_mocallbook \
+    ((int (*)(BOOK *))ADDR_is_mocallbook)
+
 #define VolumeControl_OnCreate \
     ((int (*)(DISP_OBJ *))ADDR_VolumeControl_OnCreate)
 
@@ -80,7 +83,6 @@ typedef struct
     skin_config_t sk_config;
     wchar_t cfg_path[MAX_PATH_LEN];
     bool is_java;
-    bool images_initialized;
     image_t volume_img[LAST_IMG];
 } vdata_t;
 

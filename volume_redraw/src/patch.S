@@ -6,12 +6,10 @@
     .equ ongoingcallbook_onclose, 0x454096C8
 #endif
 
-.section .text.oncreate_hook
+.section .text.dispdesc_hook
 .thumb
     .word New_Volume_OnCreate
-
-.section .text.onredraw_hook
-.thumb
+    .word New_Volume_OnClose
     .word New_Volume_OnRedraw
 
 .section .text.on_enter_hook
@@ -26,9 +24,9 @@ is_ongoingcallbook:
     ldr     r1, =ongoingcallbook_onclose+1
     ldr     r0, [r0, #4]
     cmp     r0, r1
-    bne     notequal
-    mov     r0, #1
-    bx      lr
-notequal:
+    beq     .1
     mov     r0, #0
+    bx      lr
+.1:
+    mov     r0, #1
     bx      lr
