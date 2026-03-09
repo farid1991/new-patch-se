@@ -24,7 +24,7 @@ add_compile_options(-mcpu=arm926ej-s
 					-fshort-wchar
 )
 
-add_link_options(-Wl,-z,max-page-size=1)
+add_link_options(-Wl,-z,max-page-size=1,--use-blx)
 
 set(CMAKE_C_FLAGS "-nostdlib -nostdinc")
 set(CMAKE_CXX_FLAGS "-nostdlib -nostdinc -fno-exceptions")
