@@ -328,6 +328,12 @@
 #define BookObj_GetBookID \
     ((int (*)(BOOK *))ADDR_BookObj_GetBookID)
 
+#define BookObj_WindowSetWantsFocus \
+    ((void (*)(BOOK *, int, BOOL))ADDR_BookObj_WindowSetWantsFocus)
+
+#define BookObj_StayOnTop \
+    ((void (*)(BOOK *, int))ADDR_BookObj_StayOnTop)
+
 #define root_list_get_session_count \
     ((int (*)(void))ADDR_root_list_get_session_count)
 
@@ -446,6 +452,18 @@
 
 #define DispObject_SetThemeImage \
     ((void (*)(DISP_OBJ *, int))ADDR_DispObject_SetThemeImage)
+
+#define DispObject_WindowSetPosition \
+    ((void (*)(DISP_OBJ *, int, int))ADDR_DispObject_WindowSetPosition)
+
+#define DispObject_WindowSetSize \
+    ((void (*)(DISP_OBJ *, int, int))ADDR_DispObject_WindowSetSize)
+
+#define DispObject_GetGUI \
+    ((GUI * (*)(DISP_OBJ *)) ADDR_DispObject_GetGUI)
+
+#define GUIObject_GetBook \
+    ((BOOK * (*)(GUI *)) ADDR_GUIObject_GetBook)
 
 // --- Text / Image drawing --------------------------------------------------
 #define SetFont \
@@ -669,6 +687,9 @@
 
 #define strcmp \
     ((int (*)(const char *, const char *))ADDR_strcmp)
+
+#define strncmp \
+    ((int (*)(const char *, const char *, int))ADDR_strncmp)
 
 #define strlen \
     ((int (*)(const char *))ADDR_strlen)
@@ -1261,6 +1282,11 @@
 #define Display_GetTopBook \
     ((BOOK * (*)(int)) ADDR_Display_GetTopBook)
 
+#if defined(DB2020) || defined(PNX5230) || defined(A2)
+#define MainDisplay_GetTopBook \
+    ((BOOK * (*)()) ADDR_MainDisplay_GetTopBook)
+#endif
+
 #define Display_GetBrightness \
     ((int (*)(int))ADDR_Display_GetBrightness)
 
@@ -1365,6 +1391,7 @@
 #define GetFreeBytesOnHeap ((int (*)(void))ADDR_GetFreeBytesOnHeap)
 #define FlightMode_GetState ((int (*)(void))ADDR_FlightMode_GetState)
 #define FlightMode_SetState ((void (*)(int state))ADDR_FlightMode_SetState)
+
 #define ConnectionManager_Connection_GetState \
     ((int (*)(void))ADDR_ConnectionManager_Connection_GetState)
 
@@ -1374,6 +1401,7 @@
 #define MetaData_GetTags ((wchar_t * (*)(const wchar_t *, const wchar_t *, int)) ADDR_MetaData_GetTags)
 #define Shortcut_Run ((void (*)(const wchar_t *))ADDR_Shortcut_Run)
 #define NewEvents_GetCount ((int (*)(void))ADDR_NewEvents_GetCount)
+#define IsMainDisplayFocused ((int (*)(void))ADDR_IsMainDisplayFocused)
 
 // --- Theme / Flash menu ---------------------------------------------------
 

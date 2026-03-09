@@ -104,6 +104,12 @@ Add Power Menu when long press End Button in standby.
 Change the items in a sleep mode.
 ```
 
+### volume_redraw
+```
+Ability to redraw VolumeControl with custom skin.
+Use VolumeSkinEditor.elf to edit and set skin.
+```
+
 ### volume_slider
 ```
 Add New Volume Control GUI on settings.

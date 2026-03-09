@@ -1,0 +1,4 @@
+;Ability to redraw VolumeControl with custom skin.
+;Use "VolumeSkinEditor.elf" to edit and set skin.
+;(c) blacklizard
+;v1.99

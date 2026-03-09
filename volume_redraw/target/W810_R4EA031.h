@@ -1,0 +1,55 @@
+#pragma once
+
+#define DIR_OTHER_PATH (wchar_t *)0x44665A58
+#define DEFAULT_CFG_PATH (wchar_t *)0x4464B72C
+
+#define JAVA_STR (char *)0x449566C3
+#define FOREIGN_APP_STR (char *)0x4466B79A
+
+#define ADDR_memalloc (0x45453AA8 | 1)
+#define ADDR_memfree (0x454547E0 | 1)
+#define ADDR_memset (0x44E24360 | 1)
+#define ADDR_debug_printf (0x44C9E13C | 1)
+#define ADDR_set_envp (0x44149D0A | 1)
+#define ADDR_get_envp (0x44149CF6 | 1)
+#define ADDR_strncmp (0x44E2538C | 1)
+#define ADDR_strcmp (0x44E252EC | 1)
+#define ADDR_wstrcmp (0x44E25C04 | 1)
+#define ADDR_get_DisplayGC (0x45191A98 | 1)
+#define ADDR_BookObj_GetSession (0x4529FCB0 | 1)
+#define ADDR_TextID_GetString (0x452FF248 | 1)
+#define ADDR__fopen (0x455B4268 | 1)
+#define ADDR_fread (0x455B5700 | 1)
+#define ADDR_fclose (0x455B54A0 | 1)
+#define ADDR_REQUEST_IMAGEHANDLER_INTERNAL_GETHANDLE (0x455ADDD0 | 1)
+#define ADDR_REQUEST_IMAGEHANDLER_INTERNAL_REGISTER (0x455ADE50 | 1)
+#define ADDR_REQUEST_IMAGEHANDLER_INTERNAL_UNREGISTER (0x455ADEE4 | 1)
+#define ADDR_FSX_IsFileExists (0x452510D8 | 1)
+#define ADDR_DrawRect (0x45306940 | 1)
+#define ADDR_GC_PutChar (0x451925BC | 1)
+#define ADDR_GetImageHeight (0x45307FD8 | 1)
+#define ADDR_GetImageWidth (0x45307FC0 | 1)
+#define ADDR_SetFont (0x45307888 | 1)
+#define ADDR_DrawString (0x45306D48 | 1)
+#define ADDR_wstrcpy (0x44E25C34 | 1)
+#define ADDR_TextID_Destroy (0x452FE86C | 1)
+#define ADDR_DispObject_GetGUI (0x453024AC | 1)
+#define ADDR_GUIObject_GetBook (0x45193C54 | 1)
+#define ADDR_FindBook (0x45531160 | 1)
+#define ADDR_TextID_CreateIntegerID (0x452FE300 | 1)
+#define ADDR_TextID_Create (0x452FE69C | 1)
+#define ADDR_TextID_Copy (0x452FE7D0 | 1)
+#define ADDR_Display_GetWidth (0x45547984 | 1)
+#define ADDR_Display_GetTopBook (0x4529F01C | 1)
+#define ADDR_GUIObject_GetDispObject (0x45193C40 | 1)
+#define ADDR_Display_GetHeight (0x45547974 | 1)
+#define ADDR_DispObject_WindowSetSize (0x4530476C | 1)
+#define ADDR_DispObject_SetLayerColor (0x453060C4 | 1)
+#define ADDR_DispObject_SetAnimation (0x45306134 | 1)
+
+#define ADDR_is_mocallbook (0x452035EC | 1)
+
+#define ADDR_VolumeControl_OnCreate (0x452A8FFC | 1)
+#define ADDR_VolumeControl_OnClose (0x452A9014 | 1)
+#define ADDR_VolumeControl_OnRedraw (0x452A9158 | 1)
+#define ADDR_pg_VolumeControl_Active_EnterEvent (0x4564378C | 1)
