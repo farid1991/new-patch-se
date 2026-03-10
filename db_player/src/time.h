@@ -14,18 +14,18 @@ typedef struct GUI GUI_TIMEINPUT;
 
 typedef struct DISP_OBJ_TIMEINPUT
 {
-    DISP_OBJ disp;
-    int buf_min;
-    int buf_sec;
-    int track_time_min;
-    int track_time_sec;
-    int track_time_msec;
-    uint16_t disp_width;
-    uint16_t disp_height;
-    uint8_t cstep;
-    uint8_t cursor;
-    TEXTID text_id;
-    wchar_t buf[64];
+	DISP_OBJ disp;
+	int buf_min;
+	int buf_sec;
+	int track_time_min;
+	int track_time_sec;
+	int track_time_msec;
+	uint16_t disp_width;
+	uint16_t disp_height;
+	uint8_t cstep;
+	uint8_t cursor;
+	TEXTID text_id;
+	wchar_t buf[64];
 } DISP_OBJ_TIMEINPUT;
 
 void DBPlayer_Time(BOOK *book, GUI *gui);

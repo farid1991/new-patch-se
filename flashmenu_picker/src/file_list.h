@@ -3,8 +3,8 @@
 
 typedef struct
 {
-    wchar_t *name;
-    wchar_t *filename;
+	wchar_t *name;
+	wchar_t *filename;
 } FILELIST_ELEM;
 
 BOOL is_directory(const wchar_t *path);

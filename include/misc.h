@@ -37,5 +37,4 @@ enum METADATA_TAGS
 	TAG_X6
 };
 
-
 #endif // MISC_H

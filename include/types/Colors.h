@@ -7,7 +7,9 @@
 #define COLOR_GET_G(c) (((c) & 0x0000FF00) >> 8)
 #define COLOR_GET_B(c) (((c) & 0x00FF0000) >> 16)
 #define COLOR_GET_A(c) (((c) & 0xFF000000) >> 24)
-#define COLOR_RGBA(r, g, b, a) ((((r) & MAX_COLOR_VAL)) | (((g) & MAX_COLOR_VAL) << 8) | (((b) & MAX_COLOR_VAL) << 16) | (((a) & MAX_COLOR_VAL) << 24))
+#define COLOR_RGBA(r, g, b, a) \
+	((((r) & MAX_COLOR_VAL)) | (((g) & MAX_COLOR_VAL) << 8) | (((b) & MAX_COLOR_VAL) << 16) | \
+	 (((a) & MAX_COLOR_VAL) << 24))
 
 #define clEmpty 0x00000000
 #define clBlack 0xFF000000

@@ -11,77 +11,79 @@
 #include "dll.h"
 
 // SetFont ----------------------------------------------------
-extern "C" THUMB16 NEWCODE void dll_SetFont(int font, IFont **ppFont)
+extern "C" THUMB16
+NEWCODE void dll_SetFont(int font, IFont **ppFont)
 {
-    IFontManager *pFontManager = 0;
-    IFontFactory *pFontFactory = 0;
-    TUIFontData pFontData;
-    memset(&pFontData, 0, sizeof(TUIFontData));
+	IFontManager *pFontManager = 0;
+	IFontFactory *pFontFactory = 0;
+	TUIFontData pFontData;
+	memset(&pFontData, 0, sizeof(TUIFontData));
 
-    CoCreateInstance(CID_CUIFontManager, IID_IUIFontManager, PPINTERFACE(&pFontManager));
-    pFontManager->GetFontFactory(&pFontFactory);
-    pFontFactory->GetDefaultFontSettings(UIFontSizeLarge, &pFontData);
+	CoCreateInstance(CID_CUIFontManager, IID_IUIFontManager, PPINTERFACE(&pFontManager));
+	pFontManager->GetFontFactory(&pFontFactory);
+	pFontFactory->GetDefaultFontSettings(UIFontSizeLarge, &pFontData);
 
-    int font_size = (font & 0xFF);
-    int font_style = font >> 8;
-    pFontData.size = (float)font_size;
-    pFontData.emphasis = (TUIEmphasisStyle)font_style;
-    pFontFactory->CreateDefaultFont(&pFontData, ppFont);
+	int font_size = (font & 0xFF);
+	int font_style = font >> 8;
+	pFontData.size = (float)font_size;
+	pFontData.emphasis = (TUIEmphasisStyle)font_style;
+	pFontFactory->CreateDefaultFont(&pFontData, ppFont);
 
-    if (pFontFactory)
-        pFontFactory->Release();
-    if (pFontManager)
-        pFontManager->Release();
+	if (pFontFactory)
+		pFontFactory->Release();
+	if (pFontManager)
+		pFontManager->Release();
 }
 
 // DrawString ----------------------------------------------------
-extern "C" THUMB16 NEWCODE void dll_DrawString(int font, TEXTID text, int align, int x1, int y1, int x2, int y2, int pen_color)
+extern "C" THUMB16
+NEWCODE void dll_DrawString(int font, TEXTID text, int align, int x1, int y1, int x2, int y2, int pen_color)
 {
-    ITextRenderingManager *pTextRenderingManager = 0;
-    ITextRenderingFactory *pTextRenderingFactory = 0;
-    IUIRichTextLayoutOptions *pRichTextLayoutOptions = 0;
-    IRichTextLayout *pRichTextLayout = 0;
-    IRichText *pRichText = 0;
-    IUnknown *pCanvas = 0;
-    IFont *pFont = 0;
+	ITextRenderingManager *pTextRenderingManager = 0;
+	ITextRenderingFactory *pTextRenderingFactory = 0;
+	IUIRichTextLayoutOptions *pRichTextLayoutOptions = 0;
+	IRichTextLayout *pRichTextLayout = 0;
+	IRichText *pRichText = 0;
+	IUnknown *pCanvas = 0;
+	IFont *pFont = 0;
 
-    CoCreateInstance(CID_CTextRenderingManager, IID_ITextRenderingManager, PPINTERFACE(&pTextRenderingManager));
-    pTextRenderingManager->GetTextRenderingFactory(&pTextRenderingFactory);
-    pTextRenderingFactory->CreateRichText(&pRichText);
-    pTextRenderingFactory->CreateRichTextLayoutOptions(&pRichTextLayoutOptions);
-    pTextRenderingFactory->CreateRichTextLayout(pRichText, 0, pRichTextLayoutOptions, &pRichTextLayout);
+	CoCreateInstance(CID_CTextRenderingManager, IID_ITextRenderingManager, PPINTERFACE(&pTextRenderingManager));
+	pTextRenderingManager->GetTextRenderingFactory(&pTextRenderingFactory);
+	pTextRenderingFactory->CreateRichText(&pRichText);
+	pTextRenderingFactory->CreateRichTextLayoutOptions(&pRichTextLayoutOptions);
+	pTextRenderingFactory->CreateRichTextLayout(pRichText, 0, pRichTextLayoutOptions, &pRichTextLayout);
 
-    dll_SetFont(font, &pFont);
+	dll_SetFont(font, &pFont);
 
-    TextObject_SetText(pRichText, text);
-    TextObject_SetFont(pRichText, pFont, UITEXTSTYLE_START_OF_TEXT, UITEXTSTYLE_END_OF_TEXT);
-    pRichText->SetTextColor(pen_color, UITEXTSTYLE_START_OF_TEXT, UITEXTSTYLE_END_OF_TEXT);
-    pRichText->SetAlignment((TUITextAlignment)align, UITEXTSTYLE_START_OF_TEXT, UITEXTSTYLE_END_OF_TEXT);
+	TextObject_SetText(pRichText, text);
+	TextObject_SetFont(pRichText, pFont, UITEXTSTYLE_START_OF_TEXT, UITEXTSTYLE_END_OF_TEXT);
+	pRichText->SetTextColor(pen_color, UITEXTSTYLE_START_OF_TEXT, UITEXTSTYLE_END_OF_TEXT);
+	pRichText->SetAlignment((TUITextAlignment)align, UITEXTSTYLE_START_OF_TEXT, UITEXTSTYLE_END_OF_TEXT);
 
-    pRichTextLayoutOptions->SetLineBreakModel(UILineBreakBit_OK_To_Break_On_Glyph);
+	pRichTextLayoutOptions->SetLineBreakModel(UILineBreakBit_OK_To_Break_On_Glyph);
 
-    DisplayGC_AddRef(get_DisplayGC(), &pCanvas);
+	DisplayGC_AddRef(get_DisplayGC(), &pCanvas);
 
-    TUIRectangle rect;
-    rect.Point.X = x1;
-    rect.Point.Y = y1;
-    rect.Size.Width = x2 - x1;
-    rect.Size.Height = y2 - y1;
-    pRichTextLayout->Compose(rect.Size.Width);
-    pRichTextLayout->Display(pCanvas, x1, y1, &rect);
+	TUIRectangle rect;
+	rect.Point.X = x1;
+	rect.Point.Y = y1;
+	rect.Size.Width = x2 - x1;
+	rect.Size.Height = y2 - y1;
+	pRichTextLayout->Compose(rect.Size.Width);
+	pRichTextLayout->Display(pCanvas, x1, y1, &rect);
 
-    if (pTextRenderingManager)
-        pTextRenderingManager->Release();
-    if (pTextRenderingFactory)
-        pTextRenderingFactory->Release();
-    if (pRichTextLayoutOptions)
-        pRichTextLayoutOptions->Release();
-    if (pRichTextLayout)
-        pRichTextLayout->Release();
-    if (pRichText)
-        pRichText->Release();
-    if (pCanvas)
-        pCanvas->Release();
-    if (pFont)
-        pFont->Release();
+	if (pTextRenderingManager)
+		pTextRenderingManager->Release();
+	if (pTextRenderingFactory)
+		pTextRenderingFactory->Release();
+	if (pRichTextLayoutOptions)
+		pRichTextLayoutOptions->Release();
+	if (pRichTextLayout)
+		pRichTextLayout->Release();
+	if (pRichText)
+		pRichText->Release();
+	if (pCanvas)
+		pCanvas->Release();
+	if (pFont)
+		pFont->Release();
 }

@@ -16,8 +16,8 @@ static const char BASE_PAGE[] = "VolumeSlider_Base_Page";
 
 typedef struct
 {
-    BOOK book;
-    GUI *gui;
+	BOOK book;
+	GUI *gui;
 } VSBook;
 
 #define MAX_MEDIAVOLUME 15
@@ -35,19 +35,14 @@ typedef struct
 #define KBD_LONG_RELEASE 0x4
 
 //
-#define onBackPressed \
-    ((void (*)(BOOK *, GUI *))ADDR_onBackPressed)
+#define onBackPressed ((void (*)(BOOK *, GUI *))ADDR_onBackPressed)
 
-#define onLongBackPressed \
-    ((void (*)(BOOK *, GUI *))ADDR_onLongBackPressed)
+#define onLongBackPressed ((void (*)(BOOK *, GUI *))ADDR_onLongBackPressed)
 
-#define onCloseBook \
-    ((void (*)(BOOK *))ADDR_onCloseBook)
+#define onCloseBook ((void (*)(BOOK *))ADDR_onCloseBook)
 
-#define onStandyEvent \
-    ((int (*)(void *, BOOK *))ADDR_onStandyEvent)
+#define onStandyEvent ((int (*)(void *, BOOK *))ADDR_onStandyEvent)
 
-#define StandartRingMenu \
-    ((void (*)(DYNAMIC_MENU_ELEMENT *))ADDR_StandartRingMenu)
+#define StandartRingMenu ((void (*)(DYNAMIC_MENU_ELEMENT *))ADDR_StandartRingMenu)
 
 #endif

@@ -8,22 +8,20 @@ static const TEXTID WEEKDAYS[7] = {TEXTID_1, TEXTID_2, TEXTID_3, TEXTID_4, TEXTI
 
 #if defined(DB2000) || defined(DB2010)
 #define ICONS_COUNT 4
-static const int missed_icons[ICONS_COUNT] = {
-    CALLS_MISSED_SLEEPMODE_ICN,
-    MMS_NEW_MESSAGE_SLEEPMODE_ICN,
-    MSG_UI_EMAIL_MESSAGE_SLEEPMODE_ICN,
-    SMS_SLEEPMODE_ICN};
+static const int missed_icons[ICONS_COUNT] = {CALLS_MISSED_SLEEPMODE_ICN,
+                                              MMS_NEW_MESSAGE_SLEEPMODE_ICN,
+                                              MSG_UI_EMAIL_MESSAGE_SLEEPMODE_ICN,
+                                              SMS_SLEEPMODE_ICN};
 #else
 #define ICONS_COUNT 8
-static const int missed_icons[ICONS_COUNT] = {
-    KEYLOCK_SLEEPMODE_ICN,
-    SILENT_SLEEPMODE_ICN,
-    CALLS_MISSED_SLEEPMODE_ICN,
-    SMS_SLEEPMODE_ICN,
-    MSG_UI_EMAIL_MESSAGE_SLEEPMODE_ICN,
-    MMS_NEW_MESSAGE_SLEEPMODE_ICN,
-    APPOINTMENT_REMINDER_SLEEPMODE_ICN,
-    TASK_REMINDER_SLEEPMODE_ICN};
+static const int missed_icons[ICONS_COUNT] = {KEYLOCK_SLEEPMODE_ICN,
+                                              SILENT_SLEEPMODE_ICN,
+                                              CALLS_MISSED_SLEEPMODE_ICN,
+                                              SMS_SLEEPMODE_ICN,
+                                              MSG_UI_EMAIL_MESSAGE_SLEEPMODE_ICN,
+                                              MMS_NEW_MESSAGE_SLEEPMODE_ICN,
+                                              APPOINTMENT_REMINDER_SLEEPMODE_ICN,
+                                              TASK_REMINDER_SLEEPMODE_ICN};
 #endif
 
 #endif

@@ -9,15 +9,15 @@
 
 typedef enum
 {
-    NOLYRIC = -2,
-    WAIT = -1,
-    READY = 0
+	NOLYRIC = -2,
+	WAIT = -1,
+	READY = 0
 } OFFSET_STATUS;
 
 typedef enum
 {
-    READ_FAIL = 0,
-    READ_OK = 1
+	READ_FAIL = 0,
+	READ_OK = 1
 } LRC_STATE;
 
 void GetLyric(DISP_OBJ_DBP *disp_obj, const wchar_t *path, const wchar_t *name);

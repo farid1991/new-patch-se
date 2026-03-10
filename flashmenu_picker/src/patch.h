@@ -20,28 +20,28 @@ static const char FlashMenuPicker_Main_Page_Name[] = "FlashMenuPicker_Main_Page"
 
 enum
 {
-    ITEM_SYS,
-    ITEM_INT,
+	ITEM_SYS,
+	ITEM_INT,
 #ifdef HAS_EXTERNAL
-    ITEM_EXT,
+	ITEM_EXT,
 #endif
-    ITEM_LAST
+	ITEM_LAST
 };
 
 typedef struct FlashMenuPickerBook
 {
-    BOOK book;
-    GUI_LIST *main_menu;
-    GUI_LIST *sub_menu;
-    LIST *flist;
-    int type;
+	BOOK book;
+	GUI_LIST *main_menu;
+	GUI_LIST *sub_menu;
+	LIST *flist;
+	int type;
 } FlashMenuPickerBook;
 
 typedef struct FlashDesktopBook
 {
-    BOOK book;
-    GUI *main_menu;
-    IMAGEID img;
+	BOOK book;
+	GUI *main_menu;
+	IMAGEID img;
 } FlashDesktopBook;
 
 void *malloc(int size);

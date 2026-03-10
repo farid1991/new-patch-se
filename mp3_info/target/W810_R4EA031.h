@@ -1,6 +1,6 @@
 #pragma once
 
-#define ADDR_memcmp (0x44E242F4|1)
+#define ADDR_memcmp (0x44E242F4 | 1)
 #define ADDR_sprintf (0x44E24E88 | 1)
 #define ADDR__fopen (0x455B4268 | 1)
 #define ADDR_fread (0x455B5700 | 1)

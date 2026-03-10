@@ -9,57 +9,63 @@
 #include <libse.h>
 #include <sync.h>
 
-// static const int _SYNC = 0;
-// static const int *SYNC = &_SYNC;
-
 static const char mem[] = "al";
 static const wchar_t output_fmt[] = L"%02d:%02d (%02d:%02d)";
 
-THUMB16 NEWCODE void *malloc(int size)
+THUMB16
+NEWCODE void *malloc(int size)
 {
 #if defined(DB2020)
-    return (memalloc(0, size, 1, 5, mem, 0));
+	return (memalloc(0, size, 1, 5, mem, 0));
 #elif defined(A2)
-    return (memalloc(0xFFFFFFFF, size, 1, 5, mem, 0));
+	return (memalloc(0xFFFFFFFF, size, 1, 5, mem, 0));
 #else
-    return memalloc(size, 1, 5, mem, 0);
+	return memalloc(size, 1, 5, mem, 0);
 #endif
 }
 
-THUMB16 NEWCODE void mfree(void *mem)
+THUMB16
+NEWCODE void mfree(void *mem)
 {
-    if (mem)
+	if (mem)
 #if defined(DB2020)
-        memfree(0, mem, mem, 0);
+		memfree(0, mem, mem, 0);
 #elif defined(A2)
-        memfree(0, mem, mem, 0);
+		memfree(0, mem, mem, 0);
 #else
-        memfree(mem, mem, 0);
+		memfree(mem, mem, 0);
 #endif
 }
 
-THUMB16 NEWCODE TEXTID GetRemainingTimeID(TIME *alarm)
+THUMB16
+NEWCODE TEXTID GetRemainingTimeID(TIME *alarm)
 {
-    DATETIME datetime_real;
-    REQUEST_DATEANDTIME_GET(&SYNC, &datetime_real);
-    int unix_real = datetime2unixtime(&datetime_real);
+	DATETIME datetime_real;
+	REQUEST_DATEANDTIME_GET(&SYNC, &datetime_real);
+	int unix_real = datetime2unixtime(&datetime_real);
 
-    DATETIME *datetime_alarm = (DATETIME *)malloc(sizeof(DATETIME));
-    datetime_alarm->date.year = datetime_real.date.year;
-    datetime_alarm->date.mon = datetime_real.date.mon;
-    datetime_alarm->date.day = datetime_real.date.day + 1;
-    datetime_alarm->time.hour = alarm->hour;
-    datetime_alarm->time.min = alarm->min + 1;
-    datetime_alarm->time.sec = 0;
-    datetime_alarm->time.msec = 0;
-    int unix_alarm = datetime2unixtime(datetime_alarm);
+	DATETIME *datetime_alarm = (DATETIME *)malloc(sizeof(DATETIME));
+	datetime_alarm->date.year = datetime_real.date.year;
+	datetime_alarm->date.mon = datetime_real.date.mon;
+	datetime_alarm->date.day = datetime_real.date.day + 1;
+	datetime_alarm->time.hour = alarm->hour;
+	datetime_alarm->time.min = alarm->min + 1;
+	datetime_alarm->time.sec = 0;
+	datetime_alarm->time.msec = 0;
+	int unix_alarm = datetime2unixtime(datetime_alarm);
 
-    DATETIME datetime_back;
-    unixtime2datetime(unix_alarm - unix_real, &datetime_back);
+	DATETIME datetime_back;
+	unixtime2datetime(unix_alarm - unix_real, &datetime_back);
 
-    mfree(datetime_alarm);
+	mfree(datetime_alarm);
 
-    wchar_t buf[64];
-    snwprintf(buf, MAXELEMS(buf), output_fmt, alarm->hour, alarm->min, datetime_back.time.hour, datetime_back.time.min);
-    return TextID_Create(buf, ENC_UCS2, TEXTID_ANY_LEN);
+	wchar_t buf[64];
+	snwprintf(buf,
+	          MAXELEMS(buf),
+	          output_fmt,
+	          alarm->hour,
+	          alarm->min,
+	          datetime_back.time.hour,
+	          datetime_back.time.min);
+	return TextID_Create(buf, ENC_UCS2, TEXTID_ANY_LEN);
 }

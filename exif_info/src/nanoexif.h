@@ -73,11 +73,10 @@
 #define NANOEXIF_EXIF_HEADER_SIZE (2 + 2 + 2 + 6 + 2 + 2 + 4)
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif /* __cplusplus */
 
-    /*
+/*
     The MIT License
 
     Copyright (c) 2010 Tokuhiro Matsuno
@@ -101,46 +100,46 @@ extern "C"
     THE SOFTWARE.
     */
 
-    /**
+/**
      * enum nanoexif_endian describe the endian.
      */
-    typedef enum
-    {
-        NANOEXIF_LITTLE_ENDIAN,
-        NANOEXIF_BIG_ENDIAN,
-    } nanoexif_endian;
+typedef enum
+{
+	NANOEXIF_LITTLE_ENDIAN,
+	NANOEXIF_BIG_ENDIAN,
+} nanoexif_endian;
 
 #define NANOEXIF_MACHINE_ENDIAN NANOEXIF_LITTLE_ENDIAN
 
-    /**
+/**
      * struct nanoexif_ifd_entry describe the IFD entry.
      */
-    typedef struct
-    {
-        uint16_t tag;
-        uint16_t type;
-        uint32_t count;
-        uint8_t offset[4];
-    } nanoexif_ifd_entry;
+typedef struct
+{
+	uint16_t tag;
+	uint16_t type;
+	uint32_t count;
+	uint8_t offset[4];
+} nanoexif_ifd_entry;
 
-    /**
+/**
      * struct nanoexif describe the exif(means APP1 segment).
      */
-    typedef struct
-    {
-        nanoexif_endian endian;
-        uint8_t *buf;
-        size_t offset;
-    } nanoexif;
+typedef struct
+{
+	nanoexif_endian endian;
+	uint8_t *buf;
+	size_t offset;
+} nanoexif;
 
-    nanoexif *nanoexif_init(int fp, uint32_t *ifd_offset);
-    void nanoexif_free(nanoexif *ne);
-    nanoexif_ifd_entry *nanoexif_read_ifd(nanoexif *ne, uint16_t offset, uint32_t *next, uint16_t *cnt);
-    uint16_t *nanoexif_get_ifd_entry_data_short(nanoexif *ne, nanoexif_ifd_entry *entry);
-    char *nanoexif_get_ifd_entry_data_ascii(nanoexif *ne, nanoexif_ifd_entry *entry);
-    uint32_t *nanoexif_get_ifd_entry_data_rational(nanoexif *ne, nanoexif_ifd_entry *entry);
-    uint32_t *nanoexif_get_ifd_entry_data_long(nanoexif *ne, nanoexif_ifd_entry *entry);
-    const char *nanoexif_tag_name(uint32_t n);
+nanoexif *nanoexif_init(int fp, uint32_t *ifd_offset);
+void nanoexif_free(nanoexif *ne);
+nanoexif_ifd_entry *nanoexif_read_ifd(nanoexif *ne, uint16_t offset, uint32_t *next, uint16_t *cnt);
+uint16_t *nanoexif_get_ifd_entry_data_short(nanoexif *ne, nanoexif_ifd_entry *entry);
+char *nanoexif_get_ifd_entry_data_ascii(nanoexif *ne, nanoexif_ifd_entry *entry);
+uint32_t *nanoexif_get_ifd_entry_data_rational(nanoexif *ne, nanoexif_ifd_entry *entry);
+uint32_t *nanoexif_get_ifd_entry_data_long(nanoexif *ne, nanoexif_ifd_entry *entry);
+const char *nanoexif_tag_name(uint32_t n);
 
 #ifdef __cplusplus
 }

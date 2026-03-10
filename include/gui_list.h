@@ -10,7 +10,7 @@ typedef struct GUI GUI_LIST;
 typedef struct GUI_MESSAGE
 {
 	uint8_t __msg; // use GUIonMessage_GetMsg( )
-	GUI *__gui;	   // use GUIonMessage_GetGui( )
+	GUI *__gui;    // use GUIonMessage_GetGui( )
 	BOOK *__book;  // use GUIonMessage_GetBook( )
 } GUI_MESSAGE;
 

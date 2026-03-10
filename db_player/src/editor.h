@@ -10,13 +10,13 @@ static const char GuiColor_Name[] = "GUI_Color";
 
 typedef struct DISP_OBJ_COLOR
 {
-    DISP_OBJ disp;
-    uint8_t r, g, b, a;
-    uint8_t type;
-    uint8_t need_str;
-    uint8_t current_column;
-    uint8_t cstep;
-    TEXTID buf_text;
+	DISP_OBJ disp;
+	uint8_t r, g, b, a;
+	uint8_t type;
+	uint8_t need_str;
+	uint8_t current_column;
+	uint8_t cstep;
+	TEXTID buf_text;
 } DISP_OBJ_COLOR;
 
 void SetActivate(BOOK *m_bk, int count);

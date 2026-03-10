@@ -46,7 +46,7 @@
 #define ADDR_Date2ID (0x11AEB39C | 1)
 #define ADDR_Time2ID (0x11AEB2B8 | 1)
 #define ADDR_DATE_GetWeekDay (0x10C68CA8 | 1)
-             
+
 #define ADDR_DispObject_InvalidateRect (0x10A6653C | 1)
 #define ADDR_SetFont (0x10A6A7CC | 1)
 #define ADDR_DrawString (0x10A69C0C | 1)

@@ -6,82 +6,82 @@
 
 typedef struct FSTAT
 {
-    uint16_t st_ino;
-    uint16_t st_nlink;
-    uint32_t st_mode; // was unk1
-    uint32_t fsize;   // st_size
-    time_t st_atime;
-    time_t st_mtime;
-    time_t st_ctime;
-    uint32_t st_attr;
+	uint16_t st_ino;
+	uint16_t st_nlink;
+	uint32_t st_mode; // was unk1
+	uint32_t fsize;   // st_size
+	time_t st_atime;
+	time_t st_mtime;
+	time_t st_ctime;
+	uint32_t st_attr;
 } FSTAT;
 
 typedef struct W_FSTAT
 {
-    int attr;
-    int unk_0x4;
-    int unk_0x8;
-    int unk_0xC;
-    int unk_0x10;
-    int unk_0x14;
-    int st_size;
-    unsigned int unk_0x1C;
-    unsigned int unk_0x20;
-    unsigned int unk_0x24;
+	int attr;
+	int unk_0x4;
+	int unk_0x8;
+	int unk_0xC;
+	int unk_0x10;
+	int unk_0x14;
+	int st_size;
+	unsigned int unk_0x1C;
+	unsigned int unk_0x20;
+	unsigned int unk_0x24;
 } W_FSTAT;
 
 typedef struct FILELISTITEM
 {
-    int unk;
-    wchar_t *path;
-    wchar_t *fname;
-    char *content_type;
-    char unk1[0x2F0];
+	int unk;
+	wchar_t *path;
+	wchar_t *fname;
+	char *content_type;
+	char unk1[0x2F0];
 } FILELISTITEM; // FSX_dirent?
 
 typedef struct DIR_HANDLE
 {
-    int unk_0;
-    uint16_t unk_4;
-    uint16_t unk_6;
-    int unk_8;
-    char unk_C;
-    char unk_D;
-    char ena_hidden;
+	int unk_0;
+	uint16_t unk_4;
+	uint16_t unk_6;
+	int unk_8;
+	char unk_C;
+	char unk_D;
+	char ena_hidden;
 } DIR_HANDLE; // FSX_DIR?
 
 typedef struct VOLUMESIZE
 {
-    uint32_t TotalSpace;            /* Total size of FS in bytes */
-    uint32_t FreeSpace;             /* Number of free bytes */
-    uint32_t BytesPerCluster;       /* File system block size */
-    uint32_t TotalClusters;         /* Logical file system size */
-    uint32_t TotalFreeClusters;     /* Number of free blocks, both phyical and logical */
-    uint32_t free_reserved_blocks;  /* Number of free reserved blocks. */
-    uint32_t used_oversize_blocks;  /* Number of used oversize blocks. */
-    uint32_t total_oversize_blocks; /* Number of available oversize blocks. */
-} VOLUMESIZE;                       // old FSX_freespace
+	uint32_t TotalSpace;            /* Total size of FS in bytes */
+	uint32_t FreeSpace;             /* Number of free bytes */
+	uint32_t BytesPerCluster;       /* File system block size */
+	uint32_t TotalClusters;         /* Logical file system size */
+	uint32_t TotalFreeClusters;     /* Number of free blocks, both phyical and logical */
+	uint32_t free_reserved_blocks;  /* Number of free reserved blocks. */
+	uint32_t used_oversize_blocks;  /* Number of used oversize blocks. */
+	uint32_t total_oversize_blocks; /* Number of available oversize blocks. */
+} VOLUMESIZE;                           // old FSX_freespace
 
 typedef struct VOLUMESIZE_A2
 {
-    uint64_t TotalSpace;            /* Total size of FS in bytes */
-    uint64_t FreeSpace;             /* Number of free bytes */
-    uint32_t BytesPerCluster;       /* File system block size */
-    uint32_t TotalClusters;         /* Logical file system size */
-    uint32_t TotalFreeClusters;     /* Number of free blocks, both phyical and logical */
-    uint32_t free_reserved_blocks;  /* Number of free reserved blocks. */
-    uint32_t used_oversize_blocks;  /* Number of used oversize blocks. */
-    uint32_t total_oversize_blocks; /* Number of available oversize blocks. */
-} VOLUMESIZE_A2;                    // FSX_freespace
+	uint64_t TotalSpace;            /* Total size of FS in bytes */
+	uint64_t FreeSpace;             /* Number of free bytes */
+	uint32_t BytesPerCluster;       /* File system block size */
+	uint32_t TotalClusters;         /* Logical file system size */
+	uint32_t TotalFreeClusters;     /* Number of free blocks, both phyical and logical */
+	uint32_t free_reserved_blocks;  /* Number of free reserved blocks. */
+	uint32_t used_oversize_blocks;  /* Number of used oversize blocks. */
+	uint32_t total_oversize_blocks; /* Number of available oversize blocks. */
+} VOLUMESIZE_A2;                        // FSX_freespace
 
 // w_fopen
 typedef enum W_OPEN_ATTR
 {
-    WA_Read = 1,
-    WA_Write = 2,
-    WA_Append = 4,
-    WA_Create = 8,
-    WA_Truncate = 0x40
+	WA_Read = 1,
+	WA_Write = 2,
+	WA_Append = 4,
+	WA_Create = 8,
+	WA_Truncate = 0x40
 } W_OPEN_ATTR;
 
 // fopen/_fopen (mode)

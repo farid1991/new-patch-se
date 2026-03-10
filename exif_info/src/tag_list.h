@@ -3,12 +3,12 @@
 
 typedef struct
 {
-    uint16_t tag;
-    uint16_t type;
-    uint16_t name_len;
-    uint16_t value_len;
-    char *name;
-    char *value;
+	uint16_t tag;
+	uint16_t type;
+	uint16_t name_len;
+	uint16_t value_len;
+	char *name;
+	char *value;
 } TAG_LIST_ELEM;
 
 int tag_list_item_filter(void *elem);

@@ -3,11 +3,11 @@
 
 typedef enum
 {
-    ERROR = 0,
-    ANSI = 1,
-    UTF16_LE = 2,
-    UTF16_BE = 3,
-    UTF8 = 4
+	ERROR = 0,
+	ANSI = 1,
+	UTF16_LE = 2,
+	UTF16_BE = 3,
+	UTF8 = 4
 } Encoding_t;
 
 int TextID_GetWidth(int font, TEXTID text, int len);
