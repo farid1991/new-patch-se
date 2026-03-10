@@ -3,6 +3,7 @@
 
 #include <types/Basic_types.h>
 
+// clang-format off
 /**
  * The maximum length of a file path or a streaming URL
  */
@@ -622,5 +623,6 @@ typedef enum
  * computed by bitwise 'or' different TMMEWindCondition together.
  */
 typedef uint16_t TMMEWindConditionFlagField;
+// clang-format on
 
 #endif

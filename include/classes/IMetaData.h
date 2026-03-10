@@ -10,41 +10,40 @@
 #define METADATA_H
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 
-    typedef struct IMetaData IMetaData;
+typedef struct IMetaData IMetaData;
 
-    typedef struct COVER_INFO_DESC
-    {
-        char cover_type;
-        int size;
-        int cover_offset;
-    } COVER_INFO_DESC;
+typedef struct COVER_INFO_DESC
+{
+	char cover_type;
+	int size;
+	int cover_offset;
+} COVER_INFO_DESC;
 
-    typedef enum
-    {
-        TMetadataTagId_Artist,
-        TMetadataTagId_Title,
-        TMetadataTagId_Album,
-        TMetadataTagId_Year,
-        TMetadataTagId_Genre,
-        TMetadataTagId_x6,
-        TMetadataTagId_x7,
-    } TMetadata_TagId;
+typedef enum
+{
+	TMetadataTagId_Artist,
+	TMetadataTagId_Title,
+	TMetadataTagId_Album,
+	TMetadataTagId_Year,
+	TMetadataTagId_Genre,
+	TMetadataTagId_x6,
+	TMetadataTagId_x7,
+} TMetadata_TagId;
 
-    typedef struct METADATA_DESC
-    {
-        wchar_t artist[0x100];
-        wchar_t title[0x100];
-        wchar_t album[0x100];
-        wchar_t year[0x100];
-        wchar_t genre[0x100];
-        wchar_t x6[0x100];
-        wchar_t x7[0x100];
-        IMetaData *pIMetaData;
-    } METADATA_DESC;
+typedef struct METADATA_DESC
+{
+	wchar_t artist[0x100];
+	wchar_t title[0x100];
+	wchar_t album[0x100];
+	wchar_t year[0x100];
+	wchar_t genre[0x100];
+	wchar_t x6[0x100];
+	wchar_t x7[0x100];
+	IMetaData *pIMetaData;
+} METADATA_DESC;
 
 #ifdef __cplusplus
 }
@@ -54,6 +53,7 @@ extern "C"
 
 #include <classes/IUnknown.h>
 
+// clang-format off
 class IMetaData : public IUnknown
 {
 public:
@@ -67,6 +67,7 @@ public:
     virtual int unk_0x2C();
     virtual int HasAlbumArt(wchar_t *path, wchar_t *name);
 };
+// clang-format on
 
 #else /* ================= C version ================= */
 
@@ -74,28 +75,28 @@ struct IMetaData;
 
 typedef struct IMetaDataVtbl
 {
-    /* IUnknown */
-    void *(*pguid)(struct IMetaData *);
-    void *(*QueryInterface)(struct IMetaData *, void *, void **);
-    void *(*AddRef)(struct IMetaData *);
-    void *(*Release)(struct IMetaData *);
+	/* IUnknown */
+	void *(*pguid)(struct IMetaData *);
+	void *(*QueryInterface)(struct IMetaData *, void *, void **);
+	void *(*AddRef)(struct IMetaData *);
+	void *(*Release)(struct IMetaData *);
 
-    /* IMetaData */
-    int (*SetFile)(struct IMetaData *, wchar_t *, wchar_t *);
-    int (*unk_0x14)(struct IMetaData *, void *, void *);
-    int (*GetTag)(struct IMetaData *, int, wchar_t *);
-    int (*GetTrackNum)(struct IMetaData *, int, int *);
-    int (*GetCoverInfo)(struct IMetaData *, COVER_INFO_DESC *);
-    int (*unk_0x24)(struct IMetaData *);
-    int (*unk_0x28)(struct IMetaData *);
-    int (*unk_0x2C)(struct IMetaData *);
-    int (*HasAlbumArt)(struct IMetaData *, wchar_t *, wchar_t *);
+	/* IMetaData */
+	int (*SetFile)(struct IMetaData *, wchar_t *, wchar_t *);
+	int (*unk_0x14)(struct IMetaData *, void *, void *);
+	int (*GetTag)(struct IMetaData *, int, wchar_t *);
+	int (*GetTrackNum)(struct IMetaData *, int, int *);
+	int (*GetCoverInfo)(struct IMetaData *, COVER_INFO_DESC *);
+	int (*unk_0x24)(struct IMetaData *);
+	int (*unk_0x28)(struct IMetaData *);
+	int (*unk_0x2C)(struct IMetaData *);
+	int (*HasAlbumArt)(struct IMetaData *, wchar_t *, wchar_t *);
 
 } IMetaDataVtbl;
 
 typedef struct IMetaData
 {
-    const IMetaDataVtbl *lpVtbl;
+	const IMetaDataVtbl *lpVtbl;
 } IMetaData;
 
 #endif /* __cplusplus */

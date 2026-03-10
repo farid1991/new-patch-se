@@ -3,6 +3,8 @@
 
 #include <types/Basic_types.h>
 
+// clang-format off
+
 #define MAX_MEDIAVOLUME 15
 #define MAX_CALLVOLUME 8
 #define MAX_RINGVOLUME 8
@@ -1074,5 +1076,7 @@ typedef enum
 
     AUDIOCONTROL_TTYMODE_LAST
 } TAudioControl_TTYMode;
+
+// clang-format on
 
 #endif

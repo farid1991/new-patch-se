@@ -1,6 +1,8 @@
 #ifndef __BASIC_TYPES_H__
 #define __BASIC_TYPES_H__
 
+// clang-format off
+
 /**
  * Signed integer number. The size of this type is platform-
  * and compiler-specific but is at least 32 bits.
@@ -186,5 +188,7 @@ typedef struct
 {
     FUint8 Uuid[16];
 } TUuid;
+
+// clang-format on
 
 #endif

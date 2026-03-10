@@ -6,6 +6,7 @@
 #include <classes/IRichTextLayout.h>
 #include <types/Basic_types.h>
 
+// clang-format off
 class IRichText : public IUnknown
 {
 public:
@@ -112,5 +113,6 @@ public:
     virtual int GetFontConfigFilePath(IUnknown **pIString);
     virtual int GetFontEngineConfigFilePath(IUnknown **pIString);
 };
+// clang-format on
 
 #endif

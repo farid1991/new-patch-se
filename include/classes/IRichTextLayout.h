@@ -9,6 +9,7 @@
 #include <types/UIRect_types.h>
 #include <types/UIRichText_types.h>
 
+// clang-format off
 class IRichText;
 
 class IUIRichTextLayoutOptions : public IUnknown
@@ -83,5 +84,6 @@ public:
     virtual int AddTextContainer(IUnknown *pIUITextContainer, FSint32 containerID, TUIPoint *pContainerOrigin);                                                                                         // 0x6C
     virtual int RemoveTextContainer(FSint32 containerID);
 };
+// clang-format on
 
 #endif

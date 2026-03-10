@@ -11,20 +11,27 @@
 #endif
 #include "slider.h"
 
+// clang-format off
+
 static const PAGE_MSG bk_msglst_main[] =
-    {
-        PAGE_ENTER_EVENT, pg_vs_EnterEvent,
-        PAGE_EXIT_EVENT, pg_vs_ExitEvent,
-        NIL_EVENT, NULL};
+{
+    PAGE_ENTER_EVENT, pg_vs_EnterEvent,
+    PAGE_EXIT_EVENT, pg_vs_ExitEvent,
+    NIL_EVENT, NULL
+};
 
 static const PAGE_DESC vs_Main_Page = {MAIN_PAGE, NULL, bk_msglst_main};
 
 static const PAGE_MSG bk_msglst_base[] =
-    {
-        CANCEL_EVENT, pg_vs_CancelEvent,
-        RETURN_TO_STANDBY_EVENT, pg_vs_CancelEvent,
-        NIL_EVENT, NULL};
+{
+    CANCEL_EVENT, pg_vs_CancelEvent,
+    RETURN_TO_STANDBY_EVENT, pg_vs_CancelEvent,
+    NIL_EVENT, NULL
+};
+
 static const PAGE_DESC vs_Base_Page = {BASE_PAGE, NULL, bk_msglst_base};
+
+// clang-format on
 
 THUMB16 NEWCODE void *malloc(int size)
 {

@@ -31,6 +31,7 @@ typedef unsigned short wchar_t;
 #ifndef __cplusplus
 typedef unsigned long LPARAM;
 #else
+// clang-format off
 class LPARAM
 {
 	unsigned long data;
@@ -41,6 +42,7 @@ public:
 	operator int() { return data; }
 	operator void *() { return reinterpret_cast<void *>(data); }
 };
+// clang-format on
 #endif
 
 #ifndef _NULL
@@ -69,11 +71,13 @@ public:
 #define MAXELEMS(x) (sizeof(x) / sizeof(x[0]))
 
 #ifdef __cplusplus
+// clang-format off
 template <typename BASETYPE, typename CHILDTYPE>
 void INHERITANCECHECK()
 {
 	if (static_cast<BASETYPE *>(0) == static_cast<CHILDTYPE *>(0));
 }
+// clang-format on
 #endif
 
 #define ARM32 __attribute__((target("arm")))

@@ -9,6 +9,7 @@
 #ifdef __cplusplus
 #include <classes/IUnknown.h>
 
+// clang-format off
 class IMMEPlayer : public IUnknown
 {
 public:
@@ -33,6 +34,7 @@ public:
     virtual int SetVolume();
     virtual int GetVolume();
 };
+// clang-format on
 
 #else
 
@@ -40,46 +42,45 @@ typedef struct IMMEPlayer IMMEPlayer;
 
 typedef struct IMMEPlayerVtbl
 {
-    /* IUnknown */
-    void *(*pguid)(IMMEPlayer *);
-    void *(*QueryInterface)(IMMEPlayer *, void *, void **);
-    void *(*AddRef)(IMMEPlayer *);
-    void *(*Release)(IMMEPlayer *);
+	/* IUnknown */
+	void *(*pguid)(IMMEPlayer *);
+	void *(*QueryInterface)(IMMEPlayer *, void *, void **);
+	void *(*AddRef)(IMMEPlayer *);
+	void *(*Release)(IMMEPlayer *);
 
-    /* IMMEPlayer */
-    int (*GetHandle)(IMMEPlayer *, FUint32 *handle);
-    int (*GetState)(IMMEPlayer *, uint8_t *state);
-    int (*GetTime)(IMMEPlayer *, TMMETime *elapsedTime);
-    int (*SetTime)(IMMEPlayer *, TMMETime *offsetTime);
-    int (*SetDisplayAppearance)(IMMEPlayer *, TUIRectangle *);
-    int (*Play)(IMMEPlayer *, FUint32, TBool);
-    int (*Pause)(IMMEPlayer *);
-    int (*SetFastForwardRewindBoundaryConditions)(IMMEPlayer *, TMMEWindCondition);
-    int (*SetWindTimerInterval)(IMMEPlayer *, FUint32);
-    int (*StartFastForward)(IMMEPlayer *);
-    int (*StopFastForward)(IMMEPlayer *);
-    int (*StartRewind)(IMMEPlayer *);
-    int (*StopRewind)(IMMEPlayer *);
-    int (*SlowMotion)(IMMEPlayer *);
-    int (*SetFadeDownOnInterrupted)(IMMEPlayer *, TMMEFadeDirection);
-    int (*StartAudioFade)(IMMEPlayer *);
-    int (*Mute)(IMMEPlayer *);
-    int (*UnMute)(IMMEPlayer *);
-    int (*SetVolume)(IMMEPlayer *);
-    int (*GetVolume)(IMMEPlayer *);
+	/* IMMEPlayer */
+	int (*GetHandle)(IMMEPlayer *, FUint32 *handle);
+	int (*GetState)(IMMEPlayer *, uint8_t *state);
+	int (*GetTime)(IMMEPlayer *, TMMETime *elapsedTime);
+	int (*SetTime)(IMMEPlayer *, TMMETime *offsetTime);
+	int (*SetDisplayAppearance)(IMMEPlayer *, TUIRectangle *);
+	int (*Play)(IMMEPlayer *, FUint32, TBool);
+	int (*Pause)(IMMEPlayer *);
+	int (*SetFastForwardRewindBoundaryConditions)(IMMEPlayer *, TMMEWindCondition);
+	int (*SetWindTimerInterval)(IMMEPlayer *, FUint32);
+	int (*StartFastForward)(IMMEPlayer *);
+	int (*StopFastForward)(IMMEPlayer *);
+	int (*StartRewind)(IMMEPlayer *);
+	int (*StopRewind)(IMMEPlayer *);
+	int (*SlowMotion)(IMMEPlayer *);
+	int (*SetFadeDownOnInterrupted)(IMMEPlayer *, TMMEFadeDirection);
+	int (*StartAudioFade)(IMMEPlayer *);
+	int (*Mute)(IMMEPlayer *);
+	int (*UnMute)(IMMEPlayer *);
+	int (*SetVolume)(IMMEPlayer *);
+	int (*GetVolume)(IMMEPlayer *);
 } IMMEPlayerVtbl;
 
 struct IMMEPlayer
 {
-    IMMEPlayerVtbl *lpVtbl;
+	IMMEPlayerVtbl *lpVtbl;
 };
 
 #define IMME_GetHandle(p, a) ((p)->lpVtbl->GetHandle((p), (a)))
 #define IMME_GetState(p, a) ((p)->lpVtbl->GetState((p), (a)))
 #define IMME_GetTime(p, a) ((p)->lpVtbl->GetTime((p), (a)))
 #define IMME_SetTime(p, a) ((p)->lpVtbl->SetTime((p), (a)))
-#define IMME_SetDisplayAppearance(p, a) \
-    ((p)->lpVtbl->SetDisplayAppearance((p), (a)))
+#define IMME_SetDisplayAppearance(p, a) ((p)->lpVtbl->SetDisplayAppearance((p), (a)))
 
 #define IMME_Play(p, a, b) ((p)->lpVtbl->Play((p), (a), (b)))
 #define IMME_Pause(p) ((p)->lpVtbl->Pause((p)))

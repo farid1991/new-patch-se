@@ -1,4 +1,4 @@
-
+// clang-format off
 /* png.h - header file for PNG reference library
  *
  * libpng version 1.2.24 - December 14, 2007
@@ -3549,3 +3549,4 @@ png_infop info_ptr, png_uint_32 *res_x, png_uint_32 *res_y, int *unit_type));
 #endif /* PNG_VERSION_INFO_ONLY */
 /* do not put anything past this line */
 #endif /* PNG_H */
+// clang-format on

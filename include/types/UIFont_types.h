@@ -3,6 +3,8 @@
 
 #include <types/Basic_types.h>
 
+// clang-format off
+
 typedef FUint16 TUIRenderStyle;
 
 /**
@@ -105,5 +107,7 @@ typedef enum
     UIFontParamSizeSmall,
     UIFontParamSizeLarge
 } TUIFontParamSize;
+
+// clang-format on
 
 #endif

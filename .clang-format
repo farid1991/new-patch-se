@@ -1,0 +1,64 @@
+---
+Language: Cpp
+BasedOnStyle: LLVM
+Standard: Cpp03
+
+UseTab: ForIndentation
+TabWidth: 8
+IndentWidth: 8
+ContinuationIndentWidth: 8
+
+ColumnLimit: 120
+
+PointerAlignment: Right
+DerivePointerAlignment: false
+
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterFunction: true
+  AfterControlStatement: true
+  AfterEnum: true
+  AfterStruct: true
+  AfterUnion: true
+  AfterClass: true
+  AfterNamespace: true
+  BeforeElse: true
+  IndentBraces: false
+
+SpaceBeforeParens: ControlStatements
+SpacesInParentheses: false
+SpacesBeforeTrailingComments: 1
+SpaceBeforeCpp11BracedList: false
+
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+AllowShortBlocksOnASingleLine: false
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortEnumsOnASingleLine: false
+AllowShortCaseLabelsOnASingleLine: true
+AllowAllConstructorInitializersOnNextLine: true
+
+AlignConsecutiveDeclarations: false
+AlignConsecutiveAssignments: false
+AlignEscapedNewlines: DontAlign
+AlignAfterOpenBracket: Align
+AlignArrayOfStructures: Left
+AlignTrailingComments:
+  Kind: Always
+
+IndentWrappedFunctionNames: false
+AlwaysBreakAfterReturnType: None
+AlwaysBreakAfterDefinitionReturnType: None
+PenaltyBreakBeforeFirstCallParameter: 1
+
+SortIncludes: false
+IndentPPDirectives: None
+
+ReflowComments: false
+MaxEmptyLinesToKeep: 1
+BinPackArguments: false
+BinPackParameters: false
+
+StatementMacros:
+  - ARM32
+  - THUMB16

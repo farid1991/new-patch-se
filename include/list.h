@@ -15,11 +15,13 @@ typedef int (*LISTFINDCALLBACK)(void *listitem, void *itemtofind);
 #define LIST_ERROR 0xFFFF
 
 #ifdef __cplusplus
+// clang-format off
 template <typename T, typename T2>
 LISTFINDCALLBACK MKLISTFINDCALLBACK(int (*param)(T, T2))
 {
 	return reinterpret_cast<LISTFINDCALLBACK>(param);
 }
+// clang-format on
 #else
 #define MKLISTFINDCALLBACK(fn) (LISTFINDCALLBACK) fn
 #endif

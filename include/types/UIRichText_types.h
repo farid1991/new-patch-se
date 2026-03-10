@@ -4,6 +4,7 @@
 #include <types/Basic_types.h>
 #include <types/UIRect_types.h>
 
+// clang-format off
 #define UIRICHTEXTLAYOUT_CONTAINER_NO_SIZE_LIMIT FSINT32_MAX
 #define UIRICHTEXTLAYOUT_MAX_LINE_WIDTH 0x00007FFF
 
@@ -203,5 +204,7 @@ typedef FUint32 TUILineBreakModel;
 #define UILineBreakBit_Korean_Uses_East_Asian_Style 0x0008
 #define UILineBreakBit_Wrap_WhiteSpaces 0x0010
 #define UILineBreakBit_Hide_Initial_Wrapped_WhiteSpace 0x0020
+
+// clang-format on
 
 #endif

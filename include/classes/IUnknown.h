@@ -4,6 +4,7 @@
 #include <base.h>
 #include <com.h>
 
+// clang-format off
 class IUnknown
 {
 public:
@@ -29,5 +30,6 @@ public:
     virtual int InvalidateCallbackInterface();
     virtual int GetCallerExecutionShell(IUnknown **ppIExecutionShell);
 };
+// clang-format on
 
 #endif

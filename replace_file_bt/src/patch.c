@@ -23,13 +23,18 @@ typedef struct FILE_DATA
 int pg_ReplaceFile_EnterEvent(void *data, BOOK *book);
 int pg_ReplaceFile_ExitEvent(void *data, BOOK *book);
 
+// clang-format off
+
 const PAGE_MSG evtlst_DataDownload_ReplaceFile[] =
-    {
-        PAGE_ENTER_EVENT, pg_ReplaceFile_EnterEvent,
-        PAGE_EXIT_EVENT, pg_ReplaceFile_ExitEvent,
-        NIL_EVENT, NULL};
+{
+    PAGE_ENTER_EVENT, pg_ReplaceFile_EnterEvent,
+    PAGE_EXIT_EVENT, pg_ReplaceFile_ExitEvent,
+    NIL_EVENT, NULL
+};
 
 const PAGE_DESC DataDownload_ReplaceFile_Page = {DataDownload_ReplaceFile_Page_Name, 0, evtlst_DataDownload_ReplaceFile};
+
+// clang-format on
 
 THUMB16 NEWCODE void *malloc(int size)
 {

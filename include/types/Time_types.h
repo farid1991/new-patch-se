@@ -3,6 +3,7 @@
 
 #include <types/Basic_types.h>
 
+// clang-format off
 /**
  * A time in hours.
  */
@@ -138,5 +139,7 @@ typedef struct
     TDate Date;
     TDayTime DayTime;
 } TDateAndTime;
+
+// clang-format on
 
 #endif

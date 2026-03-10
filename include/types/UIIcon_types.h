@@ -3,6 +3,8 @@
 
 #include <types/Basic_types.h>
 
+// clang-format off
+
 /**
  * Used to identify the Id of an icon.
  * @ingroup Icon_Manager
@@ -43,5 +45,7 @@ typedef FUint32 TIconSet;
 
 #define  TIconSet_Undefined 0
 // END OBSOLETE
+
+// clang-format on
 
 #endif

@@ -3,6 +3,7 @@
 
 #include <types/Basic_types.h>
 
+// clang-format off
 /**
  * Value type of registry entry. These are the value types/classes that the
  * Registry can hold.
@@ -95,5 +96,7 @@ typedef enum
     Reg_ValidationResult_Failed, ///< The value is invalid.
     Reg_ValidationResult_Error   ///< The validation caused an error.
 } Reg_ValidationResult_t;
+
+// clang-format on
 
 #endif

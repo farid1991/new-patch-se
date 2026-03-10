@@ -7,6 +7,7 @@
 #include <types/Basic_types.h>
 #include <types/UIIcon_types.h>
 
+// clang-format off
 class IIconSet : public IUnknown
 {
 public:
@@ -16,5 +17,6 @@ public:
     virtual int UnloadIconFile(wchar_t *pIconFilePath);
     virtual int GetIconVersion(TIconId iconId, FUint32 *pVersion);
 };
+// clang-format on
 
 #endif

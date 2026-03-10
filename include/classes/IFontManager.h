@@ -5,6 +5,7 @@
 #include <classes/IUnknown.h>
 #include <types/UIFont_types.h>
 
+// clang-format off
 class IFontResource : public IUnknown
 {
 public:
@@ -74,5 +75,6 @@ class IFontManager : public IUnknown
 public:
     virtual int GetFontFactory(IFontFactory **pFontFactory);
 };
+// clang-format on
 
 #endif

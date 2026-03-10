@@ -20,27 +20,36 @@ int pg_FlashMenuPicker_CancelEvent(void *data, BOOK *book);
 int pg_FlashMenuPicker_Pick_EnterEvent(void *data, BOOK *book);
 int pg_FlashMenuPicker_Pick_ExitEvent(void *data, BOOK *book);
 
+// clang-format off
+
 const PAGE_MSG bk_msglst_skin[] =
-    {
-        PAGE_ENTER_EVENT, pg_FlashMenuPicker_Pick_EnterEvent,
-        PAGE_EXIT_EVENT, pg_FlashMenuPicker_Pick_ExitEvent,
-        NIL_EVENT, NULL};
+{
+    PAGE_ENTER_EVENT, pg_FlashMenuPicker_Pick_EnterEvent,
+    PAGE_EXIT_EVENT, pg_FlashMenuPicker_Pick_ExitEvent,
+    NIL_EVENT, NULL
+};
 
 const PAGE_DESC FlashMenuPicker_Pick_Page = {FlashMenuPicker_Pick_Page_Name, NULL, bk_msglst_skin};
 
 const PAGE_MSG bk_msglst_base[] =
-    {
-        CANCEL_EVENT, pg_FlashMenuPicker_CancelEvent,
-        RETURN_TO_STANDBY_EVENT, pg_FlashMenuPicker_CancelEvent,
-        NIL_EVENT, NULL};
+{
+    CANCEL_EVENT, pg_FlashMenuPicker_CancelEvent,
+    RETURN_TO_STANDBY_EVENT, pg_FlashMenuPicker_CancelEvent,
+    NIL_EVENT, NULL
+};
+
 const PAGE_DESC FlashMenuPicker_Base_Page = {FlashMenuPicker_Base_Page_Name, NULL, bk_msglst_base};
 
 const PAGE_MSG bk_msglst_main[] =
-    {
-        PAGE_ENTER_EVENT, pg_FlashMenuPicker_EnterEvent,
-        PAGE_EXIT_EVENT, pg_FlashMenuPicker_ExitEvent,
-        NIL_EVENT, NULL};
+{
+    PAGE_ENTER_EVENT, pg_FlashMenuPicker_EnterEvent,
+    PAGE_EXIT_EVENT, pg_FlashMenuPicker_ExitEvent,
+    NIL_EVENT, NULL
+};
+
 const PAGE_DESC FlashMenuPicker_Main_Page = {FlashMenuPicker_Main_Page_Name, NULL, bk_msglst_main};
+
+// clang-format on
 
 THUMB16 NEWCODE void *malloc(int size)
 {

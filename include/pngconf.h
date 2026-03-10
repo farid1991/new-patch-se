@@ -1,4 +1,4 @@
-
+// clang-format off
 /* pngconf.h - machine configurable file for libpng
  *
  * libpng version 1.2.24 - December 14, 2007
@@ -1471,3 +1471,4 @@ typedef z_stream FAR *  png_zstreamp;
 #endif /* PNG_VERSION_INFO_ONLY */
 
 #endif /* PNGCONF_H */
+// clang-format on

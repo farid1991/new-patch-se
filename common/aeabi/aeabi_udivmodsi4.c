@@ -1,8 +1,10 @@
 /*
  * __udivmodsi4.c 32-bit. (internal funtion)
  */
+// clang-format off
 __attribute__((section(".text.patch_section")))
-unsigned int __udivmodsi4(unsigned int num, unsigned int den, unsigned int * rem_p)
+// clang-format on
+unsigned int __udivmodsi4(unsigned int num, unsigned int den, unsigned int *rem_p)
 {
 	unsigned int quot = 0, qbit = 1;
 
@@ -14,7 +16,7 @@ unsigned int __udivmodsi4(unsigned int num, unsigned int den, unsigned int * rem
 	/*
 	 * left-justify denominator and count shift
 	 */
-	while ((signed int) den >= 0)
+	while ((signed int)den >= 0)
 	{
 		den <<= 1;
 		qbit <<= 1;

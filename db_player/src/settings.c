@@ -29,21 +29,27 @@ static const char FMT_XYWH_BI[] = "%d,%d,%d,%d font:%dBI";
 static const char FMT_XY2[] = "%d, %d, %d, %d";
 static const char FMT_COLOR_HEX[] = "%02X, %02X, %02X, %02X";
 
+// clang-format off
+
 const PAGE_MSG base_evtlst[] =
-    {
-        RETURN_TO_STANDBY_EVENT, DBPlayer_Settings_onCancel,
-        NIL_EVENT, 0};
+{
+    RETURN_TO_STANDBY_EVENT, DBPlayer_Settings_onCancel,
+    NIL_EVENT, 0
+};
 
 const PAGE_MSG main_evtlst[] =
-    {
-        PAGE_ENTER_EVENT, DBPlayer_Settings_onEnter,
-        PAGE_EXIT_EVENT, DBPlayer_Settings_onExit,
-        PREVIOUS_EVENT, DBPlayer_Settings_onPrev,
-        CANCEL_EVENT, DBPlayer_Settings_onCancel,
-        NIL_EVENT, 0};
+{
+    PAGE_ENTER_EVENT, DBPlayer_Settings_onEnter,
+    PAGE_EXIT_EVENT, DBPlayer_Settings_onExit,
+    PREVIOUS_EVENT, DBPlayer_Settings_onPrev,
+    CANCEL_EVENT, DBPlayer_Settings_onCancel,
+    NIL_EVENT, 0
+};
 
 const PAGE_DESC DBPlayer_Settings_Base_Page = {BASE_PAGE_NAME, 0, base_evtlst};
 const PAGE_DESC DBPlayer_Settings_Main_Page = {MAIN_PAGE_NAME, 0, main_evtlst};
+
+// clang-format on
 
 THUMB16 NEWCODE void Text_OnSelect(BOOK *book, GUI *gui)
 {

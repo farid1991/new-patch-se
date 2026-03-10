@@ -9,11 +9,13 @@ typedef struct
 } UUID, *PUUID;
 
 #ifdef __cplusplus
+// clang-format off
 template <typename T>
 void **PPINTERFACE(T **pp)
 {
 	return reinterpret_cast<void **>(pp);
 }
+// clang-format on
 #else
 #define PPINTERFACE(v) (void **)v
 #endif

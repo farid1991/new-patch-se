@@ -3,6 +3,8 @@
 
 #include <types/Basic_types.h>
 
+// clang-format off
+
 /**
  *  Used for dimension, e.g width and height
  */
@@ -49,5 +51,7 @@ enum UIRectLocationEnum
     UI_Right = 16
 };
 typedef FUint32 TUIPointLocation;
+
+// clang-format on
 
 #endif

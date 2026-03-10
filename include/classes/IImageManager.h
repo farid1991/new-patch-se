@@ -13,6 +13,7 @@
 
 #define IUIIMAGERENDERER_TIME_INFINITY FUINT32_MAX;
 
+// clang-format off
 class IUIImageRenderer : public IUnknown
 {
 public:
@@ -71,5 +72,6 @@ public:
 #endif
     virtual int Draw(IUIImage *pUIImage, IUnknown *pICanvas, TUIRectangle targetRect);
 };
+// clang-format on
 
 #endif

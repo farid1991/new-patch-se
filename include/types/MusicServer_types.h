@@ -7,6 +7,7 @@
 /// @name Types
 //@{
 
+// clang-format off
 #define MUSIC_SERVER_MAX_URI_LENGTH 512
 #define  MUSIC_SERVER_MAX_PLAYLISTNAME_LENGTH 251
 
@@ -218,5 +219,7 @@ typedef enum
 } TMusicServer_AlbumArt_ImageType;
 
 //@} End of Types
+
+// clang-format on
 
 #endif

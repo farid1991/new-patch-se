@@ -3,6 +3,7 @@
 
 #include <types/Basic_types.h>
 
+// clang-format off
 /**
  * This file contains global types for OPA.
  *
@@ -235,5 +236,7 @@ typedef FUint32 TColour;
  * This is the maximum time-out value in milliseconds (~6.21 days).
  */
 #define OPA_MAX_TIMEOUT_VALUE 536870911
+
+// clang-format on
 
 #endif

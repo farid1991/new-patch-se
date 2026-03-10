@@ -3,6 +3,8 @@
 
 #include <types/Basic_types.h>
 
+// clang-format off
+
 typedef enum
 {
     ACC_POLLFREQ_1HZ = 1,
@@ -74,5 +76,7 @@ typedef enum
     ACC_XYZ_AXES = 7,
     ACC_AXES_INVALID = 8
 } Acc_Channels_t;
+
+// clang-format on
 
 #endif

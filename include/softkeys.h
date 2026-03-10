@@ -8,6 +8,7 @@
 
 typedef void (*SKACTIONPROC)(BOOK *, GUI *);
 
+// clang-format off
 typedef enum
 {
 	UNDEFINED_SOFTKEY = -1,	  // See documentation for CreateSoftkey
@@ -40,6 +41,7 @@ typedef enum
 	YES_SOFTKEY,			  // Predefined softkey for yes
 	LAST_SOFTKEY			  // Last softkey
 } PredefinedSoftKeys;
+// clang-format on
 
 typedef struct SKLABEL
 {
@@ -97,6 +99,7 @@ typedef struct SOFTKEY_DESC
 } SOFTKEY_DESC;
 
 #ifdef __cplusplus
+// clang-format off
 template <typename T, typename T2>
 SKACTIONPROC MKSKACTIONPROC(void (*param)(T *, T2 *))
 {
@@ -104,6 +107,7 @@ SKACTIONPROC MKSKACTIONPROC(void (*param)(T *, T2 *))
 	INHERITANCECHECK<GUI, T2>();
 	return reinterpret_cast<SKACTIONPROC>(param);
 }
+// clang-format on
 #else
 #define MKSKACTIONPROC(fn) (SKACTIONPROC) fn
 #endif
