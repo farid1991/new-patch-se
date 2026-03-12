@@ -7,7 +7,9 @@
 #endif
 
 #include <libse.h>
+#include <elf_int.h>
 #include <sync.h>
+
 #include <types/UIRichText_types.h>
 
 #ifdef A1
@@ -48,24 +50,6 @@ static const wchar_t NEW_EVENTS_FMT[] = L"New event: %d";
 
 static const char SC_KEY_FMT[] = "[KEY_%d]:";
 static const char ICON_PARAM[] = "ICON";
-
-ARM32
-NEWCODE int openWithBcfgEdit(const wchar_t *bcfgedit_path, const wchar_t *fpath, const wchar_t *fname)
-{
-	int ret;
-
-	__asm__ volatile("mov r0, %1\n"
-	                 "mov r1, %2\n"
-	                 "mov r2, %3\n"
-	                 "mov r3, #0\n"
-	                 "svc 0x10D\n"
-	                 "mov %0, r0\n"
-	                 : "=r"(ret)
-	                 : "r"(bcfgedit_path), "r"(fpath), "r"(fname)
-	                 : "r0", "r1", "r2", "r3", "lr", "memory");
-
-	return ret;
-}
 
 THUMB16
 NEWCODE void *malloc(int size)
@@ -647,7 +631,8 @@ NEWCODE int Elf_OpenFile(const wchar_t *filepath, const wchar_t *filename)
 	if (!filepath || !filename)
 		return BCFG_SUCCESS; // success
 
-	openWithBcfgEdit(BCFGEDIT_PATH, filepath, filename);
+	elfload_int(BCFGEDIT_PATH, (void *)filepath, (void *)filename, 0);
+
 	return BCFG_NULL;
 }
 

@@ -24,6 +24,7 @@ add_compile_options(-Os)
 # -----------------------------------------------------------------------------
 add_subdirectory(common/aeabi)
 add_subdirectory(common/sync)
+add_subdirectory(common/elf_int)
 
 # -----------------------------------------------------------------------------
 # Individual patch modules

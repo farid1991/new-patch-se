@@ -7,6 +7,7 @@
 #endif
 
 #include <libse.h>
+#include <elf_int.h>
 #include <sync.h>
 
 #include <classes/IMMEPlayer.h>
@@ -29,10 +30,9 @@
 #include "str_helper.h"
 #include "time.h"
 
-// static const int _SYNC = 0;
-// static const int *&SYNC = &_SYNC;
-
 static const char DB_MEM[] = "dbp";
+static const char ELFPACK_DATA[] = "elfpackdata";
+static const char NO_ELFPACK[] = "Elfloader is not installed";
 
 static const char FMT_XY[] = "X:%d, Y:%d";
 static const char FMT_XYWH[] = "X:%d, Y:%d, W:%d, H:%d";
@@ -1000,29 +1000,15 @@ NEWCODE void DBPlayer_Minimise(BOOK *book, GUI *gui)
 	BookObj_Hide(book, UIDisplay_Main);
 }
 
-ARM32
-NEWCODE int elfload(const wchar_t *elf_path, wchar_t *fpath, wchar_t *fname)
-{
-	int ret;
-
-	__asm__ volatile("mov r0, %1\n"
-	                 "mov r1, %2\n"
-	                 "mov r2, %3\n"
-	                 "mov r3, #0\n"
-	                 "svc 0x10D\n"
-	                 "mov %0, r0\n"
-	                 : "=r"(ret)
-	                 : "r"(elf_path), "r"(fpath), "r"(fname)
-	                 : "r0", "r1", "r2", "r3", "lr", "memory");
-
-	return ret;
-}
-
 THUMB16
 NEWCODE void DBPlayer_TagEditor(BOOK *book, GUI *gui)
 {
 	DBP_DATA *data = GetData();
-	elfload(MTAGGER_PATH, data->path, data->name);
+
+	if (get_envp(NULL, ELFPACK_DATA))
+		MessageBox_NoImage(EMPTY_TEXTID, STR(NO_ELFPACK), 0, 1500, NULL);
+	else
+		elfload_int(MTAGGER_PATH, (void *)data->path, (void *)data->name, 0);
 }
 
 THUMB16
