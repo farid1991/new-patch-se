@@ -1005,7 +1005,7 @@ NEWCODE void DBPlayer_TagEditor(BOOK *book, GUI *gui)
 {
 	DBP_DATA *data = GetData();
 
-	if (get_envp(NULL, ELFPACK_DATA))
+	if (!get_envp(get_bid(current_process()), ELFPACK_DATA))
 		MessageBox_NoImage(EMPTY_TEXTID, STR(NO_ELFPACK), 0, 1500, NULL);
 	else
 		elfload_int(MTAGGER_PATH, (void *)data->path, (void *)data->name, 0);

@@ -131,6 +131,8 @@
 #define ADDR_memcpy (0x145C5D98)
 #define ADDR_get_envp (0x101A1C18 | 1)
 #define ADDR_set_envp (0x101A1C2C | 1)
+#define ADDR_get_bid (0x101A1508)
+#define ADDR_current_process (0x101A14D0)
 
 #define ADDR__fopen (0x142048D8 | 1)
 #define ADDR_fread (0x1428EA7C | 1)
