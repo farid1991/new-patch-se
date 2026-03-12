@@ -4,6 +4,9 @@
 #define BRIGHTNESS_SHC (wchar_t *)0x445696E2
 #define CUIDISPLAYABLE_BOOK (char *)0x4456185C
 
+#define JAVA_STR (char *)0x449566C3
+#define FOREIGN_APP_STR (char *)0x4466B79A
+
 #define ACTION_BACK 0xFC0
 #define ACTION_DELETE 0xFB4
 #define ACTION_LONG_BACK 0xFAF

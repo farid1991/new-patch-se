@@ -7,6 +7,7 @@
 #endif
 
 #include <libse.h>
+#include <sync.h>
 #include <types/UIRichText_types.h>
 
 #ifdef A1
@@ -18,9 +19,6 @@
 #include "patch.h"
 
 extern int isrsstickerbook(BOOK *book);
-
-static const int _SYNC = 0;
-static const int *SYNC = &_SYNC;
 
 static const char MEM_NAME[] = "bm_mem";
 static const char EMP_NAME[] = "bm_emp";
@@ -50,11 +48,6 @@ static const wchar_t NEW_EVENTS_FMT[] = L"New event: %d";
 
 static const char SC_KEY_FMT[] = "[KEY_%d]:";
 static const char ICON_PARAM[] = "ICON";
-
-#ifdef DB2010
-static const wchar_t JAVA_FOREIGN_APP[] = L"Foreign app";
-static const wchar_t JAVA_STR[] = L"Java";
-#endif
 
 ARM32
 NEWCODE int openWithBcfgEdit(const wchar_t *bcfgedit_path, const wchar_t *fpath, const wchar_t *fname)
@@ -98,22 +91,17 @@ NEWCODE void mfree(void *mem)
 }
 
 THUMB16
-NEWCODE BOOK_MANAGER *CreateData()
-{
-	BOOK_MANAGER *data = (BOOK_MANAGER *)malloc(sizeof(BOOK_MANAGER));
-	memset(data, 0, sizeof(BOOK_MANAGER));
-	data->tab_pos = TAB_BOOKS;
-	set_envp(NULL, EMP_NAME, (OSADDRESS)data);
-	return data;
-}
-
-THUMB16
 NEWCODE BOOK_MANAGER *GetData()
 {
 	BOOK_MANAGER *data = (BOOK_MANAGER *)get_envp(NULL, EMP_NAME);
-	if (data)
-		return data;
-	return CreateData();
+	if (!data)
+	{
+		data = (BOOK_MANAGER *)malloc(sizeof(BOOK_MANAGER));
+		memset(data, 0, sizeof(BOOK_MANAGER));
+		data->tab_pos = TAB_BOOKS;
+		set_envp(NULL, EMP_NAME, (OSADDRESS)data);
+	}
+	return data;
 }
 
 #if defined(A1) || defined(DB3150v1)
@@ -197,14 +185,15 @@ THUMB16
 NEWCODE TEXTID GetJavaName(BOOK *book)
 {
 #ifdef DB2010
-	wchar_t ws[100];
-	TextID_GetWString(BookObj_GetSession(book)->name, ws, MAXELEMS(ws));
+	char s[100];
+	TextID_GetString(BookObj_GetSession(book)->name, s, MAXELEMS(s));
 
-	if (!wstrncmp(ws, JAVA_FOREIGN_APP, 11))
+	if (!strncmp(s, FOREIGN_APP_STR, 11))
 		return JavaSession_GetName();
 
-	if (!wstrcmp(ws, JAVA_STR))
+	if (!strncmp(s, JAVA_STR, 4))
 		return JavaSession_GetName();
+
 #endif
 	return EMPTY_TEXTID;
 }
@@ -785,7 +774,7 @@ NEWCODE void ShortcutMenu_onEnterPressed(BOOK *book, GUI *gui)
 			FlightMode_SetState(OFF);
 	}
 	else if (item == SHC_ITEM_5)
-		Request_ICA_ShutdownAllConnections(SYNC);
+		Request_ICA_ShutdownAllConnections(&SYNC);
 
 	FreeBook(book);
 }
