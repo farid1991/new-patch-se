@@ -4,8 +4,10 @@
 #define FONTHEIGHT(font) (font & 0xFF)
 
 static const wchar_t MTAGGER_ELF[] = L"MusicTagger.elf";
+static const wchar_t TAGEDIT_ELF[] = L"TagEditor.elf";
 static const wchar_t ZBIN_PATH[] = L"/usb/other/ZBin";
 static const wchar_t MTAGGER_PATH[] = L"/usb/other/ZBin/MusicTagger.elf";
+static const wchar_t TAGEDIT_PATH[] = L"/usb/other/ZBin/TagEditor.elf";
 
 static const char GuiName_DBPlayer[] = "GUI_DBPlayer";
 

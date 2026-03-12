@@ -33,6 +33,7 @@
 static const char DB_MEM[] = "dbp";
 static const char ELFPACK_DATA[] = "elfpackdata";
 static const char NO_ELFPACK[] = "Elfloader is not installed";
+static const char ELF_NOT_FOUND[] = "MusicTagger.elf / TagEditor.elf not found";
 
 static const char FMT_XY[] = "X:%d, Y:%d";
 static const char FMT_XYWH[] = "X:%d, Y:%d, W:%d, H:%d";
@@ -1006,9 +1007,17 @@ NEWCODE void DBPlayer_TagEditor(BOOK *book, GUI *gui)
 	DBP_DATA *data = GetData();
 
 	if (!get_envp(get_bid(current_process()), ELFPACK_DATA))
+	{
 		MessageBox_NoImage(EMPTY_TEXTID, STR(NO_ELFPACK), 0, 1500, NULL);
-	else
+		return;
+	}
+
+	if (FSX_IsFileExists(ZBIN_PATH, MTAGGER_ELF))
 		elfload_int(MTAGGER_PATH, (void *)data->path, (void *)data->name, 0);
+	else if (FSX_IsFileExists(ZBIN_PATH, TAGEDIT_ELF))
+		elfload_int(TAGEDIT_PATH, (void *)data->path, (void *)data->name, 0);
+	else
+		MessageBox_NoImage(EMPTY_TEXTID, STR(ELF_NOT_FOUND), 0, 1500, NULL);
 }
 
 THUMB16
@@ -1056,10 +1065,7 @@ NEWCODE GUI_DBPLAYER *CreateGUI(BOOK *book)
 	GUIObject_SoftKeys_SetActionAndText(gui_dbp, ACTION_STOP, DBPlayer_Stop, TEXT_STOP);
 	GUIObject_SoftKeys_SetActionAndText(gui_dbp, ACTION_SETTINGS, DBPlayer_Setting, TEXT_SETTINGS);
 	GUIObject_SoftKeys_SetActionAndText(gui_dbp, ACTION_TIME, DBPlayer_Time, TEXT_GOTO);
-
-	if (data->tagger)
-		GUIObject_SoftKeys_SetActionAndText(gui_dbp, ACTION_TAG, DBPlayer_TagEditor, STR(TEXT_TAG_EDITOR));
-
+	GUIObject_SoftKeys_SetActionAndText(gui_dbp, ACTION_TAG, DBPlayer_TagEditor, STR(TEXT_TAG_EDITOR));
 	GUIObject_SoftKeys_SetActionAndText(gui_dbp, ACTION_MINIMISE, DBPlayer_Minimise, TEXT_MINIMISE);
 	GUIObject_SoftKeys_SetAction(gui_dbp, ACTION_LONG_BACK, DBPlayer_LongClose);
 
@@ -1093,9 +1099,6 @@ NEWCODE int Get_MME_DATA(void *pMMEData, BOOK *book)
 	data->samplerate = data->pMMEData->audioSampleRate;
 	data->audio_output = data->pMMEData->audioOutput;
 	data->file_format_type = data->pMMEData->fileFormatType;
-
-	if (FSX_IsFileExists(ZBIN_PATH, MTAGGER_ELF))
-		data->tagger = TRUE;
 
 	pg_Sound_Run__0x17FC(pMMEData, book);
 	return 1;
@@ -1139,9 +1142,6 @@ NEWCODE void CreateInfo(MME_DATA *pMMEData, BOOK *book)
 	data->path = FILEITEM_GetPath(itembook->sub_exec->file_item);
 	data->name = FILEITEM_GetFname(itembook->sub_exec->file_item);
 	data->fullpath = FSX_MakeFullPath(data->path, data->name);
-
-	if (FSX_IsFileExists(ZBIN_PATH, MTAGGER_ELF))
-		data->tagger = TRUE;
 
 	LoadData(data);
 	InitIcon(data);

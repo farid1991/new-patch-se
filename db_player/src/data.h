@@ -131,7 +131,6 @@ typedef struct _DBP_DATA
 	TEMP_DATA temp;
 	IMG Image[IMG_LAST];
 
-	bool tagger;
 	bool paused;
 	bool mute;
 	int element;
