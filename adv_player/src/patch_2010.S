@@ -21,6 +21,29 @@
     .equ listtext_toplevel_browser_ret, 0x4505871C
     .equ listicon_toplevel_browser_ret, 0x4505872E
     .equ list_tracks_number_ret, 0x4505909C
+#elif defined(W800_R1BD001)
+    .equ MEDIAPLAYERKEY_PRESSED_EVENT, 0x39
+    .equ MP_BR_LISTNOWPLAYING_TXT, 0x99A
+
+    .equ UI_Event, 0x4505B5E4
+    .equ TextID_Create, 0x44EF41C4
+    .equ DispObject_SetTitleText, 0x44E8BEB0
+    .equ MediaPlayer_Audio_Rename, 0x44F5E398
+    .equ MediaPlayer_SoftKeys_Validate, 0x44C7CDD0
+
+    .equ mp_playqueue_setstyle_ret, 0x44E2CAB2
+    .equ mp_nowplaying_setsize_ret, 0x44E2CD8C
+    .equ mp_audio_setstyle_ret, 0x44E2C97C
+    .equ mp_softkeys_minim_ret, 0x44F5D50C
+    .equ mp_softkeys_ret1, 0x44F5D606
+    .equ mp_softkeys_ret2, 0x44F5D612
+    .equ audioplayer_onclose_func, 0x44F64380
+    .equ audioplayer_onclose_ret, 0x44F5CDFC
+    .equ start_mediaplayer_audio_ret, 0x44F67AE4
+    .equ menu_toplevel_browser_ret, 0x450519FA
+    .equ listtext_toplevel_browser_ret, 0x45051AE8
+    .equ listicon_toplevel_browser_ret, 0x45051AFA
+    .equ list_tracks_number_ret, 0x45052464
 #elif defined(W810_R4EA031)
     .equ MEDIAPLAYERKEY_PRESSED_EVENT, 0x3B
     .equ MP_BR_LISTNOWPLAYING_TXT, 0xCC2

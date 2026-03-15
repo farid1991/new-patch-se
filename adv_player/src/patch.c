@@ -1,5 +1,7 @@
 #if defined(W700_R1CA021)
 #include <W700_R1CA021.h>
+#elif defined(W800_R1BD001)
+#include <W800_R1BD001.h>
 #elif defined(W810_R4EA031)
 #include <W810_R4EA031.h>
 #endif
@@ -650,8 +652,7 @@ NEWCODE void GetTrackInfo(AudioPlayerBook *audio_book)
 			data->has_coverart = FALSE;
 		}
 
-		wchar_t *wsext = getFileExtension(new_track->fname);
-		if (!wstrcmpi(wsext, FILETYPE_mp3))
+		if (wstrwstr(new_track->fname, FILETYPE_mp3))
 			id3v2_get_coverart(new_track);
 
 		data->current_track = new_track;

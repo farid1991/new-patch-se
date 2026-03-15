@@ -21,13 +21,40 @@ add_executable("W700_R1CA021_${PROJECT_NAME}"
                src/toplevel.c
                src/track_desc.c
                src/visualizer.c
-               src/patch_2010.S)
+               src/patch_2010.S
+               )
 target_link_libraries("W700_R1CA021_${PROJECT_NAME}" PRIVATE 
                        aeabi_runtime
                        elf_int
                        sync
                        )
 define_patch(W700 R1CA021 A1 DB2010 0x44020000)
+
+# W800_R1BD001
+add_executable("W800_R1BD001_${PROJECT_NAME}"
+               src/patch.c
+               src/data.c
+               src/draw.c
+               src/edit_tag.c
+               src/id3_parser.c
+               src/image.c
+               src/skin_data.c
+               src/skin_list.c
+               src/skin_parser.c
+               src/skin_selector.c
+               src/str_helper.c
+               src/timer.c
+               src/toplevel.c
+               src/track_desc.c
+               src/visualizer.c
+               src/patch_2010.S
+               )
+target_link_libraries("W800_R1BD001_${PROJECT_NAME}" PRIVATE 
+                       aeabi_runtime
+                       elf_int
+                       sync
+                       )
+define_patch(W800 R1BD001 A1 DB2010 0x44020000)
 
 # W810_R4EA031
 add_executable("W810_R4EA031_${PROJECT_NAME}"
@@ -46,7 +73,8 @@ add_executable("W810_R4EA031_${PROJECT_NAME}"
                src/toplevel.c
                src/track_desc.c
                src/visualizer.c
-               src/patch_2010.S)
+               src/patch_2010.S
+               )
 target_link_libraries("W810_R4EA031_${PROJECT_NAME}" PRIVATE 
                        aeabi_runtime
                        elf_int
