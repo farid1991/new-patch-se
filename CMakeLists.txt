@@ -23,15 +23,16 @@ add_compile_options(-Os)
 # Common modules used by multiple patches
 # -----------------------------------------------------------------------------
 add_subdirectory(common/aeabi)
-add_subdirectory(common/sync)
 add_subdirectory(common/elf_int)
+add_subdirectory(common/id3)
+add_subdirectory(common/sync)
 
 # -----------------------------------------------------------------------------
 # Individual patch modules
 # Each directory builds its own firmware patch
 # -----------------------------------------------------------------------------
-add_subdirectory(alarm_remaining_time)
 add_subdirectory(adv_player)
+add_subdirectory(alarm_remaining_time)
 add_subdirectory(book_manager)
 add_subdirectory(bt_transmission)
 add_subdirectory(db_itemtext)

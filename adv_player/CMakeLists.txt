@@ -26,6 +26,7 @@ add_executable("W700_R1CA021_${PROJECT_NAME}"
 target_link_libraries("W700_R1CA021_${PROJECT_NAME}" PRIVATE 
                        aeabi_runtime
                        elf_int
+                       id3_helper
                        sync
                        )
 define_patch(W700 R1CA021 A1 DB2010 0x44020000)
@@ -52,6 +53,7 @@ add_executable("W800_R1BD001_${PROJECT_NAME}"
 target_link_libraries("W800_R1BD001_${PROJECT_NAME}" PRIVATE 
                        aeabi_runtime
                        elf_int
+                       id3_helper
                        sync
                        )
 define_patch(W800 R1BD001 A1 DB2010 0x44020000)
@@ -78,6 +80,7 @@ add_executable("W810_R4EA031_${PROJECT_NAME}"
 target_link_libraries("W810_R4EA031_${PROJECT_NAME}" PRIVATE 
                        aeabi_runtime
                        elf_int
+                       id3_helper
                        sync
                        )
 define_patch(W810 R4EA031 A1 DB2010 0x44140000)

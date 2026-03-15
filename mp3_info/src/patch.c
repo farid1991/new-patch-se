@@ -9,6 +9,7 @@
 #endif
 
 #include <libse.h>
+#include <id3.h>
 
 #include "id3v2.h"
 
