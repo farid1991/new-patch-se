@@ -15,7 +15,6 @@
 #include "patch.h"
 #include "edit_tag.h"
 
-static const char ELFPACK_DATA[] = "elfpackdata";
 static const char NO_ELFPACK[] = "Elfloader is not installed";
 static const char ELF_NOT_FOUND[] = "MusicTagger.elf / TagEditor.elf not found";
 static const char GET_ITEM_FAILED[] = "Failed to alloc playlist item";
@@ -29,7 +28,8 @@ static const wchar_t TAGEDIT_PATH[] = _TAGEDIT_PATH;
 THUMB16
 NEWCODE void tagedit_start_elf(BOOK *book, GUI *gui)
 {
-	if (!get_envp(get_bid(current_process()), ELFPACK_DATA))
+	const ose_func_t ose = {current_process, get_bid, get_envp};
+	if (!is_elfpack_installed(&ose))
 	{
 		MessageBox_NoImage(EMPTY_TEXTID, STR(NO_ELFPACK), 0, 1500, NULL);
 		return;

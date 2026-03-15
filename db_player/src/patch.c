@@ -31,7 +31,6 @@
 #include "time.h"
 
 static const char DB_MEM[] = "dbp";
-static const char ELFPACK_DATA[] = "elfpackdata";
 static const char NO_ELFPACK[] = "Elfloader is not installed";
 static const char ELF_NOT_FOUND[] = "MusicTagger.elf / TagEditor.elf not found";
 
@@ -1006,7 +1005,8 @@ NEWCODE void DBPlayer_TagEditor(BOOK *book, GUI *gui)
 {
 	DBP_DATA *data = GetData();
 
-	if (!get_envp(get_bid(current_process()), ELFPACK_DATA))
+	const ose_func_t ose = {current_process, get_bid, get_envp};
+	if (!is_elfpack_installed(&ose))
 	{
 		MessageBox_NoImage(EMPTY_TEXTID, STR(NO_ELFPACK), 0, 1500, NULL);
 		return;
