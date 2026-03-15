@@ -84,7 +84,7 @@
 #define ADDR_GUIonMessage_SetMenuItemText (0x11B1139C | 1)
 #define ADDR_GUIonMessage_SetMenuItemIcon (0x11B113DC | 1)
 #define ADDR_FSX_IsFileExists (0x1188A9F4 | 1)
-#define ADDR_getFileExtention (0x109F8EB0 | 1)
+#define ADDR_getFileExtension (0x109F8EB0 | 1)
 #define ADDR_MainMenu_SetFromUserTheme (0x10E769CC | 1)
 #define ADDR_Set_SWF_AsFlashMenu (0x10DC9F40 | 1)
 #define ADDR_MessageBox (0x11AE853C | 1)

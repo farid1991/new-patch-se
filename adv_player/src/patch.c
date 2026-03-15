@@ -650,7 +650,8 @@ NEWCODE void GetTrackInfo(AudioPlayerBook *audio_book)
 			data->has_coverart = FALSE;
 		}
 
-		if (wstrwstr(new_track->fname, FILETYPE_mp3))
+		wchar_t *wsext = getFileExtension(new_track->fname);
+		if (!wstrcmpi(wsext, FILETYPE_mp3))
 			id3v2_get_coverart(new_track);
 
 		data->current_track = new_track;

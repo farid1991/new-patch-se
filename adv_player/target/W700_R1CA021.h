@@ -130,6 +130,7 @@
 #define ADDR_fstat (0x450ECC34 | 1)
 #define ADDR_lseek (0x450EDC98 | 1)
 #define ADDR_FileDelete (0x450ECD88 | 1)
+#define ADDR_getFileExtension (0x450EEC24 | 1)
 #define ADDR_w_diropen (0x4511B760 | 1)
 #define ADDR_w_chdir (0x45119D28 | 1)
 #define ADDR_w_dirread (0x44D00464 | 1)

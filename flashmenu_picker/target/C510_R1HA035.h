@@ -42,7 +42,7 @@
 #define ADDR_memalloc (0x4BA32698)
 #define ADDR_memfree (0x4BA326C0)
 #define ADDR_memset (0x14B31C80)
-#define ADDR_getFileExtention (0x144D94F8 | 1)
+#define ADDR_getFileExtension (0x144D94F8 | 1)
 #define ADDR_CreateBook (0x142866FC | 1)
 #define ADDR_BookObj_GotoPage (0x14481B20 | 1)
 #define ADDR_BookObj_ReturnPage (0x14212A58 | 1)

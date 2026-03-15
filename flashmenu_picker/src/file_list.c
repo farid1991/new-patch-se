@@ -89,7 +89,7 @@ NEWCODE LIST *file_list_create(const wchar_t *path)
 	{
 		if (!is_directory(next))
 		{
-			wchar_t *ext = getFileExtention(next);
+			wchar_t *ext = getFileExtension(next);
 			if (wstrcmpi(ext, swf_ext) == 0)
 			{
 				FILELIST_ELEM *flist_elem = file_list_add_item(next);

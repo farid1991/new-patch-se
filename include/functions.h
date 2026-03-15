@@ -130,7 +130,7 @@
 
 #define rename ((int (*)(const wchar_t *, const wchar_t *, const wchar_t *, const wchar_t *, int))ADDR_rename)
 
-#define getFileExtention ((wchar_t * (*)(const wchar_t *)) ADDR_getFileExtention)
+#define getFileExtension ((wchar_t * (*)(const wchar_t *)) ADDR_getFileExtension)
 
 // wide filesystem (w_*) -------------------------------------------------------
 
