@@ -14,7 +14,7 @@ SECTIONS
         KEEP(*(.text.mme_data_fix))
     }
 
-    text.patch_section 0x15D65EF0 :
+    text.patch_section 0x15D65E80 :
     {
         KEEP(*(.text.patch_section))
         KEEP(*(.rodata*))

@@ -30,7 +30,7 @@ SECTIONS
         KEEP(*(.text.pg_ObEx_FileSentFailed))
     }
 
-    .patch_section 0x15D63300 :
+    .patch_section 0x15D63320 :
     {
         KEEP(*(.text.patch_section))
         KEEP(*(.rodata*))

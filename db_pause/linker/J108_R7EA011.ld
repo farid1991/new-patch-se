@@ -15,7 +15,7 @@ SECTIONS
         KEEP(*(.text.add_new_softkeys))
     }
 
-    .patch_section 0x15D65E30 :
+    .patch_section 0x15D65E80 :
     {
         KEEP(*(.text.patch_section))
     }

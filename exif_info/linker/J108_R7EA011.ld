@@ -6,7 +6,7 @@ SECTIONS
         KEEP(*(.text.brw_jpg_hook))
     }
 
-    .patch_section 0x15D636A0 :
+    .patch_section 0x15D636C0 :
     {
         KEEP(*(.text.patch_section))
         KEEP(*(.rodata*))

@@ -6,7 +6,7 @@ SECTIONS
         KEEP(*(.text.secondline_hook))
     }
 
-    .patch_section 0x15D6BF70 :
+    .patch_section 0x15D6BFD0 :
     {
         KEEP(*(.text.patch_section))
     }

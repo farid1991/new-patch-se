@@ -14,7 +14,7 @@ SECTIONS
         KEEP(*(.text.redraw_hook))
     }
 
-    .patch_section 0x15D65790 :
+    .patch_section 0x15D657D0 :
     {
         KEEP(*(.text.patch_section))
         KEEP(*(.rodata*))
