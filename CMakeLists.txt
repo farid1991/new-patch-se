@@ -31,6 +31,7 @@ add_subdirectory(common/elf_int)
 # Each directory builds its own firmware patch
 # -----------------------------------------------------------------------------
 add_subdirectory(alarm_remaining_time)
+add_subdirectory(adv_player)
 add_subdirectory(book_manager)
 add_subdirectory(bt_transmission)
 add_subdirectory(db_itemtext)

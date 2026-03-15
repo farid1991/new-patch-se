@@ -48,7 +48,7 @@ typedef enum
 /**
  * This type is used to indicate mute reason received from MME.
  */
-typedef TMMEMuteReason TMusicServer_MuteReason;
+// typedef TMMEMuteReason TMusicServer_MuteReason;
 
 // ContentProvider
 // typedef TMultimediaContentProvider_LocationPath TMusicServer_LocationPath;
@@ -101,7 +101,7 @@ typedef enum
  * TMMEEqBand_16000,        Both Clear Audio and ordinary EQ
  *
  */
-typedef TMMEEqBand TMusicServer_EqBand;
+// typedef TMMEEqBand TMusicServer_EqBand;
 
 #ifdef CLEARAUDIO
 /**

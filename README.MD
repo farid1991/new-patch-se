@@ -5,6 +5,22 @@ Patch sources for Sony Ericsson phones A1 and A2 platform.
 
 Build with CMake and ARM-GCC
 
+### adv_player
+```
+AdvPlayer
+Adds possibility to edit the Position,Color,Font
+Enable/Disable Title,Artist,Album,Total/Elapsed/Remaining time,Sample rate,Total/Current track number,progress-bar,Album art
+Adds possibility to read Album Art from MP3
+Adds new item of Sample rate to Walkman
+Adds possibility to edit position of icons shuffle/EQ/loop/state,Title/Artist/Album/Background
+Adds possibility to use skins in Walkman Player
+Adds possibility to display Walkman in Fullscreen
+Adds possibility to display visualization Walkman
+Adds Album in TopLevelBook menu
+Using theme color in TopLevelBook Menu
+Redraws everything in Walkman,optimized for better Walkman experience
+```
+
 ### alarm_remaining_time
 ```
 Show remaining time before the alarm.

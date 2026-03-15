@@ -82,6 +82,8 @@
 
 #define swscanf ((int (*)(const wchar_t *, const wchar_t *, ...))ADDR_swscanf)
 
+#define strftime ((int (*)(int, int, int, int, void *, int))ADDR_strftime)
+
 // MessageBox ---------------------------------------------------------------
 
 #define MessageBox ((int (*)(TEXTID, TEXTID, IMAGEID, int, int, BOOK *))ADDR_MessageBox)
@@ -331,9 +333,23 @@
 
 #define DispObject_WindowSetSize ((void (*)(DISP_OBJ *, int, int))ADDR_DispObject_WindowSetSize)
 
+#define DispObject_SetStyle ((void (*)(DISP_OBJ *, int))ADDR_DispObject_SetStyle)
+
+#define DispObject_GetStyle ((int (*)(DISP_OBJ *))ADDR_DispObject_GetStyle)
+
 #define DispObject_GetGUI ((GUI * (*)(DISP_OBJ *)) ADDR_DispObject_GetGUI)
 
-#define GUIObject_GetBook ((BOOK * (*)(GUI *)) ADDR_GUIObject_GetBook)
+#define DispObject_SetTitleText ((void (*)(DISP_OBJ *, TEXTID))ADDR_DispObject_SetTitleText)
+
+#define DispObject_SetTitleType ((void (*)(DISP_OBJ *, int))ADDR_DispObject_SetTitleType)
+
+#define DispObject_GetTitleType ((int (*)(DISP_OBJ *))ADDR_DispObject_GetTitleType)
+
+#define DispObject_SetTitleAlignment ((void (*)(DISP_OBJ *, char))ADDR_DispObject_SetTitleAlignment)
+
+#define DispObject_GetTitleAlignment ((int (*)(DISP_OBJ *))ADDR_DispObject_GetTitleAlignment)
+
+#define DispObject_SetSecondRowTitleText ((void (*)(DISP_OBJ *, TEXTID))ADDR_DispObject_SetSecondRowTitleText)
 
 // --- Text / Image drawing --------------------------------------------------
 #define SetFont ((int (*)(int))ADDR_SetFont)
@@ -377,22 +393,40 @@
 
 #define GUIObject_SetStyle ((void (*)(GUI *, int))ADDR_GUIObject_SetStyle)
 
+#define GUIObject_GetStyle ((int (*)(GUI *))ADDR_GUIObject_GetStyle)
+
+#define GUIObject_SetTitleTextAlign ((void (*)(GUI *, char))ADDR_GUIObject_SetTitleTextAlign)
+
+#define GUIObject_GetTitleTextAlign ((int (*)(GUI *))ADDR_GUIObject_GetTitleTextAlign)
+
 #define GUIObject_Show ((void (*)(GUI *))ADDR_GUIObject_Show)
 
 #define GUIObject_Destroy ((GUI * (*)(GUI *)) ADDR_GUIObject_Destroy)
 
 #define GUIObject_GetDispObject ((DISP_OBJ * (*)(GUI *)) ADDR_GUIObject_GetDispObject)
 
+#define GUIObject_GetBook ((BOOK * (*)(GUI *)) ADDR_GUIObject_GetBook)
+
 #define GUIObject_TabTitleRemove ((void (*)(GUI *, int))ADDR_GUIObject_TabTitleRemove)
+
+#define GUIObject_SetTitleBackgroundImage ((void (*)(GUI *, IMAGEID))ADDR_GUIObject_SetTitleBackgroundImage)
+
+#define GUIObject_SetCursorImage ((void (*)(GUI *, IMAGEID))ADDR_GUIObject_SetCursorImage)
+
+#define GUIObject_SetBackgroundImage ((void (*)(GUI *, IMAGEID))ADDR_GUIObject_SetBackgroundImage)
+
+#define GUIObject_SetTitleTextColor ((void (*)(GUI *, int))ADDR_GUIObject_SetTitleTextColor)
 
 // Softkey handling ------------------------------------------------------------
 
-#define GUIObject_SoftKeys_SetAction ((void (*)(GUI *, uint16_t, SKACTIONPROC))ADDR_GUIObject_SoftKeys_SetAction)
+#define GUIObject_SoftKeys_SetAction ((void (*)(GUI *, uint16_t, SKACTIONPROC proc))ADDR_GUIObject_SoftKeys_SetAction)
 
 #define GUIObject_SoftKeys_SetText ((void (*)(GUI *, uint16_t, TEXTID))ADDR_GUIObject_SoftKeys_SetText)
 
 #define GUIObject_SoftKeys_SetActionAndText \
-	((void (*)(GUI *, uint16_t, SKACTIONPROC, TEXTID))ADDR_GUIObject_SoftKeys_SetActionAndText)
+	((void (*)(GUI *, uint16_t, SKACTIONPROC proc, TEXTID))ADDR_GUIObject_SoftKeys_SetActionAndText)
+
+#define GUIObject_SoftKeys_SetInfoText ((void (*)(GUI *, uint16_t, TEXTID))ADDR_GUIObject_SoftKeys_SetInfoText)
 
 #define GUIObject_SoftKeys_Hide ((void (*)(GUI *))ADDR_GUIObject_SoftKeys_Hide)
 
@@ -412,6 +446,16 @@
 
 #define GUIObject_SoftKeys_SuppressDefaultAction \
 	((void (*)(GUI *, uint16_t))ADDR_GUIObject_SoftKeys_SuppressDefaultAction)
+
+#define MediaPlayer_SoftKeys_Validate ((int (*)(GUI *))ADDR_MediaPlayer_SoftKeys_Validate)
+
+#define MediaPlayer_SoftKeys_SetText ((void (*)(GUI *, int, TEXTID))ADDR_MediaPlayer_SoftKeys_SetText)
+
+#define MediaPlayer_SoftKeys_SetAction ((void (*)(GUI *, int, SKACTIONPROC proc))ADDR_MediaPlayer_SoftKeys_SetAction)
+
+#define MediaPlayer_SoftKeys_SetItemAsSubItem ((void (*)(GUI *, int, int))ADDR_MediaPlayer_SoftKeys_SetItemAsSubItem)
+
+#define MediaPlayer_SoftKeys_AddHelpStr ((void (*)(GUI *, int, TEXTID))ADDR_MediaPlayer_SoftKeys_AddHelpStr)
 
 // DISP descriptor / object API -----------------------------------------------
 
@@ -505,11 +549,15 @@
 
 #define strstr ((char *(*)(const char *, const char *))ADDR_strstr)
 
+#define count_digit ((int (*)(int))ADDR_count_digit)
+
+#define itow ((int (*)(int, wchar_t *, int))ADDR_itow)
+
 // TextID API ------------------------------------------------------------------
 
 #define TextID_CreateIntegerID ((TEXTID (*)(int))ADDR_TextID_CreateIntegerID)
 
-#define TextID_Create ((TEXTID (*)(const void *, int, int))ADDR_TextID_Create)
+#define TextID_Create ((TEXTID (*)(const void *, TEXT_ENCODING, int))ADDR_TextID_Create)
 
 #define TextID_GetString ((void (*)(TEXTID, char *, int))ADDR_TextID_GetString)
 
@@ -521,7 +569,9 @@
 
 #define TextID_Copy ((TEXTID (*)(TEXTID))ADDR_TextID_Copy)
 
-// Timer
+#define TextID_CreateFromTextIterator ((TEXTID (*)(void *, TEXT_ENCODING, int))ADDR_TextID_CreateFromTextIterator)
+
+// Timer -----------------------------------------------------------------------
 
 #define Timer_ReSet ((void (*)(uint16_t *timer, int time, TIMERPROC onTimer, LPARAM lparam))ADDR_Timer_ReSet)
 
@@ -1007,6 +1057,10 @@
 #define GVI_CreateMemoryGC ((GVI_GC (*)(GVI_BMP))ADDR_GVI_CreateMemoryGC)
 
 #define GVI_DeleteMemoryGC ((void (*)(GVI_GC))ADDR_GVI_DeleteMemoryGC)
+
+#define GC_CreateMemoryGC ((GC * (*)(int, int, int, int, void *, int)) ADDR_GC_CreateMemoryGC)
+
+#define GC_FreeGC ((void (*)(GC *))ADDR_GC_FreeGC)
 
 // Phone Book
 #define AB_GETNBROFITEMS ((int (*)(int, int))ADDR_AB_GETNBROFITEMS)

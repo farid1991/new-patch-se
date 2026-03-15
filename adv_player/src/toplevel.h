@@ -1,0 +1,22 @@
+#ifndef _TopLevel_h_
+#define _TopLevel_h_
+
+enum MM_TOPLEVEL_BRW
+{
+	MENU_NOWPLAYING,
+	MENU_ARTIST,
+	MENU_ALBUMS,
+	MENU_TRACKS,
+	MENU_PLAYLIST,
+	MENU_VIDEOS,
+	MENU_LAST,
+};
+
+enum WINDOW_ANIM
+{
+	LEFT_IN_LEFT_OUT,
+	LEFT_IN_RIGHT_OUT,
+	RIGHT_IN_LEFT_OUT
+};
+
+#endif
