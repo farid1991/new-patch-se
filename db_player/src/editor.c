@@ -550,8 +550,8 @@ NEWCODE const wchar_t *Font_GetNameByFontId(int font_size)
 }
 #else
 	wchar_t *font_name = L"Undefined";
-	FONT_DESC *font_desc = GET_FONTDESC_PTR;
-	int total_font = *GET_FONTCOUNT_PTR;
+	FONT_DESC *font_desc = FONTDESC_PTR;
+	int total_font = *FONTCOUNT_PTR;
 
 	for (int i = 0; i < total_font; i++)
 	{
@@ -568,8 +568,8 @@ THUMB16
 NEWCODE int GetIdByFontId(int id)
 {
 	int ret = 0;
-	FONT_DESC *font_desc = GET_FONTDESC_PTR;
-	int total_font = *GET_FONTCOUNT_PTR;
+	FONT_DESC *font_desc = FONTDESC_PTR;
+	int total_font = *FONTCOUNT_PTR;
 
 	for (int i = 0; i < total_font; i++)
 	{
@@ -605,7 +605,7 @@ NEWCODE void SetVisual(BOOK *book)
 		data->style_bold = style_flags & BOLD;
 		data->style_italic = (style_flags & ITALIC) >> 1;
 #else
-		data->total_fonts = *PGetFontCount;
+		data->total_fonts = *FONTCOUNT_PTR;
 		data->cur_pos = GetIdByFontId(data->temp.font);
 #endif
 		data->edit_text_mode = TRUE;

@@ -7,6 +7,7 @@
 #include <com.h>
 #include <datetime.h>
 #include <dispobj.h>
+#include <font.h>
 #include <fsx.h>
 #include <gui.h>
 #include <gui_feedback.h>

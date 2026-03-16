@@ -991,6 +991,8 @@
 
 #define Display_GetBrightness ((int (*)(int))ADDR_Display_GetBrightness)
 
+#define Disp_GetTextIDWidth ((int (*)(TEXTID, int))ADDR_Disp_GetTextIDWidth)
+
 // CANVAS / GVI GC -------------------------------------------------------------
 
 #define CANVAS_Get_GviGC ((int (*)(PCANVAS, GVI_GC *))ADDR_CANVAS_Get_GviGC)

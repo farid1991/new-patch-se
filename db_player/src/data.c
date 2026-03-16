@@ -16,21 +16,16 @@
 static const char DB_EMP[] = "dbp_emp";
 
 THUMB16
-NEWCODE DBP_DATA *CreateData()
-{
-	DBP_DATA *data = (DBP_DATA *)malloc(sizeof(DBP_DATA));
-	memset(data, 0, sizeof(DBP_DATA));
-	set_envp(NULL, DB_EMP, (OSADDRESS)data);
-	return data;
-}
-
-THUMB16
 NEWCODE DBP_DATA *GetData()
 {
 	DBP_DATA *data = (DBP_DATA *)get_envp(NULL, DB_EMP);
-	if (data)
-		return data;
-	return CreateData();
+	if (!data)
+	{
+		data = (DBP_DATA *)malloc(sizeof(DBP_DATA));
+		memset(data, 0, sizeof(DBP_DATA));
+		set_envp(NULL, DB_EMP, (OSADDRESS)data);
+	}
+	return data;
 }
 
 THUMB16

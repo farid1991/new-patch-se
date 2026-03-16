@@ -932,7 +932,7 @@ NEWCODE void DBPlayer_onKey(DISP_OBJ *disp, int key, int count, int repeat, int 
 				data->temp.font = ((data->cur_pos + 1) * FONT_STEP) + (data->style_bold << 8) +
 				                  (data->style_italic << 9);
 #else
-				FONT_DESC *font_desc = PGetFontDesc;
+				FONT_DESC *font_desc = FONTDESC_PTR;
 				data->temp.font = font_desc[data->cur_pos].id;
 #endif
 			}
@@ -1145,7 +1145,7 @@ NEWCODE void CreateInfo(MME_DATA *pMMEData, BOOK *book)
 
 	LoadData(data);
 	InitIcon(data);
-	itembook->sub_exec->gui = data->gui = CreateGUI(itembook);
+	itembook->sub_exec->gui = data->gui = CreateGUI(book);
 	if (itembook->sub_exec->gui)
 	{
 		DBP_GetLyric(itembook->sub_exec->gui, data->path, data->name);
