@@ -86,12 +86,10 @@ typedef struct SUB_EXECUTE
 	void *strinp_struct;
 #if defined(DB3350_R2)
 	char dummy1[0x2A4];
-#endif
-#if defined(DB3200) || defined(DB3200)
+#elif defined(DB3150v1) || defined(DB3150v2)
+	char dummy2[0x2D4];
+#elif defined(DB3200) || defined(DB3200) || defined(DB3350)
 	char dummy1[0x2D0];
-#if defined(DB3150v1) || defined(DB3150v2)
-	char dummy2[0x4];
-#endif
 #endif
 	void *pIMMEPlayer;
 } SUB_EXECUTE;
