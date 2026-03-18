@@ -27,10 +27,8 @@ typedef enum TEXT_ENCODING
 #define TEXTID_ANY_LEN 0xFFFF
 #define EMPTY_TEXTID 0x6FFFFFFF
 
-#define TEXT(__STR__) L##__STR__
-#define _T(__STR__) L##__STR__
 #define STR(__STR__) TextID_Create(__STR__, ENC_LAT1, TEXTID_ANY_LEN)
-#define STRW(__STRW__) TextID_Create(_T(__STRW__), ENC_UCS2, TEXTID_ANY_LEN)
+#define WSTR(__STRW__) TextID_Create(__STRW__, ENC_UCS2, TEXTID_ANY_LEN)
 
 // clang-format off
 

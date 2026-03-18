@@ -352,6 +352,7 @@
 #define DispObject_SetSecondRowTitleText ((void (*)(DISP_OBJ *, TEXTID))ADDR_DispObject_SetSecondRowTitleText)
 
 // --- Text / Image drawing --------------------------------------------------
+
 #define SetFont ((int (*)(int))ADDR_SetFont)
 
 #define DrawString ((void (*)(TEXTID, int, int, int, int, int, int, int, int, int))ADDR_DrawString)
@@ -527,6 +528,10 @@
 
 #define wstrrchr ((wchar_t * (*)(const wchar_t *, wchar_t)) ADDR_wstrrchr)
 
+#define wstrnupr ((void (*)(wchar_t *, int))ADDR_wstrnupr)
+
+#define wstrnlwr ((void (*)(wchar_t *, int))ADDR_wstrnlwr)
+
 #define strcpy ((char *(*)(char *, const char *))ADDR_strcpy)
 
 #define strncpy ((char *(*)(char *, const char *, int))ADDR_strncpy)
@@ -619,11 +624,13 @@
 #define DynamicMenu_CreateSetBook ((BOOK * (*)(void)) ADDR_DynamicMenu_CreateSetBook)
 
 // volume control --------------------------------------------------------------
+
 #define Volume_Set ((void (*)(int, char))ADDR_Volume_Set)
 
 #define Volume_Get ((int (*)(int, char *))ADDR_Volume_Get)
 
 // REQUEST / settings / system -------------------------------------------------
+
 #define REQUEST_DATEANDTIME_GET ((void (*)(const int *, DATETIME *))ADDR_REQUEST_DATEANDTIME_GET)
 
 #define REQUEST_DATEFORMAT_GET ((int (*)(const int *, char *))ADDR_REQUEST_DATEFORMAT_GET)
@@ -666,6 +673,8 @@
 #define REQUEST_SYSTEM_RESTART ((void (*)(void))ADDR_REQUEST_SYSTEM_RESTART)
 
 #define Request_ICA_ShutdownAllConnections ((int (*)(const int *))ADDR_Request_ICA_ShutdownAllConnections)
+
+#define REQUEST_UI_OAF_START_APPLICATION ((void (*)(const int *, int, char *))ADDR_REQUEST_UI_OAF_START_APPLICATION)
 
 // List Menu GUI ------------------------------------------------------------
 
@@ -804,6 +813,7 @@
 #define OnOffList_SetSecondText ((void (*)(GUI *, TEXTID))ADDR_OnOffList_SetSecondText)
 
 // String Input GUI
+
 #define CreateStringInput ((GUI * (*)(BOOK * book)) ADDR_CreateStringInput)
 
 #define CreateStringInputVA ((GUI * (*)(int, ...)) ADDR_CreateStringInputVA)
@@ -848,7 +858,10 @@
 #define StringInput_DispObject_CopySelectedText ((void (*)(DISP_OBJ *))ADDR_StringInput_DispObject_CopySelectedText)
 
 // Yes No Question GUI
+
 #define CreateYesNoQuestion ((GUI * (*)(BOOK *, int)) ADDR_CreateYesNoQuestion)
+
+#define CreateYesNoQuestionVA ((GUI * (*)(int, ...)) ADDR_CreateYesNoQuestionVA)
 
 #define YesNoQuestion_SetQuestionText ((void (*)(GUI *, TEXTID))ADDR_YesNoQuestion_SetQuestionText)
 
@@ -872,6 +885,7 @@
 #endif
 
 // TabMenuBar GUI
+
 #define CreateTabMenuBar ((GUI_TABMENUBAR * (*)(BOOK * book)) ADDR_CreateTabMenuBar)
 
 #define TabMenuBar_SetTabCount ((void (*)(GUI_TABMENUBAR *, int count))ADDR_TabMenuBar_SetTabCount)
@@ -890,6 +904,7 @@
 #define TabMenuBar_SetTabTitle ((void (*)(GUI_TABMENUBAR *, int tab_num, TEXTID))ADDR_TabMenuBar_SetTabTitle)
 
 // Date and Time
+
 #define datetime2unixtime ((int (*)(DATETIME *))ADDR_datetime2unixtime)
 
 #define unixtime2datetime ((void (*)(int, DATETIME *))ADDR_unixtime2datetime)
@@ -902,11 +917,58 @@
 
 // DataBrowser / FILEITEM ------------------------------------------------------
 
+#define DataBrowserDesc_Create ((void *(*)(void))ADDR_DataBrowserDesc_Create)
+
+#define DataBrowserDesc_SetItemStyle ((void (*)(void *, int))ADDR_DataBrowserDesc_SetItemStyle)
+
+#define DataBrowserDesc_SetHeaderText ((void (*)(void *, TEXTID))ADDR_DataBrowserDesc_SetHeaderText)
+
+#define DataBrowserDesc_SetFolders ((void (*)(void *, const wchar_t **))ADDR_DataBrowserDesc_SetFolders)
+
+#define DataBrowserDesc_SetOKSoftKeyText ((void (*)(void *, TEXTID))ADDR_DataBrowserDesc_SetOKSoftKeyText)
+
+#define DataBrowserDesc_SetFoldersNumber ((void (*)(void *, int))ADDR_DataBrowserDesc_SetFoldersNumber)
+
+#define DataBrowserDesc_SetActions ((void (*)(void *, char *))ADDR_DataBrowserDesc_SetActions)
+
+#define DataBrowserDesc_SetDefaultActions ((void (*)(void *, BOOL))ADDR_DataBrowserDesc_SetDefaultActions)
+
+#define DataBrowserDesc_SetSelectAction ((void (*)(void *, int))ADDR_DataBrowserDesc_SetSelectAction)
+
+#define DataBrowserDesc_SetSelectActionOnFolders ((void (*)(void *, int))ADDR_DataBrowserDesc_SetSelectActionOnFolders)
+
+#define DataBrowserDesc_SetBookID ((void (*)(void *, int))ADDR_DataBrowserDesc_SetBookID)
+
+#define DataBrowserDesc_SetItemFilter ((void (*)(void *, DB_FILE_FILTER))ADDR_DataBrowserDesc_SetItemFilter)
+
+#define DataBrowserDesc_SetOption ((void (*)(void *, char *))ADDR_DataBrowserDesc_SetOption)
+
+#define DataBrowserDesc_SetOpenEmptyFolder ((void (*)(void *, int))ADDR_DataBrowserDesc_SetOpenEmptyFolder)
+
+#define DataBrowserDesc_SetFileExtList ((void (*)(void *, const wchar_t *))ADDR_DataBrowserDesc_SetFileExtList)
+
+#define DataBrowserDesc_Menu_AddFSFunctions ((void (*)(void *, int))ADDR_DataBrowserDesc_Menu_AddFSFunctions)
+
+#define DataBrowserDesc_Menu_AddNewFolder ((void (*)(void *, int))ADDR_DataBrowserDesc_Menu_AddNewFolder)
+
+#define DataBrowserDesc_Menu_AddMarkFiles ((void (*)(void *, int))ADDR_DataBrowserDesc_Menu_AddMarkFiles)
+
+#define DataBrowserDesc_SetViewModeAndSortOrder ((void (*)(void *, int))ADDR_DataBrowserDesc_SetViewModeAndSortOrder)
+
+#define DataBrowserDesc_SetFocusToFILEITEM ((int (*)(void *, FILEITEM *))ADDR_DataBrowserDesc_SetFocusToFILEITEM)
+
+#define DataBrowser_Create ((void (*)(void *))ADDR_DataBrowser_Create)
+
+#define DataBrowserDesc_Destroy ((void (*)(void *))ADDR_DataBrowserDesc_Destroy)
+
 #define DataBrowser_CreateSubExecute ((SUB_EXECUTE * (*)(int, FILEITEM *)) ADDR_DataBrowser_CreateSubExecute)
 
 #define DataBrowser_ExecuteSubroutine ((int (*)(SUB_EXECUTE *, int, uint16_t *))ADDR_DataBrowser_ExecuteSubroutine)
 
 #define DataBrowser_ItemDesc_CheckFileToCopyMove ((int (*)(FILEITEM *))ADDR_DataBrowser_ItemDesc_CheckFileToCopyMove)
+
+#define DataBrowser_isFileInListExt \
+	((int (*)(const wchar_t *, const wchar_t *, const wchar_t *))ADDR_DataBrowser_isFileInListExt)
 
 #define FILEITEM_SetFname ((int (*)(FILEITEM *, const wchar_t *))ADDR_FILEITEM_SetFname)
 
@@ -944,7 +1006,10 @@
 
 #define JavaSession_GetName ((TEXTID (*)(void))ADDR_JavaSession_GetName)
 
+#define JavaAppDesc_GetJavaAppID ((int (*)(void *))ADDR_JavaAppDesc_GetJavaAppID)
+
 // Sound Recorder
+
 #define SoundRecorderDesc_Create ((void *(*)())ADDR_SoundRecorderDesc_Create)
 
 #define SoundRecorderDesc_Destroy ((void (*)(void *desc))ADDR_SoundRecorderDesc_Destroy)
@@ -1065,9 +1130,11 @@
 #define GC_FreeGC ((void (*)(GC *))ADDR_GC_FreeGC)
 
 // Phone Book
+
 #define AB_GETNBROFITEMS ((int (*)(int, int))ADDR_AB_GETNBROFITEMS)
 
 // Misc
+
 #define GetFreeBytesOnHeap ((int (*)(void))ADDR_GetFreeBytesOnHeap)
 
 #define FlightMode_GetState ((int (*)(void))ADDR_FlightMode_GetState)
@@ -1080,11 +1147,25 @@
 
 #define MetaData_GetTags ((wchar_t * (*)(const wchar_t *, const wchar_t *, int)) ADDR_MetaData_GetTags)
 
-#define Shortcut_Run ((void (*)(const wchar_t *))ADDR_Shortcut_Run)
-
 #define NewEvents_GetCount ((int (*)(void))ADDR_NewEvents_GetCount)
 
 #define IsMainDisplayFocused ((int (*)(void))ADDR_IsMainDisplayFocused)
+
+// Main Menu
+
+#define MenuBook_Desktop ((BOOK * (*)(int, int)) ADDR_MenuBook_Desktop)
+
+#define MenuBook_Desktop_GetSelectedItemID ((wchar_t * (*)(BOOK *)) ADDR_MenuBook_Desktop_GetSelectedItemID)
+
+#define BookObj_SoftKeys_SetAction ((void (*)(BOOK *, int, SKACTIONPROC))ADDR_BookObj_SoftKeys_SetAction)
+
+#define BookObj_SoftKeys_SetText ((void (*)(BOOK *, int, TEXTID))ADDR_BookObj_SoftKeys_SetText)
+
+#define Shortcut_Get_MenuItemName ((TEXTID (*)(void *))ADDR_Shortcut_Get_MenuItemName)
+
+#define Shortcut_Get_MenuItemIconID ((IMAGEID (*)(void *))ADDR_Shortcut_Get_MenuItemIconID)
+
+#define Shortcut_Run ((void (*)(const wchar_t *))ADDR_Shortcut_Run)
 
 // --- Theme / Flash menu ---------------------------------------------------
 

@@ -1,0 +1,8 @@
+;Change Softkey in Standby to "Goto" Shortcut.
+;You can choose 4 shortcut type with your own choice
+;-Shortcut
+;-Java
+;-Elf
+;-Folder
+;v 3.11
+;(c) farid

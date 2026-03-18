@@ -77,6 +77,12 @@ Select swf from Main Menu Layout->Custom->FlashMenuPicker.
 Add "Record" functions in the FM Radio.
 ```
 
+### goto_shortcut
+```
+Change Softkey in Standby to "Goto" Shortcut.
+You can choose 4 shortcut type with your own choice
+```
+
 ### mp3_info
 ```
 Add extra informations about files mp3.
