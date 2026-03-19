@@ -129,7 +129,7 @@ NEWCODE int New_MediaPlayer_Audio_OnCreate(DISP_OBJ *disp_obj)
 }
 
 THUMB16
-NEWCODE void New_AudioPlayerBook_onClose(BOOK *book)
+NEWCODE void New_AudioPlayerBook_onClose()
 {
 	ADVPLAYER_DATA *data = env_data_get();
 

@@ -325,7 +325,6 @@ not_valid_exit:
 .align 2
 
 audioplayer_onclose:
-    ldr     r0, [sp, #0]
     bl      New_AudioPlayerBook_onClose
     ldr     r0, [sp, #0]
     ldr     r3, =audioplayer_onclose_func+1
