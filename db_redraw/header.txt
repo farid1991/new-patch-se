@@ -1,0 +1,10 @@
+;Add display of information about the track being played in the file manager 
+;Added to the track information 
+;Artist, title, album, current / remaining / full time 
+;Progress bar, coverart,  and animation
+;Added the ability to minimize the window with information about the track being played 
+;You can expand the window with the information in the file manager
+;Now using simple .ini config not binary config
+;Path to config file "/usb/other/DBPlayer/DBPlayerStyle.ini" 
+;(c) MaPkiZzz & Ploik
+;(e) farid

@@ -279,6 +279,8 @@
 
 #define UI_Event_toBookIDwData ((void (*)(int, int, void *, void (*)(void *)))ADDR_UI_Event_toBookIDwData)
 
+#define Session_SetFocus ((void *(*)(UI_APP_SESSION *, int))ADDR_Session_SetFocus)
+
 // DISP / GC / GUI -------------------------------------------------------------
 
 #define get_DisplayGC ((GC * (*)(void)) ADDR_get_DisplayGC)
@@ -444,6 +446,8 @@
 #define GUIObject_SoftKeys_RemoveItem ((void (*)(GUI *, uint16_t))ADDR_GUIObject_SoftKeys_RemoveItem)
 
 #define GUIObject_SoftKeys_SetVisible ((void (*)(GUI *, uint16_t, BOOL))ADDR_GUIObject_SoftKeys_SetVisible)
+
+#define GUIObject_SoftKeys_SetItemAsSubItem ((void (*)(GUI *, int, int))ADDR_GUIObject_SoftKeys_SetItemAsSubItem)
 
 #define GUIObject_SoftKeys_SuppressDefaultAction \
 	((void (*)(GUI *, uint16_t))ADDR_GUIObject_SoftKeys_SuppressDefaultAction)
@@ -1132,6 +1136,18 @@
 // Phone Book
 
 #define AB_GETNBROFITEMS ((int (*)(int, int))ADDR_AB_GETNBROFITEMS)
+
+// METADATA API
+
+#define MetaData_Desc_Create ((void *(*)(wchar_t *, wchar_t *))ADDR_MetaData_Desc_Create)
+
+#define MetaData_Desc_Destroy ((void (*)(void *))ADDR_MetaData_Desc_Destroy)
+
+#define MetaData_Desc_HasCover ((bool (*)(void *))ADDR_MetaData_Desc_HasCover)
+
+#define MetaData_Desc_GetCoverInfo ((int (*)(void *, char *, int *, int *))ADDR_MetaData_Desc_GetCoverInfo)
+
+#define MetaData_Desc_GetTags ((wchar_t * (*)(void *, int)) ADDR_MetaData_Desc_GetTags)
 
 // Misc
 

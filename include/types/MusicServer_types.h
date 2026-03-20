@@ -166,7 +166,7 @@ typedef enum
  * Defines an unused handle.
  *
  */
-const FUint32 MUSICSERVER_HANDLE_NOT_USED = 0;
+#define MUSICSERVER_HANDLE_NOT_USED 0
 
 /**
  * The set of causes that can be sent
