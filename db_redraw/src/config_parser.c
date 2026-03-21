@@ -7,6 +7,7 @@
 #endif
 
 #include <libse.h>
+#include <ini_parser.h>
 
 #include "patch.h"
 
@@ -41,108 +42,6 @@ static const char KEY_TIME_R_COLOR[] = "[TIME_R_COLOR]";
 
 static const char KEY_PROGRESS_BAR[] = "[PROGRESS_BAR]";
 static const char KEY_PB_POS[] = "[PB_POS]";
-
-THUMB16
-NEWCODE static inline int isspace(int c)
-{
-	return (c == ' ' || c >= '\t' && c <= '\r');
-}
-
-THUMB16
-NEWCODE static inline int isdigit(int c)
-{
-	return (c >= '0' && c <= '9');
-}
-
-THUMB16
-NEWCODE static inline int isxdigit(int c)
-{
-	return ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'F'));
-}
-
-THUMB16
-NEWCODE int hex2int(const char *h)
-{
-	int res = 0;
-
-	while (*h && *h != 'x')
-		h++;
-	if (*h == 'x')
-		h++;
-
-	while (*h && *h != ';')
-	{
-		char c = *h++;
-		if (c >= '0' && c <= '9')
-		{
-			res = (res << 4) | (c - '0');
-		}
-		else if (c >= 'A' && c <= 'F')
-		{
-			res = (res << 4) | (c - 'A' + 10);
-		}
-		else if (c >= 'a' && c <= 'f')
-		{
-			res = (res << 4) | (c - 'a' + 10);
-		}
-	}
-	return res;
-}
-
-THUMB16
-NEWCODE int ascii2int(const char *s)
-{
-	int result = 0;
-
-	while (isspace(*s))
-		s++;
-
-	while (isdigit(*s))
-	{
-		result = result * 10 + (*s - '0');
-		s++;
-	}
-
-	return result;
-}
-
-THUMB16
-NEWCODE int parse_value(const char *str)
-{
-	if (*str == '0' && (*(str + 1) == 'x' || *(str + 1) == 'X'))
-		return hex2int(str);
-
-	return ascii2int(str);
-}
-
-THUMB16
-NEWCODE void parse_values(const char *input, int *output)
-{
-	const char *input_start = input;
-	int i = 0;
-
-	while (*input_start)
-	{
-		const char *end = input_start;
-		while (*end && *end != ',')
-			end++;
-
-		char temp[32];
-		int len = end - input_start;
-		if (len >= sizeof(temp))
-			len = sizeof(temp) - 1;
-
-		memcpy(temp, input_start, len);
-		temp[len] = '\0';
-
-		output[i++] = parse_value(temp);
-
-		if (*end == ',')
-			input_start = end + 1;
-		else
-			break;
-	}
-}
 
 THUMB16
 NEWCODE FILE_STYLE *DBRedraw_Load_CfgData(const wchar_t *fpath)
@@ -187,7 +86,7 @@ NEWCODE FILE_STYLE *DBRedraw_Load_CfgData(const wchar_t *fpath)
 	if (param)
 	{
 		int values[3];
-		parse_values(param, values);
+		ini_parse_values(param, values, 3);
 		fs->background_state = values[0];
 		fs->background_x = values[1];
 		fs->background_y = values[2];
@@ -199,7 +98,7 @@ NEWCODE FILE_STYLE *DBRedraw_Load_CfgData(const wchar_t *fpath)
 	param = manifest_GetParam(buf, KEY_COVER_EN, 0);
 	if (param)
 	{
-		fs->cover_state = parse_value(param);
+		fs->cover_state = ini_parse_value(param);
 		mfree(param);
 	}
 
@@ -207,7 +106,7 @@ NEWCODE FILE_STYLE *DBRedraw_Load_CfgData(const wchar_t *fpath)
 	if (param)
 	{
 		int values[4];
-		parse_values(param, values);
+		ini_parse_values(param, values, 4);
 		fs->cover_x = values[0];
 		fs->cover_y = values[1];
 		fs->cover_w = values[2];
@@ -221,7 +120,7 @@ NEWCODE FILE_STYLE *DBRedraw_Load_CfgData(const wchar_t *fpath)
 	if (param)
 	{
 		int values[3];
-		parse_values(param, values);
+		ini_parse_values(param, values, 3);
 		fs->title_state = values[0];
 		fs->title_font = values[1];
 		fs->title_align = values[2];
@@ -231,7 +130,7 @@ NEWCODE FILE_STYLE *DBRedraw_Load_CfgData(const wchar_t *fpath)
 	if (param)
 	{
 		int values[4];
-		parse_values(param, values);
+		ini_parse_values(param, values, 4);
 		fs->title_x1 = values[0];
 		fs->title_x2 = values[1];
 		fs->title_y1 = values[2];
@@ -242,7 +141,7 @@ NEWCODE FILE_STYLE *DBRedraw_Load_CfgData(const wchar_t *fpath)
 	if (param)
 	{
 		int values[2];
-		parse_values(param, values);
+		ini_parse_values(param, values, 2);
 		fs->title_color = values[0];
 		fs->title_border_color = values[1];
 		mfree(param);
@@ -251,7 +150,7 @@ NEWCODE FILE_STYLE *DBRedraw_Load_CfgData(const wchar_t *fpath)
 	if (param)
 	{
 		int values[3];
-		parse_values(param, values);
+		ini_parse_values(param, values, 3);
 		fs->title_icon_state = values[0];
 		fs->title_icon_x = values[1];
 		fs->title_icon_y = values[2];
@@ -264,7 +163,7 @@ NEWCODE FILE_STYLE *DBRedraw_Load_CfgData(const wchar_t *fpath)
 	if (param)
 	{
 		int values[3];
-		parse_values(param, values);
+		ini_parse_values(param, values, 3);
 		fs->artist_state = values[0];
 		fs->artist_font = values[1];
 		fs->artist_align = values[2];
@@ -274,7 +173,7 @@ NEWCODE FILE_STYLE *DBRedraw_Load_CfgData(const wchar_t *fpath)
 	if (param)
 	{
 		int values[4];
-		parse_values(param, values);
+		ini_parse_values(param, values, 4);
 		fs->artist_x1 = values[0];
 		fs->artist_x2 = values[1];
 		fs->artist_y1 = values[2];
@@ -285,7 +184,7 @@ NEWCODE FILE_STYLE *DBRedraw_Load_CfgData(const wchar_t *fpath)
 	if (param)
 	{
 		int values[2];
-		parse_values(param, values);
+		ini_parse_values(param, values, 2);
 		fs->artist_color = values[0];
 		fs->artist_border_color = values[1];
 		mfree(param);
@@ -294,7 +193,7 @@ NEWCODE FILE_STYLE *DBRedraw_Load_CfgData(const wchar_t *fpath)
 	if (param)
 	{
 		int values[3];
-		parse_values(param, values);
+		ini_parse_values(param, values, 3);
 		fs->artist_icon_state = values[0];
 		fs->artist_icon_x = values[1];
 		fs->artist_icon_y = values[2];
@@ -307,7 +206,7 @@ NEWCODE FILE_STYLE *DBRedraw_Load_CfgData(const wchar_t *fpath)
 	if (param)
 	{
 		int values[3];
-		parse_values(param, values);
+		ini_parse_values(param, values, 3);
 		fs->album_state = values[0];
 		fs->album_font = values[1];
 		fs->album_align = values[2];
@@ -317,7 +216,7 @@ NEWCODE FILE_STYLE *DBRedraw_Load_CfgData(const wchar_t *fpath)
 	if (param)
 	{
 		int values[4];
-		parse_values(param, values);
+		ini_parse_values(param, values, 4);
 		fs->album_x1 = values[0];
 		fs->album_x2 = values[1];
 		fs->album_y1 = values[2];
@@ -328,7 +227,7 @@ NEWCODE FILE_STYLE *DBRedraw_Load_CfgData(const wchar_t *fpath)
 	if (param)
 	{
 		int values[2];
-		parse_values(param, values);
+		ini_parse_values(param, values, 2);
 		fs->album_color = values[0];
 		fs->album_border_color = values[1];
 		mfree(param);
@@ -337,7 +236,7 @@ NEWCODE FILE_STYLE *DBRedraw_Load_CfgData(const wchar_t *fpath)
 	if (param)
 	{
 		int values[3];
-		parse_values(param, values);
+		ini_parse_values(param, values, 3);
 		fs->album_icon_state = values[0];
 		fs->album_icon_x = values[1];
 		fs->album_icon_y = values[2];
@@ -350,7 +249,7 @@ NEWCODE FILE_STYLE *DBRedraw_Load_CfgData(const wchar_t *fpath)
 	if (param)
 	{
 		int values[3];
-		parse_values(param, values);
+		ini_parse_values(param, values, 3);
 		fs->elapsed_time_state = values[0];
 		fs->elapsed_time_font = values[1];
 		fs->elapsed_time_align = values[2];
@@ -360,7 +259,7 @@ NEWCODE FILE_STYLE *DBRedraw_Load_CfgData(const wchar_t *fpath)
 	if (param)
 	{
 		int values[4];
-		parse_values(param, values);
+		ini_parse_values(param, values, 4);
 		fs->elapsed_time_x1 = values[0];
 		fs->elapsed_time_x2 = values[1];
 		fs->elapsed_time_y1 = values[2];
@@ -371,7 +270,7 @@ NEWCODE FILE_STYLE *DBRedraw_Load_CfgData(const wchar_t *fpath)
 	if (param)
 	{
 		int values[2];
-		parse_values(param, values);
+		ini_parse_values(param, values, 2);
 		fs->elapsed_time_color = values[0];
 		fs->elapsed_time_border_color = values[1];
 		mfree(param);
@@ -383,7 +282,7 @@ NEWCODE FILE_STYLE *DBRedraw_Load_CfgData(const wchar_t *fpath)
 	if (param)
 	{
 		int values[3];
-		parse_values(param, values);
+		ini_parse_values(param, values, 3);
 		fs->full_time_state = values[0];
 		fs->full_time_font = values[1];
 		fs->full_time_align = values[2];
@@ -393,7 +292,7 @@ NEWCODE FILE_STYLE *DBRedraw_Load_CfgData(const wchar_t *fpath)
 	if (param)
 	{
 		int values[4];
-		parse_values(param, values);
+		ini_parse_values(param, values, 4);
 		fs->full_time_x1 = values[0];
 		fs->full_time_x2 = values[1];
 		fs->full_time_y1 = values[2];
@@ -404,7 +303,7 @@ NEWCODE FILE_STYLE *DBRedraw_Load_CfgData(const wchar_t *fpath)
 	if (param)
 	{
 		int values[2];
-		parse_values(param, values);
+		ini_parse_values(param, values, 2);
 		fs->full_time_color = values[0];
 		fs->full_time_border_color = values[1];
 		mfree(param);
@@ -416,7 +315,7 @@ NEWCODE FILE_STYLE *DBRedraw_Load_CfgData(const wchar_t *fpath)
 	if (param)
 	{
 		int values[3];
-		parse_values(param, values);
+		ini_parse_values(param, values, 3);
 		fs->remaining_time_state = values[0];
 		fs->remaining_time_font = values[1];
 		fs->remaining_time_align = values[2];
@@ -426,7 +325,7 @@ NEWCODE FILE_STYLE *DBRedraw_Load_CfgData(const wchar_t *fpath)
 	if (param)
 	{
 		int values[4];
-		parse_values(param, values);
+		ini_parse_values(param, values, 4);
 		fs->remaining_time_x1 = values[0];
 		fs->remaining_time_x2 = values[1];
 		fs->remaining_time_y1 = values[2];
@@ -437,7 +336,7 @@ NEWCODE FILE_STYLE *DBRedraw_Load_CfgData(const wchar_t *fpath)
 	if (param)
 	{
 		int values[2];
-		parse_values(param, values);
+		ini_parse_values(param, values, 2);
 		fs->remaining_time_color = values[0];
 		fs->remaining_time_border_color = values[1];
 		mfree(param);
@@ -449,7 +348,7 @@ NEWCODE FILE_STYLE *DBRedraw_Load_CfgData(const wchar_t *fpath)
 	if (param)
 	{
 		int values[4];
-		parse_values(param, values);
+		ini_parse_values(param, values, 4);
 		fs->progbar_state = values[0];
 		fs->progbar_current_color = values[1];
 		fs->progbar_background_color = values[2];
@@ -460,7 +359,7 @@ NEWCODE FILE_STYLE *DBRedraw_Load_CfgData(const wchar_t *fpath)
 	if (param)
 	{
 		int values[4];
-		parse_values(param, values);
+		ini_parse_values(param, values, 4);
 		fs->progbar_x1 = values[0];
 		fs->progbar_x2 = values[1];
 		fs->progbar_y1 = values[2];
@@ -473,13 +372,13 @@ NEWCODE FILE_STYLE *DBRedraw_Load_CfgData(const wchar_t *fpath)
 	param = manifest_GetParam(buf, KEY_GUI_STYLE, 0);
 	if (param)
 	{
-		fs->gui_style = parse_value(param);
+		fs->gui_style = ini_parse_value(param);
 		mfree(param);
 	}
 	param = manifest_GetParam(buf, KEY_HIDE_SOFT, 0);
 	if (param)
 	{
-		fs->hide_softkeys = parse_value(param);
+		fs->hide_softkeys = ini_parse_value(param);
 		mfree(param);
 	}
 
@@ -487,7 +386,7 @@ NEWCODE FILE_STYLE *DBRedraw_Load_CfgData(const wchar_t *fpath)
 	if (param)
 	{
 		int values[5];
-		parse_values(param, values);
+		ini_parse_values(param, values, 5);
 		fs->viz_count = values[0];
 		fs->viz_x = values[1];
 		fs->viz_y = values[2];
