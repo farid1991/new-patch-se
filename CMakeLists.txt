@@ -25,6 +25,7 @@ add_compile_options(-Os)
 add_subdirectory(common/aeabi)
 add_subdirectory(common/elf_int)
 add_subdirectory(common/id3)
+add_subdirectory(common/ini)
 add_subdirectory(common/sync)
 
 # -----------------------------------------------------------------------------
