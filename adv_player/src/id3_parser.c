@@ -15,7 +15,6 @@
 #include "id3_parser.h"
 #include "image.h"
 #include "patch.h"
-#include "str_helper.h"
 
 static const wchar_t JPG_EXT[] = L"jpg";
 static const wchar_t GIF_EXT[] = L"gif";

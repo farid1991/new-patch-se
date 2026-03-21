@@ -11,7 +11,6 @@
 #include <book/AudioPlayerBook.h>
 
 #include "data.h"
-#include "str_helper.h"
 #include "track_desc.h"
 
 THUMB16

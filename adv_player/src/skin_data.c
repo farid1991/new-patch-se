@@ -7,13 +7,13 @@
 #endif
 
 #include <libse.h>
+#include <ini_parser.h>
 
 #include "data.h"
 #include "draw.h"
 #include "patch.h"
 #include "track_desc.h"
 #include "skin_data.h"
-#include "skin_parser.h"
 #include "timer.h"
 
 THUMB16
@@ -109,7 +109,7 @@ NEWCODE void skin_data_read(SKIN_DATA *skin_data, wchar_t *skin_path)
 			if (param = manifest_GetParam(buf, KEY_BACKGROUND, 0))
 			{
 				int values[3];
-				parse_values(param, values);
+				ini_parse_values(param, values, 3);
 				skin_data->bg_enable = values[0];
 				skin_data->bg_x = values[1];
 				skin_data->bg_y = values[2];
@@ -118,7 +118,7 @@ NEWCODE void skin_data_read(SKIN_DATA *skin_data, wchar_t *skin_path)
 			if (param = manifest_GetParam(buf, KEY_OVERLAY, 0))
 			{
 				int values[3];
-				parse_values(param, values);
+				ini_parse_values(param, values, 3);
 				skin_data->overlay_enable = values[0];
 				skin_data->overlay_x = values[1];
 				skin_data->overlay_y = values[2];
@@ -127,7 +127,7 @@ NEWCODE void skin_data_read(SKIN_DATA *skin_data, wchar_t *skin_path)
 			if (param = manifest_GetParam(buf, KEY_ARTIST_TEXT, 0))
 			{
 				int values[3];
-				parse_values(param, values);
+				ini_parse_values(param, values, 3);
 				skin_data->text_artist_enable = values[0];
 				skin_data->text_artist_font = values[1];
 				skin_data->text_artist_align = values[2];
@@ -136,7 +136,7 @@ NEWCODE void skin_data_read(SKIN_DATA *skin_data, wchar_t *skin_path)
 			if (param = manifest_GetParam(buf, KEY_ARTIST_POS, 0))
 			{
 				int values[4];
-				parse_values(param, values);
+				ini_parse_values(param, values, 4);
 				skin_data->text_artist_x = values[0];
 				skin_data->text_artist_y = values[1];
 				skin_data->text_artist_w = values[2];
@@ -145,14 +145,13 @@ NEWCODE void skin_data_read(SKIN_DATA *skin_data, wchar_t *skin_path)
 			}
 			if (param = manifest_GetParam(buf, KEY_ARTIST_COLOR, 0))
 			{
-				int value = parse_value(param);
-				skin_data->text_artist_color = value;
+				skin_data->text_artist_color = ini_parse_value(param);
 				mfree(param);
 			}
 			if (param = manifest_GetParam(buf, KEY_ARTIST_ICON, 0))
 			{
 				int values[3];
-				parse_values(param, values);
+				ini_parse_values(param, values, 3);
 				skin_data->icon_artist_enable = values[0];
 				skin_data->icon_artist_x = values[1];
 				skin_data->icon_artist_y = values[2];
@@ -162,7 +161,7 @@ NEWCODE void skin_data_read(SKIN_DATA *skin_data, wchar_t *skin_path)
 			if (param = manifest_GetParam(buf, KEY_TITLE_TEXT, 0))
 			{
 				int values[3];
-				parse_values(param, values);
+				ini_parse_values(param, values, 3);
 				skin_data->text_title_enable = values[0];
 				skin_data->text_title_font = values[1];
 				skin_data->text_title_align = values[2];
@@ -171,7 +170,7 @@ NEWCODE void skin_data_read(SKIN_DATA *skin_data, wchar_t *skin_path)
 			if (param = manifest_GetParam(buf, KEY_TITLE_POS, 0))
 			{
 				int values[4];
-				parse_values(param, values);
+				ini_parse_values(param, values, 4);
 				skin_data->text_title_x = values[0];
 				skin_data->text_title_y = values[1];
 				skin_data->text_title_w = values[2];
@@ -180,14 +179,14 @@ NEWCODE void skin_data_read(SKIN_DATA *skin_data, wchar_t *skin_path)
 			}
 			if (param = manifest_GetParam(buf, KEY_TITLE_COLOR, 0))
 			{
-				int value = parse_value(param);
-				skin_data->text_title_color = value;
+
+				skin_data->text_title_color = ini_parse_value(param);
 				mfree(param);
 			}
 			if (param = manifest_GetParam(buf, KEY_TITLE_ICON, 0))
 			{
 				int values[3];
-				parse_values(param, values);
+				ini_parse_values(param, values, 3);
 				skin_data->icon_title_enable = values[0];
 				skin_data->icon_title_x = values[1];
 				skin_data->icon_title_y = values[2];
@@ -197,7 +196,7 @@ NEWCODE void skin_data_read(SKIN_DATA *skin_data, wchar_t *skin_path)
 			if (param = manifest_GetParam(buf, KEY_ALBUM_TEXT, 0))
 			{
 				int values[3];
-				parse_values(param, values);
+				ini_parse_values(param, values, 3);
 				skin_data->text_album_enable = values[0];
 				skin_data->text_album_font = values[1];
 				skin_data->text_album_align = values[2];
@@ -206,7 +205,7 @@ NEWCODE void skin_data_read(SKIN_DATA *skin_data, wchar_t *skin_path)
 			if (param = manifest_GetParam(buf, KEY_ALBUM_POS, 0))
 			{
 				int values[4];
-				parse_values(param, values);
+				ini_parse_values(param, values, 4);
 				skin_data->text_album_x = values[0];
 				skin_data->text_album_y = values[1];
 				skin_data->text_album_w = values[2];
@@ -215,14 +214,13 @@ NEWCODE void skin_data_read(SKIN_DATA *skin_data, wchar_t *skin_path)
 			}
 			if (param = manifest_GetParam(buf, KEY_ALBUM_COLOR, 0))
 			{
-				int value = parse_value(param);
-				skin_data->text_album_color = value;
+				skin_data->text_album_color = ini_parse_value(param);
 				mfree(param);
 			}
 			if (param = manifest_GetParam(buf, KEY_ALBUM_ICON, 0))
 			{
 				int values[3];
-				parse_values(param, values);
+				ini_parse_values(param, values, 3);
 				skin_data->icon_album_enable = values[0];
 				skin_data->icon_album_x = values[1];
 				skin_data->icon_album_y = values[2];
@@ -232,7 +230,7 @@ NEWCODE void skin_data_read(SKIN_DATA *skin_data, wchar_t *skin_path)
 			if (param = manifest_GetParam(buf, KEY_TRACKID, 0))
 			{
 				int values[3];
-				parse_values(param, values);
+				ini_parse_values(param, values, 3);
 				skin_data->text_trackid_enable = values[0];
 				skin_data->text_trackid_font = values[1];
 				skin_data->text_trackid_align = values[2];
@@ -241,7 +239,7 @@ NEWCODE void skin_data_read(SKIN_DATA *skin_data, wchar_t *skin_path)
 			if (param = manifest_GetParam(buf, KEY_TRACKID_POS, 0))
 			{
 				int values[4];
-				parse_values(param, values);
+				ini_parse_values(param, values, 4);
 				skin_data->text_trackid_x = values[0];
 				skin_data->text_trackid_y = values[1];
 				skin_data->text_trackid_w = values[2];
@@ -250,15 +248,14 @@ NEWCODE void skin_data_read(SKIN_DATA *skin_data, wchar_t *skin_path)
 			}
 			if (param = manifest_GetParam(buf, KEY_TRACKID_COLOR, 0))
 			{
-				int value = parse_value(param);
-				skin_data->text_trackid_color = value;
+				skin_data->text_trackid_color = ini_parse_value(param);
 				mfree(param);
 			}
 
 			if (param = manifest_GetParam(buf, KEY_FULLTIME, 0))
 			{
 				int values[3];
-				parse_values(param, values);
+				ini_parse_values(param, values, 3);
 				skin_data->text_fulltime_enable = values[0];
 				skin_data->text_fulltime_font = values[1];
 				skin_data->text_fulltime_align = values[2];
@@ -267,7 +264,7 @@ NEWCODE void skin_data_read(SKIN_DATA *skin_data, wchar_t *skin_path)
 			if (param = manifest_GetParam(buf, KEY_FULLTIME_POS, 0))
 			{
 				int values[4];
-				parse_values(param, values);
+				ini_parse_values(param, values, 4);
 				skin_data->text_fulltime_x = values[0];
 				skin_data->text_fulltime_y = values[1];
 				skin_data->text_fulltime_w = values[2];
@@ -276,15 +273,14 @@ NEWCODE void skin_data_read(SKIN_DATA *skin_data, wchar_t *skin_path)
 			}
 			if (param = manifest_GetParam(buf, KEY_FULLTIME_COLOR, 0))
 			{
-				int value = parse_value(param);
-				skin_data->text_fulltime_color = value;
+				skin_data->text_fulltime_color = ini_parse_value(param);
 				mfree(param);
 			}
 
 			if (param = manifest_GetParam(buf, KEY_ELAPSED, 0))
 			{
 				int values[3];
-				parse_values(param, values);
+				ini_parse_values(param, values, 3);
 				skin_data->text_elapsedtime_enable = values[0];
 				skin_data->text_elapsedtime_font = values[1];
 				skin_data->text_elapsedtime_align = values[2];
@@ -293,7 +289,7 @@ NEWCODE void skin_data_read(SKIN_DATA *skin_data, wchar_t *skin_path)
 			if (param = manifest_GetParam(buf, KEY_ELAPSED_POS, 0))
 			{
 				int values[4];
-				parse_values(param, values);
+				ini_parse_values(param, values, 4);
 				skin_data->text_elapsedtime_x = values[0];
 				skin_data->text_elapsedtime_y = values[1];
 				skin_data->text_elapsedtime_w = values[2];
@@ -302,15 +298,14 @@ NEWCODE void skin_data_read(SKIN_DATA *skin_data, wchar_t *skin_path)
 			}
 			if (param = manifest_GetParam(buf, KEY_ELAPSED_COLOR, 0))
 			{
-				int value = parse_value(param);
-				skin_data->text_elapsedtime_color = value;
+				skin_data->text_elapsedtime_color = ini_parse_value(param);
 				mfree(param);
 			}
 
 			if (param = manifest_GetParam(buf, KEY_REMAINING, 0))
 			{
 				int values[3];
-				parse_values(param, values);
+				ini_parse_values(param, values, 3);
 				skin_data->text_remainingtime_enable = values[0];
 				skin_data->text_remainingtime_font = values[1];
 				skin_data->text_remainingtime_align = values[2];
@@ -319,7 +314,7 @@ NEWCODE void skin_data_read(SKIN_DATA *skin_data, wchar_t *skin_path)
 			if (param = manifest_GetParam(buf, KEY_REMAINING_POS, 0))
 			{
 				int values[4];
-				parse_values(param, values);
+				ini_parse_values(param, values, 4);
 				skin_data->text_remainingtime_x = values[0];
 				skin_data->text_remainingtime_y = values[1];
 				skin_data->text_remainingtime_w = values[2];
@@ -328,15 +323,14 @@ NEWCODE void skin_data_read(SKIN_DATA *skin_data, wchar_t *skin_path)
 			}
 			if (param = manifest_GetParam(buf, KEY_REMAINING_COLOR, 0))
 			{
-				int value = parse_value(param);
-				skin_data->text_remainingtime_color = value;
+				skin_data->text_remainingtime_color = ini_parse_value(param);
 				mfree(param);
 			}
 
 			if (param = manifest_GetParam(buf, KEY_SAMPLERATE, 0))
 			{
 				int values[3];
-				parse_values(param, values);
+				ini_parse_values(param, values, 3);
 				skin_data->text_samplerate_enable = values[0];
 				skin_data->text_samplerate_font = values[1];
 				skin_data->text_samplerate_align = values[2];
@@ -345,7 +339,7 @@ NEWCODE void skin_data_read(SKIN_DATA *skin_data, wchar_t *skin_path)
 			if (param = manifest_GetParam(buf, KEY_SAMPLERATE_POS, 0))
 			{
 				int values[4];
-				parse_values(param, values);
+				ini_parse_values(param, values, 4);
 				skin_data->text_samplerate_x = values[0];
 				skin_data->text_samplerate_y = values[1];
 				skin_data->text_samplerate_w = values[2];
@@ -354,21 +348,19 @@ NEWCODE void skin_data_read(SKIN_DATA *skin_data, wchar_t *skin_path)
 			}
 			if (param = manifest_GetParam(buf, KEY_SAMPLERATE_COLOR, 0))
 			{
-				int value = parse_value(param);
-				skin_data->text_samplerate_color = value;
+				skin_data->text_samplerate_color = ini_parse_value(param);
 				mfree(param);
 			}
 
 			if (param = manifest_GetParam(buf, KEY_COVERART, 0))
 			{
-				int value = parse_value(param);
-				skin_data->coverart_enable = value;
+				skin_data->coverart_enable = ini_parse_value(param);
 				mfree(param);
 			}
 			if (param = manifest_GetParam(buf, KEY_COVER_POS, 0))
 			{
 				int values[4];
-				parse_values(param, values);
+				ini_parse_values(param, values, 4);
 				skin_data->coverart_x = values[0];
 				skin_data->coverart_y = values[1];
 				skin_data->coverart_w = values[2];
@@ -379,7 +371,7 @@ NEWCODE void skin_data_read(SKIN_DATA *skin_data, wchar_t *skin_path)
 			if (param = manifest_GetParam(buf, KEY_PLAYERSTATE, 0))
 			{
 				int values[3];
-				parse_values(param, values);
+				ini_parse_values(param, values, 3);
 				skin_data->icon_playerstate_enable = values[0];
 				skin_data->icon_playerstate_x = values[1];
 				skin_data->icon_playerstate_y = values[2];
@@ -388,7 +380,7 @@ NEWCODE void skin_data_read(SKIN_DATA *skin_data, wchar_t *skin_path)
 			if (param = manifest_GetParam(buf, KEY_NEXT_ICON, 0))
 			{
 				int values[3];
-				parse_values(param, values);
+				ini_parse_values(param, values, 3);
 				skin_data->icon_next_enable = values[0];
 				skin_data->icon_next_x = values[1];
 				skin_data->icon_next_y = values[2];
@@ -397,7 +389,7 @@ NEWCODE void skin_data_read(SKIN_DATA *skin_data, wchar_t *skin_path)
 			if (param = manifest_GetParam(buf, KEY_PREV_ICON, 0))
 			{
 				int values[3];
-				parse_values(param, values);
+				ini_parse_values(param, values, 3);
 				skin_data->icon_prev_enable = values[0];
 				skin_data->icon_prev_x = values[1];
 				skin_data->icon_prev_y = values[2];
@@ -406,7 +398,7 @@ NEWCODE void skin_data_read(SKIN_DATA *skin_data, wchar_t *skin_path)
 			if (param = manifest_GetParam(buf, KEY_RANDOM_ICON, 0))
 			{
 				int values[3];
-				parse_values(param, values);
+				ini_parse_values(param, values, 3);
 				skin_data->icon_random_enable = values[0];
 				skin_data->icon_random_x = values[1];
 				skin_data->icon_random_y = values[2];
@@ -415,7 +407,7 @@ NEWCODE void skin_data_read(SKIN_DATA *skin_data, wchar_t *skin_path)
 			if (param = manifest_GetParam(buf, KEY_REPEAT_ICON, 0))
 			{
 				int values[3];
-				parse_values(param, values);
+				ini_parse_values(param, values, 3);
 				skin_data->icon_repeat_enable = values[0];
 				skin_data->icon_repeat_x = values[1];
 				skin_data->icon_repeat_y = values[2];
@@ -424,7 +416,7 @@ NEWCODE void skin_data_read(SKIN_DATA *skin_data, wchar_t *skin_path)
 			if (param = manifest_GetParam(buf, KEY_EQ_ICON, 0))
 			{
 				int values[3];
-				parse_values(param, values);
+				ini_parse_values(param, values, 3);
 				skin_data->icon_eq_enable = values[0];
 				skin_data->icon_eq_x = values[1];
 				skin_data->icon_eq_y = values[2];
@@ -434,7 +426,7 @@ NEWCODE void skin_data_read(SKIN_DATA *skin_data, wchar_t *skin_path)
 			if (param = manifest_GetParam(buf, KEY_PROGRESSBAR, 0))
 			{
 				int values[2];
-				parse_values(param, values);
+				ini_parse_values(param, values, 2);
 				skin_data->pb_enable = values[0];
 				skin_data->pb_enable_indicator = values[1];
 				mfree(param);
@@ -442,7 +434,7 @@ NEWCODE void skin_data_read(SKIN_DATA *skin_data, wchar_t *skin_path)
 			if (param = manifest_GetParam(buf, KEY_PB_POS, 0))
 			{
 				int values[4];
-				parse_values(param, values);
+				ini_parse_values(param, values, 4);
 				skin_data->pb_x1 = values[0];
 				skin_data->pb_x2 = values[1];
 				skin_data->pb_y1 = values[2];
@@ -451,34 +443,29 @@ NEWCODE void skin_data_read(SKIN_DATA *skin_data, wchar_t *skin_path)
 			}
 			if (param = manifest_GetParam(buf, KEY_PB_COLOR_B, 0))
 			{
-				int value = parse_value(param);
-				skin_data->pb_color_b = value;
+				skin_data->pb_color_b = ini_parse_value(param);
 				mfree(param);
 			}
 			if (param = manifest_GetParam(buf, KEY_PB_COLOR_E, 0))
 			{
-				int value = parse_value(param);
-				skin_data->pb_color_e = value;
+				skin_data->pb_color_e = ini_parse_value(param);
 				mfree(param);
 			}
 
 #ifdef DB2020
 			if (param = manifest_GetParam(buf, KEY_PL_ITEM_COLOR, 0))
 			{
-				int value = parse_value(param);
-				skin_data->PL_item_color = value;
+				skin_data->PL_item_color = ini_parse_value(param);
 				mfree(param);
 			}
 			if (param = manifest_GetParam(buf, KEY_PL_HIGHLIGHT, 0))
 			{
-				int value = parse_value(param);
-				skin_data->PL_highlight_color = value;
+				skin_data->PL_highlight_color = ini_parse_value(param);
 				mfree(param);
 			}
 			if (param = manifest_GetParam(buf, KEY_PL_TITLE_COLOR, 0))
 			{
-				int value = parse_value(param);
-				skin_data->PL_title_color = value;
+				skin_data->PL_title_color = ini_parse_value(param);
 				mfree(param);
 			}
 #endif
@@ -486,7 +473,7 @@ NEWCODE void skin_data_read(SKIN_DATA *skin_data, wchar_t *skin_path)
 			if (param = manifest_GetParam(buf, KEY_WALKMAN, 0))
 			{
 				int values[3];
-				parse_values(param, values);
+				ini_parse_values(param, values, 3);
 				skin_data->icon_walkman_enable = values[0];
 				skin_data->icon_walkman_x = values[1];
 				skin_data->icon_walkman_y = values[2];
@@ -495,15 +482,13 @@ NEWCODE void skin_data_read(SKIN_DATA *skin_data, wchar_t *skin_path)
 #ifdef ENABLE_VISUALIZER
 			if (param = manifest_GetParam(buf, KEY_VISUALIZATION, 0))
 			{
-				int value = parse_value(param);
-				skin_data->viz_enable = value;
+				skin_data->viz_enable = ini_parse_value(param);
 				mfree(param);
 			}
 #endif
 			if (param = manifest_GetParam(buf, KEY_FULLSCREEN, 0))
 			{
-				int value = parse_value(param);
-				skin_data->fullscreen = value;
+				skin_data->fullscreen = ini_parse_value(param);
 				mfree(param);
 			}
 
