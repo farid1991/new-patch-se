@@ -1,25 +1,19 @@
 #include <base.h>
 
 THUMB16
-NEWCODE static inline int isspace(int c)
+NEWCODE static inline int ini_isspace(int c)
 {
 	return (c == ' ' || c >= '\t' && c <= '\r');
 }
 
 THUMB16
-NEWCODE static inline int isdigit(int c)
+NEWCODE static inline int ini_isdigit(int c)
 {
 	return (c >= '0' && c <= '9');
 }
 
 THUMB16
-NEWCODE static inline int isxdigit(int c)
-{
-	return ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'F'));
-}
-
-THUMB16
-NEWCODE int hex2int(const char *h)
+NEWCODE int ini_hex2int(const char *h)
 {
 	int res = 0;
 
@@ -48,14 +42,14 @@ NEWCODE int hex2int(const char *h)
 }
 
 THUMB16
-NEWCODE int ascii2int(const char *s)
+NEWCODE int ini_ascii2int(const char *s)
 {
 	int result = 0;
 
-	while (isspace(*s))
+	while (ini_isspace(*s))
 		s++;
 
-	while (isdigit(*s))
+	while (ini_isdigit(*s))
 	{
 		result = result * 10 + (*s - '0');
 		s++;
@@ -68,9 +62,9 @@ THUMB16
 NEWCODE int ini_parse_value(const char *str)
 {
 	if (*str == '0' && (*(str + 1) == 'x' || *(str + 1) == 'X'))
-		return hex2int(str);
+		return ini_hex2int(str);
 
-	return ascii2int(str);
+	return ini_ascii2int(str);
 }
 
 THUMB16
