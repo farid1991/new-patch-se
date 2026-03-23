@@ -7,16 +7,12 @@
 #endif
 
 #include <libse.h>
+#include <id3.h>
 
 #include "dll.h"
 #include "patch.h"
 #include "data.h"
 #include "info.h"
-
-static const wchar_t JPG_EXT[] = L"jpg";
-static const wchar_t GIF_EXT[] = L"gif";
-static const wchar_t PNG_EXT[] = L"png";
-static const wchar_t BMP_EXT[] = L"bmp";
 
 static const char FMT_3GP[] = "3GP";
 static const char FMT_AAC[] = "AAC";
@@ -44,19 +40,6 @@ static const char OUT_MONO[] = "Mono";
 static const char OUT_STEREO[] = "Stereo";
 
 THUMB16
-NEWCODE const wchar_t *GetCoverType(char cover_type)
-{
-	switch (cover_type)
-	{
-	case 0: return JPG_EXT;
-	case 1: return GIF_EXT;
-	case 2: return PNG_EXT;
-	case 3: return BMP_EXT;
-	default: return 0;
-	}
-}
-
-THUMB16
 NEWCODE IMAGEID MetaData_GetCover(DBP_DATA *Data)
 {
 	IMAGEID image_id = NOIMAGE;
@@ -74,7 +57,7 @@ NEWCODE IMAGEID MetaData_GetCover(DBP_DATA *Data)
 			{
 				char *buf = (char *)malloc(size);
 				fread(file, buf, size);
-				ImageID_GetIndirect(buf, size, NULL, GetCoverType(cover_type), &image_id);
+				ImageID_GetIndirect(buf, size, NULL, id3_cover_gettype(cover_type), &image_id);
 				Data->cover_size = size;
 			}
 			fclose(file);

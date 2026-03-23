@@ -13,11 +13,6 @@
 
 #include "patch.h"
 
-static const wchar_t JPG_EXT[] = L"jpg";
-static const wchar_t GIF_EXT[] = L"gif";
-static const wchar_t PNG_EXT[] = L"png";
-static const wchar_t BMP_EXT[] = L"bmp";
-
 THUMB16
 NEWCODE uint32_t int_decode(uint8_t *bytes, int size, int offset)
 {
@@ -75,19 +70,6 @@ NEWCODE uint8_t *id3v2_tag_get(const wchar_t *path, const wchar_t *name, size_t 
 		fclose(mp3_f);
 	}
 	return NULL;
-}
-
-THUMB16
-NEWCODE const wchar_t *GetCoverType(char cover_type)
-{
-	switch (cover_type)
-	{
-	case TMusicServer_AlbumArt_ImageType_Jpeg: return JPG_EXT;
-	case TMusicServer_AlbumArt_ImageType_Gif: return GIF_EXT;
-	case TMusicServer_AlbumArt_ImageType_Png: return PNG_EXT;
-	case TMusicServer_AlbumArt_ImageType_Bmp: return BMP_EXT;
-	default: return NULL;
-	}
 }
 
 #ifdef DB2010
@@ -195,7 +177,7 @@ NEWCODE bool id3v2_get_coverart(const wchar_t *fpath, const wchar_t *fname, IMAG
 
 	if (cover_art)
 	{
-		if (!ImageID_GetIndirect(cover_art, cover_size, 0, GetCoverType(cover_type), imageid))
+		if (!ImageID_GetIndirect(cover_art, cover_size, 0, id3_cover_gettype(cover_type), imageid))
 			return TRUE;
 	}
 	return FALSE;

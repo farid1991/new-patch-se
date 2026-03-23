@@ -16,10 +16,6 @@
 #include "image.h"
 #include "patch.h"
 
-static const wchar_t JPG_EXT[] = L"jpg";
-static const wchar_t GIF_EXT[] = L"gif";
-static const wchar_t PNG_EXT[] = L"png";
-static const wchar_t BMP_EXT[] = L"bmp";
 static const wchar_t COVERNAME_FMT[] = L"%ls_%ls.coverart.%ls";
 static const char COVER_SAVED[] = "Saved";
 static const char COVER_FAILED[] = "Failed";
@@ -115,19 +111,6 @@ NEWCODE uint8_t *id3v2_tag_get(const wchar_t *path, const wchar_t *name, size_t 
 		fclose(mp3_f);
 	}
 	return NULL;
-}
-
-THUMB16
-NEWCODE const wchar_t *GetCoverType(char cover_type)
-{
-	switch (cover_type)
-	{
-	case TMusicServer_AlbumArt_ImageType_Jpeg: return JPG_EXT;
-	case TMusicServer_AlbumArt_ImageType_Gif: return GIF_EXT;
-	case TMusicServer_AlbumArt_ImageType_Png: return PNG_EXT;
-	case TMusicServer_AlbumArt_ImageType_Bmp: return BMP_EXT;
-	default: return NULL;
-	}
 }
 
 #ifdef DB2010
@@ -234,7 +217,12 @@ NEWCODE bool id3v2_extract_coverart(PLAYLIST_ITEM *item)
 	uint8_t *cover_art = id3v2_apic_frame_get(item->fpath, item->fname, &cover_type, &cover_size);
 
 	wchar_t cover_name[128];
-	snwprintf(cover_name, MAXELEMS(cover_name), COVERNAME_FMT, item->artist, item->album, GetCoverType(cover_type));
+	snwprintf(cover_name,
+	          MAXELEMS(cover_name),
+	          COVERNAME_FMT,
+	          item->artist,
+	          item->album,
+	          id3_cover_gettype(cover_type));
 
 	if (_FSX_IsFileExists(item->fpath, cover_name))
 		FileDelete(item->fpath, cover_name, NULL);
@@ -249,7 +237,7 @@ NEWCODE bool id3v2_extract_coverart(PLAYLIST_ITEM *item)
 		}
 
 		IMAGEID image_id;
-		ImageID_GetIndirect(cover_art, cover_size, 0, GetCoverType(cover_type), &image_id);
+		ImageID_GetIndirect(cover_art, cover_size, 0, id3_cover_gettype(cover_type), &image_id);
 
 		MessageBox(EMPTY_TEXTID, STR(COVER_SAVED), image_id, 0, 0, NULL);
 
@@ -272,7 +260,8 @@ NEWCODE bool id3v2_get_coverart(TRACK_DESC *track)
 	if (cover_art)
 	{
 		// IMAGEID image_id;
-		if (!ImageID_GetIndirect(cover_art, cover_size, 0, GetCoverType(cover_type), &data->cover_image.id))
+		if (!ImageID_GetIndirect(
+		            cover_art, cover_size, 0, id3_cover_gettype(cover_type), &data->cover_image.id))
 		{
 			// data->cover_image.id = image_id;
 			data->cover_image.exist = TRUE;

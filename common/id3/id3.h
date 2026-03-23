@@ -1,5 +1,5 @@
-#ifndef _ID3_HDR_H
-#define _ID3_HDR_H
+#ifndef _ID3_H
+#define _ID3_H
 
 #define BITRATE_SCALE 2
 
@@ -27,39 +27,13 @@
 #define ID3V2_INVALID_BITRATE 15
 #define ID3V2_INVALID_FREQ 3
 
-// Lookup table for bitrate values (depends on version and layer)
-static const uint8_t bitrate_table[2][3][16] = {
-        {
-         // MPEG 2 & 2.5
-                {0, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 72, 80, 0},      // Layer III
-                {0, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 72, 80, 0},            // Layer II
-                {0, 16, 24, 28, 32, 40, 48, 56, 64, 72, 80, 88, 96, 112, 128, 0} // Layer I
-        },
-        {
-         // MPEG 1
-                {0, 16, 20, 24, 28, 32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 0}, // Layer III
-                {0, 16, 24, 28, 32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 0}, // Layer II
-                {0, 16, 32, 48, 64, 80, 96, 112, 128, 144, 160, 176, 192, 208, 224, 0} // Layer I
-        }
-};
-
-static const uint8_t frequency_table[5][5] = {
-        {32, 16, 8 }, // MPEG 2.5
-        {0,  0,  0 }, // reserved
-        {22, 24, 16}, // MPEG 2
-        {44, 48, 32}  // MPEG 1
-};
-
 static const char ID3V2_MAGIC[3] = {'I', 'D', '3'};
-static const char STEREO[] = "Stereo";
-static const char J_STEREO[] = "Joint Stereo";
-static const char D_CHANNEL[] = "Dual Channel";
-static const char S_CHANNEL[] = "Single Channel";
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
+// ID3 Header
 BOOL is_valid_id3_header(uint32_t header);
 uint32_t get_header(uint8_t *mp3_data);
 int get_bitrate(uint32_t header);
@@ -69,8 +43,11 @@ const char *get_mode(uint32_t header);
 uint32_t int_decode(uint8_t *bytes, int size, int offset);
 uint32_t synch_decode(uint32_t value);
 
+// ID3 Cover
+const wchar_t *id3_cover_gettype(uint8_t cover_type);
+
 #ifdef __cplusplus
 }
 #endif
 
-#endif // _ID3_HDR_H
+#endif // _ID3_H

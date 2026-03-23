@@ -2,6 +2,40 @@
 
 #include "id3.h"
 
+// clang-format off
+
+// Lookup table for bitrate values (depends on version and layer)
+static const uint8_t bitrate_table[2][3][16] = 
+{
+	{
+		// MPEG 2 & 2.5
+		{0, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 72, 80, 0},     // Layer III
+		{0, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 72, 80, 0},     // Layer II
+		{0, 16, 24, 28, 32, 40, 48, 56, 64, 72, 80, 88, 96, 112, 128, 0}  // Layer I
+	},
+	{
+		// MPEG 1
+		{0, 16, 20, 24, 28, 32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 0},     // Layer III
+		{0, 16, 24, 28, 32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 0},    // Layer II
+		{0, 16, 32, 48, 64, 80, 96, 112, 128, 144, 160, 176, 192, 208, 224, 0} // Layer I
+	}
+};
+
+static const uint8_t frequency_table[5][5] = 
+{
+	{32, 16, 8 }, // MPEG 2.5
+	{0,  0,  0 }, // reserved
+	{22, 24, 16}, // MPEG 2
+	{44, 48, 32}  // MPEG 1
+};
+
+// clang-format on
+
+static const char STEREO[] = "Stereo";
+static const char J_STEREO[] = "Joint Stereo";
+static const char D_CHANNEL[] = "Dual Channel";
+static const char S_CHANNEL[] = "Single Channel";
+
 static inline int get_frame_sync(uint32_t header)
 {
 	return (header >> 21);
