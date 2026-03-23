@@ -1060,6 +1060,12 @@
 
 #define Display_GetBrightness ((int (*)(int))ADDR_Display_GetBrightness)
 
+#ifdef A1
+#define Display_SetBrightness ((void (*)(int, int))ADDR_Display_SetBrightness)
+#else
+#define Display_SetBrightness ((void (*)(int))ADDR_Display_SetBrightness)
+#endif
+
 #define Disp_GetTextIDWidth ((int (*)(TEXTID, int))ADDR_Disp_GetTextIDWidth)
 
 // CANVAS / GVI GC -------------------------------------------------------------

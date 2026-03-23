@@ -1,0 +1,10 @@
+;Extended brightness adjustment range
+;Allows you to adjust brightness from 0 to 100%
+;Remove message "When increasing the backlight brightness..."
+;Config name "Brightness.ini
+;Image names "Background.png", "Level_Normal.png", "Level_Up_Max.png", "Level_Down_Max.png
+;Path for config and images "/usb/other/ZBin/Config/Brightness"
+;Text/border color and font size should be specified in HEX
+;v3
+;(c) IronMaster, E1kolyan
+;(e) farid

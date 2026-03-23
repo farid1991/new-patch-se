@@ -37,6 +37,12 @@ Improved Activity Menu.
 4th tab: shut down, restart, brightness, flight mode, close the connection.
 ```
 
+### brightness
+```
+Extended brightness adjustment range.
+Allows you to adjust brightness from 0 to 100%.
+```
+
 ### bt_transmission
 ```
 Displays a process of transmission through BT in the status bar.
@@ -55,7 +61,12 @@ Folder: Show count of files and/or sub-folder inside it on second line of list i
 Add pause button during audio playback through the File Manager.
 ```
 
-### db_player
+### db_player (A2)
+```
+Add advanced display information when playing music on File Manager.
+```
+
+### db_redraw (A1)
 ```
 Add advanced display information when playing music on File Manager.
 ```

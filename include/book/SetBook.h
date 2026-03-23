@@ -8,10 +8,10 @@
 typedef struct SetBook
 {
 	BOOK book;
-	char dummy_1[0x4];
+	char unk_18[0x4];
 	GUI *gui;
-	char dummy_2[0x1C];
-	char *bright;
+	char unk_20[0x1C];
+	char brightness;
 } SetBook;
 
 #endif // SET_BOOK_H
