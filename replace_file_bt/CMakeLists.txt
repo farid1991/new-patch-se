@@ -15,3 +15,7 @@ define_patch(U10 R7AA071 A2 DB3350 0x14000000)
 # U100_R7AA076
 add_executable("U100_R7AA076_${PROJECT_NAME}" src/patch.c src/patch_3350.S)
 define_patch(U100 R7AA076 A2 DB3350 0x14000000)
+
+# W760_R3EM001
+add_executable("W760_R3EM001_${PROJECT_NAME}" src/patch.c src/patch_3150.S)
+define_patch(W760 R3EM001 A2 DB3150v2 0x10000000)

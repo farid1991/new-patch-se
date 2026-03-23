@@ -1,9 +1,11 @@
 #if defined(C510_R1HA035)
-#include "C510_R1HA035.h"
+#include <C510_R1HA035.h>
 #elif defined(U10_R7AA071)
-#include "U10_R7AA071.h"
+#include <U10_R7AA071.h>
 #elif defined(U100_R7AA076)
-#include "U100_R7AA076.h"
+#include <U100_R7AA076.h>
+#elif defined(W760_R3EM001)
+#include <W760_R3EM001.h>
 #endif
 
 #include <libse.h>
@@ -12,11 +14,6 @@
 static const char EMP_NAME[] = "r_emp";
 static const char MEM_NAME[] = "r_mem";
 static const char DataDownload_ReplaceFile_Page_Name[] = "DataDownload_ReplaceFile_Page";
-
-typedef struct FILE_DATA
-{
-	uint8_t state;
-} FILE_DATA;
 
 #define DataDownloadBook_onClose ((void (*)(BOOK *))ADDR_DataDownloadBook_onClose)
 
@@ -32,12 +29,15 @@ const PAGE_MSG evtlst_DataDownload_ReplaceFile[] =
     NIL_EVENT, NULL
 };
 
-const PAGE_DESC DataDownload_ReplaceFile_Page = {DataDownload_ReplaceFile_Page_Name, 0, evtlst_DataDownload_ReplaceFile};
+const PAGE_DESC DataDownload_ReplaceFile_Page = 
+{
+	DataDownload_ReplaceFile_Page_Name, NULL, evtlst_DataDownload_ReplaceFile
+};
 
 // clang-format on
 
 THUMB16
-NEWCODE void *malloc(int size)
+NEWCODE static inline void *malloc(int size)
 {
 #if defined(DB2020)
 	return (memalloc(0, size, 1, 5, MEM_NAME, 0));
@@ -49,7 +49,7 @@ NEWCODE void *malloc(int size)
 }
 
 THUMB16
-NEWCODE void mfree(void *mem)
+NEWCODE static inline void mfree(void *mem)
 {
 	if (mem)
 #if defined(DB2020) || defined(A2)
@@ -60,34 +60,34 @@ NEWCODE void mfree(void *mem)
 }
 
 THUMB16
-NEWCODE FILE_DATA *get_env_data()
+NEWCODE uint8_t *get_env_data()
 {
-	FILE_DATA *fdata = (FILE_DATA *)get_envp(NULL, EMP_NAME);
-	if (!fdata)
+	uint8_t *env = (uint8_t *)get_envp(NULL, EMP_NAME);
+	if (!env)
 	{
-		fdata = (FILE_DATA *)malloc(sizeof(FILE_DATA));
-		memset(fdata, NULL, sizeof(FILE_DATA));
-		set_envp(NULL, EMP_NAME, (OSADDRESS)fdata);
+		env = (uint8_t *)malloc(sizeof(uint8_t));
+		*env = FALSE;
+		set_envp(NULL, EMP_NAME, (OSADDRESS)env);
 	}
-	return fdata;
+	return env;
 }
 
 THUMB16
 NEWCODE void destroy_env_data()
 {
-	FILE_DATA *fdata = (FILE_DATA *)get_envp(NULL, EMP_NAME);
-	if (fdata)
+	uint8_t *env = (uint8_t *)get_envp(NULL, EMP_NAME);
+	if (env)
 	{
-		mfree(fdata);
-		set_envp(NULL, EMP_NAME, (OSADDRESS)NULL);
+		mfree(env);
+		set_envp(NULL, EMP_NAME, 0);
 	}
 }
 
 THUMB16
 NEWCODE void pg_ReplaceFile_onYes(BOOK *book, GUI *gui)
 {
-	FILE_DATA *fdata = get_env_data();
-	fdata->state = TRUE;
+	uint8_t *env = get_env_data();
+	*env = TRUE;
 
 	BookObj_GotoPage(book, DataDownload_Main_Page);
 }
@@ -122,29 +122,29 @@ NEWCODE int pg_ReplaceFile_ExitEvent(void *data, BOOK *book)
 }
 
 THUMB16
-NEWCODE void Patch_ReplaceFile_Page(BOOK *book)
+NEWCODE void Patch_ReplaceFile_Page(BOOK *book, const PAGE_DESC *pages)
 {
 	DataDownloadBook *dl_book = (DataDownloadBook *)book;
 
 	if (FSX_IsFileExists(FILEITEM_GetPath(dl_book->fi), FILEITEM_GetFname(dl_book->fi)))
 		BookObj_GotoPage(book, &DataDownload_ReplaceFile_Page);
 	else
-		BookObj_GotoPage(book, DataDownload_Main_Page);
+		BookObj_GotoPage(book, pages);
 }
 
 THUMB16
 NEWCODE void New_ReplaceFile(FILEITEM *fileitem)
 {
-	FILE_DATA *fd = get_env_data();
+	uint8_t *env = get_env_data();
 
-	if (fd->state)
+	if (*env)
 		FileDelete(FILEITEM_GetPath(fileitem), FILEITEM_GetFname(fileitem), NULL);
 	else
 		DataBrowser_ItemDesc_CheckFileToCopyMove(fileitem);
 }
 
 THUMB16
-NEWCODE void Close_DataDownloadBook(BOOK *book)
+NEWCODE void New_DataDownloadBook_onClose(BOOK *book)
 {
 	destroy_env_data();
 	DataDownloadBook_onClose(book);

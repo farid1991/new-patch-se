@@ -1,7 +1,7 @@
-#if defined(C510_R1HA035)
-    .equ _ddb_question_ret, 0x14CB7000
-    .equ _file_handler_ret, 0x14DDAB02
-    .equ FILEITEM_GetPath, 0x142C7CA0
+#if defined(W760_R3EM001)
+    .equ _ddb_question_ret, 0x1188CC64
+    .equ _file_handler_ret, 0x1188D234
+    .equ FILEITEM_GetPath, 0x1188FC50
     .equ pages_offset, 0x84
 #endif
 
@@ -36,6 +36,7 @@ _ddb_question:
 .section .text.patch_section
 .thumb
 _file_handler:
+    ldr     r0, [r5]
     bl      New_ReplaceFile
     ldr     r0, [r5]
     ldr     r3, =FILEITEM_GetPath+1
