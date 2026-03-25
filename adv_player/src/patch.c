@@ -105,26 +105,36 @@ NEWCODE TEXTID conv_sample_rate(int freq)
 THUMB16
 NEWCODE int New_MediaPlayer_Audio_OnCreate(DISP_OBJ *disp_obj)
 {
+	MediaPlayer_Audio_OnCreate(disp_obj);
+
 	ADVPLAYER_DATA *data = env_data_get();
-	data->disp_obj_audio = disp_obj;
-
-	SKIN_CONFIG *skin_cfg = skin_data_config_get(SKIN_CFG_PATH, SKIN_CFG_NAME);
-
-	if (!data->skin_loaded)
+	if (!data->single_file)
 	{
-		data->skin_data = (SKIN_DATA *)malloc(sizeof(SKIN_DATA));
-		memset(data->skin_data, 0, sizeof(SKIN_DATA));
-		skin_data_read(data->skin_data, skin_cfg->path);
+		data->disp_obj_audio = disp_obj;
 
-		data->skin_loaded = TRUE;
+		SKIN_CONFIG *skin_cfg = skin_data_config_get(SKIN_CFG_PATH, SKIN_CFG_NAME);
+
+		if (!data->skin_loaded)
+		{
+			data->skin_data = skin_data_read(skin_cfg->path);
+			data->skin_loaded = TRUE;
+
+#ifdef DB2010
+			int style = data->skin_data->fullscreen ? UI_OverlayStyle_FullScreenNoStatus
+			                                        : UI_OverlayStyle_Default;
+#else
+			int style = data->skin_data->fullscreen ? UI_OverlayStyle_FullScreenNoStatus
+			                                        : UI_OverlayStyle_FullScreen;
+#endif
+			DispObject_SetStyle(disp_obj, style);
+		}
+
+		if (!data->image_loaded)
+			skin_images_load(skin_cfg->path);
+
+		mfree(skin_cfg);
 	}
 
-	if (!data->image_loaded)
-		skin_images_load(skin_cfg->path);
-
-	mfree(skin_cfg);
-
-	MediaPlayer_Audio_OnCreate(disp_obj);
 	return 1;
 }
 
@@ -132,31 +142,35 @@ THUMB16
 NEWCODE void New_AudioPlayerBook_onClose()
 {
 	ADVPLAYER_DATA *data = env_data_get();
-
-	skin_images_unload();
-
-	if (data->has_coverart)
+	if (!data->single_file)
 	{
-		FREE_GC(data->cv_canvas);
-		FREE_GVI(data->cv_gvi);
-		data->has_coverart = FALSE;
-	}
+		skin_images_unload();
 
-	if (data->cover_image.id != NOIMAGE)
-		image_unregister(&data->cover_image);
+		if (data->has_coverart)
+		{
+			FREE_GC(data->cv_canvas);
+			FREE_GVI(data->cv_gvi);
+			data->has_coverart = FALSE;
+		}
+
+		if (data->cover_image.id != NOIMAGE)
+			image_unregister(&data->cover_image);
 
 #ifdef ENABLE_VISUALIZER
-	KILL_TIMER(data->wait_timer);
-	KILL_TIMER(data->viz_timer);
-	FREE_GC(data->viz_canvas);
-	FREE_GVI(data->viz_gvi);
-	image_unregister(&data->viz_image);
+		KILL_TIMER(data->wait_timer);
+		KILL_TIMER(data->viz_timer);
+		FREE_GC(data->viz_canvas);
+		FREE_GVI(data->viz_gvi);
+		image_unregister(&data->viz_image);
 #endif
 
-	mfree(data->skin_data);
-	mfree(data->current_track);
+		mfree(data->skin_data);
+		mfree(data->current_track);
 
-	env_data_destroy(data);
+		data->single_file = FALSE;
+
+		env_data_destroy(data);
+	}
 }
 
 THUMB16
@@ -165,32 +179,26 @@ NEWCODE void New_MediaPlayer_Audio_OnRedraw(DISP_OBJ *disp_obj, int a, RECT *win
 	DispObject_SetLayerColor(disp_obj, GetThemeColor(0, THEMEITEM_BACKGROUND));
 }
 
-THUMB16
-NEWCODE void New_MediaPlayer_Audio_SetStyle(DISP_OBJ *disp_obj)
-{
-	ADVPLAYER_DATA *data = env_data_get();
-#ifdef DB2010
-	int style = data->skin_data->fullscreen ? UI_OverlayStyle_FullScreenNoStatus : UI_OverlayStyle_Default;
-#else
-	int style = data->skin_data->fullscreen ? UI_OverlayStyle_FullScreenNoStatus : UI_OverlayStyle_FullScreen;
-#endif
-	DispObject_SetStyle(disp_obj, style);
-}
-
-THUMB16
-NEWCODE void WalkmanDisplay_SetSize(DISP_OBJ *disp_obj)
-{
-	ADVPLAYER_DATA *data = env_data_get();
-
-	int height = data->skin_data->fullscreen ? data->disp_h : (data->disp_h - SOFTKEYS_HEIGHT);
-	DispObject_WindowSetSize(disp_obj, data->disp_w, height);
-}
+// THUMB16
+// NEWCODE void New_MediaPlayer_Audio_SetStyle(DISP_OBJ *disp_obj)
+// {
+// 	ADVPLAYER_DATA *data = env_data_get();
+// 	if (!data->single_file)
+// 	{
+// #ifdef DB2010
+// 		int style = data->skin_data->fullscreen ? UI_OverlayStyle_FullScreenNoStatus : UI_OverlayStyle_Default;
+// #else
+// 		int style =
+// 		        data->skin_data->fullscreen ? UI_OverlayStyle_FullScreenNoStatus : UI_OverlayStyle_FullScreen;
+// #endif
+// 		DispObject_SetStyle(disp_obj, style);
+// 	}
+// }
 
 THUMB16
 NEWCODE void New_MediaPlayer_PlayQueue_SetStyle(DISP_OBJ *disp_obj, RECT *rc)
 {
 	ADVPLAYER_DATA *data = env_data_get();
-
 	DispObject_WindowSetSize(disp_obj, data->disp_w, data->disp_h);
 #ifdef DB2010
 	int style = data->skin_data->fullscreen ? UI_OverlayStyle_FullScreenNoStatus : UI_OverlayStyle_Default;
@@ -230,7 +238,12 @@ NEWCODE void New_MediaPlayer_PlayQueue_SetTitle(DISP_OBJ *disp_obj)
 THUMB16
 NEWCODE void New_MediaPlayer_NowPlaying_SetSize(DISP_OBJ *disp_obj)
 {
-	WalkmanDisplay_SetSize(disp_obj);
+	ADVPLAYER_DATA *data = env_data_get();
+	if (!data->single_file)
+	{
+		int height = data->skin_data->fullscreen ? data->disp_h : (data->disp_h - SOFTKEYS_HEIGHT);
+		DispObject_WindowSetSize(disp_obj, data->disp_w, height);
+	}
 }
 
 THUMB16
@@ -239,18 +252,20 @@ NEWCODE int New_MediaPlayer_NowPlaying_OnCreate(DISP_OBJ_NOWPLAYING *disp_obj)
 	MediaPlayer_NowPlaying_OnCreate((DISP_OBJ *)disp_obj);
 
 	ADVPLAYER_DATA *data = env_data_get();
-	data->disp_obj_nowplaying = disp_obj;
+	if (!data->single_file)
+	{
+		data->disp_obj_nowplaying = disp_obj;
 
 #ifdef ENABLE_VISUALIZER
-	visualizer_image_register();
-	visualizer_init();
+		visualizer_image_register();
+		visualizer_init();
 
-	KILL_TIMER(data->wait_timer);
-	KILL_TIMER(data->viz_timer);
+		KILL_TIMER(data->wait_timer);
+		KILL_TIMER(data->viz_timer);
 
-	data->wait_timer = Timer_Set(1000, MKTIMERPROC(wait_for_player), (LPARAM)data);
+		data->wait_timer = Timer_Set(0, MKTIMERPROC(wait_for_player), (LPARAM)data);
 #endif
-
+	}
 	return 1;
 }
 
@@ -681,32 +696,77 @@ NEWCODE void GetPlayerState(AudioPlayerBook *audio_book)
 THUMB16
 NEWCODE int New_UI_MEDIAPLAYER_AUDIO_PLAYING_TIME_EVENT(void *audio_data, BOOK *book)
 {
-	AudioPlayerBook *audio_book = (AudioPlayerBook *)book;
 	pg_MEDIAPLAYER_AUDIO_PLAYING_TIME(audio_data, book);
 
-	GetTrackInfo(audio_book);
-	GetPlayerState(audio_book);
+	ADVPLAYER_DATA *data = env_data_get();
+	if (!data->single_file)
+	{
+		AudioPlayerBook *audio_book = (AudioPlayerBook *)book;
+
+		GetTrackInfo(audio_book);
+		GetPlayerState(audio_book);
+	}
 	return 1;
 }
 
 THUMB16
 NEWCODE int New_UI_MEDIAPLAYER_NEW_TRACK_EVENT(void *audio_data, BOOK *book)
 {
-	AudioPlayerBook *audio_book = (AudioPlayerBook *)book;
 	pg_MEDIAPLAYER_NEW_TRACK_EVENT(audio_data, book);
 
-	GetTrackInfo(audio_book);
-	GetPlayerState(audio_book);
+	ADVPLAYER_DATA *data = env_data_get();
+	if (!data->single_file)
+	{
+		AudioPlayerBook *audio_book = (AudioPlayerBook *)book;
+
+		GetTrackInfo(audio_book);
+		GetPlayerState(audio_book);
+
+		return 1;
+	}
+
+	data->single_file = FALSE;
+
+	env_data_destroy(data);
+
 	return 1;
 }
 
 THUMB16
 NEWCODE int New_UI_MEDIAPLAYER_CREATED_EVENT(void *audio_data, BOOK *book)
 {
-	AudioPlayerBook *audio_book = (AudioPlayerBook *)book;
 	pg_MEDIAPLAYER_CREATED_EVENT(audio_data, book);
 
-	GetPlayerState(audio_book);
+	ADVPLAYER_DATA *data = env_data_get();
+	if (!data->single_file)
+	{
+		AudioPlayerBook *audio_book = (AudioPlayerBook *)book;
+
+		GetPlayerState(audio_book);
+	}
+
+	return 1;
+}
+
+THUMB16
+NEWCODE int New_Sound_Run_Enter(void *msg, BOOK *book)
+{
+	ADVPLAYER_DATA *data = env_data_get();
+	data->single_file = TRUE;
+
+	pg_Sound_Run_EnterEvent(msg, book);
+
+	return 1;
+}
+
+THUMB16
+NEWCODE int New_SoundRecorder_Playing(void *msg, BOOK *book)
+{
+	ADVPLAYER_DATA *data = env_data_get();
+	data->single_file = TRUE;
+
+	pg_SoundRecorder_Playing_EnterEvent(msg, book);
+
 	return 1;
 }
 

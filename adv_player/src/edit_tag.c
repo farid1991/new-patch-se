@@ -27,10 +27,11 @@ static const wchar_t ZBIN_PATH[] = _ZBIN_PATH;
 static const wchar_t MTAGGER_PATH[] = _MTAGGER_PATH;
 static const wchar_t TAGEDIT_PATH[] = _TAGEDIT_PATH;
 
+static const ose_func_t ose = {current_process, get_bid, get_envp};
+
 THUMB16
 NEWCODE void tagedit_start_elf(BOOK *book, GUI *gui)
 {
-	const ose_func_t ose = {current_process, get_bid, get_envp};
 	if (!is_elfpack_installed(&ose))
 	{
 		MessageBox_NoImage(EMPTY_TEXTID, STR(NO_ELFPACK), 0, 1500, NULL);

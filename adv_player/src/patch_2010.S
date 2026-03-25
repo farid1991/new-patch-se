@@ -91,6 +91,12 @@
 .section .text.PATCH_MediaPlayer_NowPlaying_OnRedraw
     .word New_MediaPlayer_NowPlaying_OnRedraw
 
+.section .text.PATCH_SOUND_RUN
+    .word New_Sound_Run_Enter
+
+.section .text.PATCH_SOUND_RECORDER
+    .word New_SoundRecorder_Playing
+
 @ ==================== Other GUI=============================
 
 .section .text.PATCH_MediaPlayer_Volume_SetPosition
@@ -153,11 +159,6 @@ rem_style:
 .section .text.PATCH_GUI_PLAYMODE
 .thumb
     mov     r1, #9
-
-.section .text.PATCH_MediaPlayer_Audio_SetStyle
-.thumb
-    ldr     r3, =mp_audio_setstyle+1
-    bx      r3
 
 @ ==================== SoftKeys Action===========================
 
@@ -289,13 +290,13 @@ mp_nowplaying_setsize:
     ldr     r3, =mp_nowplaying_setsize_ret+1
     bx      r3
 
-.align 2
+@ .align 2
 
-mp_audio_setstyle:
-    add     r0, r4, #0
-    bl      New_MediaPlayer_Audio_SetStyle
-    ldr     r3, =mp_audio_setstyle_ret+1
-    bx      r3
+@ mp_audio_setstyle:
+@     add     r0, r4, #0
+@     bl      New_MediaPlayer_Audio_SetStyle
+@     ldr     r3, =mp_audio_setstyle_ret+1
+@     bx      r3
 
 .align 2
 

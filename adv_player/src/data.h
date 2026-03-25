@@ -55,6 +55,8 @@ typedef struct
 	GVI_GC viz_gvi;
 #endif
 
+	bool single_file;
+
 } ADVPLAYER_DATA;
 
 ADVPLAYER_DATA *env_data_get();

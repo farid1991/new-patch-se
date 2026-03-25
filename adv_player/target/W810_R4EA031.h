@@ -310,3 +310,6 @@
 #define ADDR_MediaPlayer_Audio_Sort (0x4543646C | 1)
 #define ADDR_MediaPlayer_Audio_ActionBack (0x45431080 | 1)
 #define ADDR_MediaPlayer_Audio_ActionLongBack (0x4543103C | 1)
+
+#define ADDR_pg_Sound_Run_EnterEvent (0x455C2944 | 1)
+#define ADDR_pg_SoundRecorder_Playing_EnterEvent (0x45076980 | 1)

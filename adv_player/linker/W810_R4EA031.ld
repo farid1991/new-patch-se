@@ -1,6 +1,15 @@
 /* Sections placement */
 SECTIONS
 {
+    .text.PATCH_SOUND_RECORDER 0x445038A0 :
+    {
+        KEEP(*(.text.PATCH_SOUND_RECORDER))
+    }
+    .text.PATCH_SOUND_RUN 0x444F1820 :
+    {
+        KEEP(*(.text.PATCH_SOUND_RUN))
+    }
+
     .text.PATCH_UI_MEDIAPLAYER_AUDIO_PLAYING_TIME_EVENT 0x445015F0 :
     {
         KEEP(*(.text.PATCH_UI_MEDIAPLAYER_AUDIO_PLAYING_TIME_EVENT))

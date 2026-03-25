@@ -280,3 +280,6 @@
 #define ADDR_pg_MEDIAPLAYER_AUDIO_PLAYING_TIME (0x44F5F328 | 1)
 #define ADDR_pg_MEDIAPLAYER_NEW_TRACK_EVENT (0x44F5F3A8 | 1)
 #define ADDR_pg_MEDIAPLAYER_CREATED_EVENT (0x44F60880 | 1)
+
+#define ADDR_pg_Sound_Run_EnterEvent (0x450F56C8 | 1)
+#define ADDR_pg_SoundRecorder_Playing_EnterEvent (0x44C7EEA8 | 1)

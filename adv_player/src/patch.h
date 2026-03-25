@@ -49,6 +49,10 @@ BOOL _FSX_IsFileExists(const wchar_t *fpath, const wchar_t *fname);
 
 #define pg_MEDIAPLAYER_CREATED_EVENT ((int (*)(void *, BOOK *))ADDR_pg_MEDIAPLAYER_CREATED_EVENT)
 
+#define pg_Sound_Run_EnterEvent ((int (*)(void *, BOOK *))ADDR_pg_Sound_Run_EnterEvent)
+
+#define pg_SoundRecorder_Playing_EnterEvent ((int (*)(void *, BOOK *))ADDR_pg_SoundRecorder_Playing_EnterEvent)
+
 #define pg_MediaPlayer_Audio_Bk_ExitEvent ((int (*)(void *, BOOK *))ADDR_pg_MediaPlayer_Audio_Bk_ExitEvent)
 
 #define pg_MediaPlayer_Audio_Bk_PrevEvent ((int (*)(void *, BOOK *))ADDR_pg_MediaPlayer_Audio_Bk_PrevEvent)

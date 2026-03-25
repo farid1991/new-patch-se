@@ -270,7 +270,7 @@ typedef struct _SKIN_DATA
 
 void skin_data_path_save(const wchar_t *skin_path);
 SKIN_CONFIG *skin_data_config_get(const wchar_t *cfg_path, const wchar_t *cfg_name);
-void skin_data_read(SKIN_DATA *skin_data, wchar_t *skin_path);
+SKIN_DATA *skin_data_read(wchar_t *skin_path);
 
 #ifndef OLD_PLAYER
 void skin_data_reload(AudioPlayerBook *audio_book, wchar_t *new_skin_path);
