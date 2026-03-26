@@ -1,5 +1,7 @@
 #pragma once
 
+#define DB3350_R2
+
 #define KEY_ESC 0x4
 #define KEY_DEL 0x5
 #define KEY_ENTER 0x8

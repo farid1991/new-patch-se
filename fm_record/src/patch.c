@@ -1,6 +1,4 @@
-#if defined(C510_R1HA035)
-#include <C510_R1HA035.h>
-#endif
+#include "device.h"
 
 #include <libse.h>
 #include <book/FmRadio_Book.h>

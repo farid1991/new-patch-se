@@ -1,7 +1,4 @@
-#if defined(J108_R7EA011)
-#include <J108_R7EA011.h>
-#define DB3350_R2
-#endif
+#include "device.h"
 
 #include <libse.h>
 #include <sync.h>

@@ -1,10 +1,4 @@
-#if defined(W700_R1CA021)
-#include <W700_R1CA021.h>
-#elif defined(W800_R1BD001)
-#include <W800_R1BD001.h>
-#elif defined(W810_R4EA031)
-#include <W810_R4EA031.h>
-#endif
+#include "device.h"
 
 #include <libse.h>
 #include <ini_parser.h>
@@ -192,7 +186,6 @@ NEWCODE SKIN_DATA *skin_data_read(wchar_t *skin_path)
 	}
 	if (param = manifest_GetParam(buf, KEY_TITLE_COLOR, 0))
 	{
-
 		skin_data->text_title_color = ini_parse_value(param);
 		mfree(param);
 	}
