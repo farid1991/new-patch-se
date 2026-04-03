@@ -1,0 +1,3 @@
+;Manual Equalizer DB3350
+;Add new option to manually set equalizer on MusicApplication.
+;(c) farid

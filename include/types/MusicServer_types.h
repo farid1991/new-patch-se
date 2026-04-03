@@ -2,6 +2,7 @@
 #define __MUSICSERVER_TYPES_H__
 
 #include <types/Basic_types.h>
+#include <types/IMMETypes.h>
 
 //////////////////////////////////////////////////////////////////////
 /// @name Types
@@ -101,7 +102,7 @@ typedef enum
  * TMMEEqBand_16000,        Both Clear Audio and ordinary EQ
  *
  */
-// typedef TMMEEqBand TMusicServer_EqBand;
+typedef TMMEEqBand TMusicServer_EqBand;
 
 #ifdef CLEARAUDIO
 /**

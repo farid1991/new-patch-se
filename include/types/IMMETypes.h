@@ -2,6 +2,7 @@
 #define _IMME_TYPES_H_
 
 #include <types/Basic_types.h>
+#include <types/UIRect_types.h>
 
 // clang-format off
 /**
@@ -521,7 +522,7 @@ typedef enum
  * Width  (TUnsigned) - Witdh of the rectangle.
  * Height (TUnsigned) - Height of the rectangle.
  */
-typedef UIRECT TMMEVideoArea;
+typedef TUIRectangle TMMEVideoArea;
 
 /**
  * The set of video display orientations,

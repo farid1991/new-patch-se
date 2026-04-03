@@ -94,6 +94,12 @@ Change Softkey in Standby to "Goto" Shortcut.
 You can choose 4 shortcut type with your own choice
 ```
 
+### manual_eq
+```
+Manual Equalizer DB3350
+Add new option to manually set equalizer on MusicApplication.
+```
+
 ### mp3_info
 ```
 Add extra informations about files mp3.
