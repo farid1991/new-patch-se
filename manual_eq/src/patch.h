@@ -5,6 +5,8 @@ void *malloc(int size);
 void mfree(void *mem);
 
 static const char EQ_MEM[] = "EQ_MEM";
+static const char SOFTKEY_TEXT[] = "Manual EQ";
+
 static const char MusicApplication_ManualEQ_PageName[] = "MusicApplication_ManualEQ_Page";
 
 #define MusicApplication_CancelAction ((void (*)(BOOK *, GUI *))ADDR_MusicApplication_CancelAction)

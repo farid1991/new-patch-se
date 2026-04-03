@@ -166,5 +166,5 @@ NEWCODE void create_new_softkeys(GUI *Gui_submenu)
 {
 	GUIObject_SoftKeys_SetItemAsSubItem(Gui_submenu, ACTION_MP_SETTINGS, ACTION_MP_MANUALEQ);
 	GUIObject_SoftKeys_SetAction(Gui_submenu, ACTION_MP_MANUALEQ, Enter_ManualEqualizer);
-	GUIObject_SoftKeys_SetText(Gui_submenu, ACTION_MP_MANUALEQ, STR("Manual EQ"));
+	GUIObject_SoftKeys_SetText(Gui_submenu, ACTION_MP_MANUALEQ, STR(SOFTKEY_TEXT));
 }
