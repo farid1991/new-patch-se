@@ -123,6 +123,12 @@ Display the total of phone and sim contacts in the second row of the header.
 Add more info about PNG in file information window.
 ```
 
+### recycler
+```
+Recycle Bin
+When deleting file(s), the delete dialog now includes an option to move the file to the “Recycle Bin”.
+```
+
 ### remove_scrollbar
 ```
 Remove Scroll bar on Main Menu.

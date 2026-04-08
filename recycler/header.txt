@@ -1,0 +1,20 @@
+;Recycle Bin
+;When deleting file(s), the delete dialog now includes an option to move the file to the “Recycle Bin”.
+;On confirmation, the file is sent to the “Recycle Bin”.
+;Pressing the “*” key before confirming — the file will be permanently deleted, bypassing the “Recycle Bin”.
+;Pressing the “#” key in the delete dialog — opens the “Recycle Bin”.
+;To access the “Recycle Bin”, you must enter the phone code.
+;Default code is same with "Phone lock" (see Settings → Security → Locks → Phone lock).
+;
+;v2.5
+;Added ability to select files in the Recycle Bin.
+;Added access to the Recycle Bin from the folder deletion window.
+;
+;v3
+;Added check for absence of memory card.
+;Fixed file deletion to the Recycle Bin.
+;
+;INT_PATH[] is "/usb/RECYCLER"
+;EXT_PATH[] is "/card/RECYCLER"
+;
+;(c) KrasH

@@ -116,9 +116,9 @@
 
 #define FileDelete ((void (*)(const wchar_t *, const wchar_t *, int *))ADDR_FileDelete)
 
-#define FileCopy ((int (*)(const wchar_t *, const wchar_t *, const wchar_t *, const wchar_t *, int))ADDR_FileCopy)
+#define FileCopy ((int (*)(const wchar_t *, const wchar_t *, const wchar_t *, const wchar_t *, int *))ADDR_FileCopy)
 
-#define FileMove ((int (*)(const wchar_t *, const wchar_t *, const wchar_t *, const wchar_t *, int))ADDR_FileMove)
+#define FileMove ((int (*)(const wchar_t *, const wchar_t *, const wchar_t *, const wchar_t *, int *))ADDR_FileMove)
 
 // filesystem ---------------------------------------------------------------
 
@@ -451,6 +451,8 @@
 
 #define GUIObject_SoftKeys_SuppressDefaultAction \
 	((void (*)(GUI *, uint16_t))ADDR_GUIObject_SoftKeys_SuppressDefaultAction)
+
+#define GUIObject_SoftKeys_SetItemOnKey ((void (*)(GUI *, uint16_t, int, int))ADDR_GUIObject_SoftKeys_SetItemOnKey)
 
 #define MediaPlayer_SoftKeys_Validate ((int (*)(GUI *))ADDR_MediaPlayer_SoftKeys_Validate)
 
@@ -1172,6 +1174,10 @@
 #define NewEvents_GetCount ((int (*)(void))ADDR_NewEvents_GetCount)
 
 #define IsMainDisplayFocused ((int (*)(void))ADDR_IsMainDisplayFocused)
+
+#define CreatePasswordInputWindow ((void (*)(int, int, int, TEXTID))ADDR_CreatePasswordInputWindow)
+
+#define GetMemoryStickStatus ((int (*)(void))ADDR_GetMemoryStickStatus)
 
 // Main Menu
 
